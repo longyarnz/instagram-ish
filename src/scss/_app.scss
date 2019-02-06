@@ -1,0 +1,25 @@
+*{
+  box-sizing: border-box;
+  font-family: ubuntu,helvetica neue,Helvetica,Roboto,Arial,sans-serif;
+}
+
+body{
+  width: 100vw;
+  margin: 0px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  overflow-x: hidden;
+  
+  section.container {
+    background-color: #fff;
+    width: 80vw;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    border-radius: 3px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, .1);
+  }
+}
