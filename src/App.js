@@ -1,7 +1,12 @@
 import React, { useReducer } from 'react';
+import AsyncLoader from './components/AsyncLoader';
 
 function reducer(state, action) {
+  const mutations = state.mutations.concat([action.type]);
+  
   switch (action.type) {
+    case 'CHANGE VIEW':
+      return { ...state, mutations, view: action.payload }
     default: return state;
   }
 }
@@ -9,11 +14,14 @@ function reducer(state, action) {
 export const AppContext = React.createContext([]);
 
 export default function App() {
-  const AppState = useReducer(reducer, { view: 'Hello World' });
+  const initialState = { view: './NewsFeed', mutations: [] };
+  const appState = useReducer(reducer, initialState);
+  const [state] = appState;
+
   return (
-    <AppContext.Provider value={ AppState }>
+    <AppContext.Provider value={appState}>
       <section className="container">
-        { AppState[0].view }
+        <AsyncLoader path={state.view} />
       </section>
     </AppContext.Provider>
   )

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import App from './App';
-import Import from './components/Import';
+import AsyncLoader from './components/AsyncLoader';
 
 export default class ErrorBoundary extends Component {
   constructor(props) {
@@ -13,8 +13,9 @@ export default class ErrorBoundary extends Component {
   
   componentDidCatch(error, info){
     this.setState({ 
+      error: true,
       view: (
-        <Import name="Error" error={error} info={info} /> 
+        <AsyncLoader path="./Error" error={error} info={info} /> 
       )
     });
   }
