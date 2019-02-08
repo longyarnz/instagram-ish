@@ -20,9 +20,7 @@ export default function App() {
 
   return (
     <AppContext.Provider value={appState}>
-      <section className="container">
-        <AsyncLoader path={state.view} />
-      </section>
+      <AsyncLoader path={state.view} />
     </AppContext.Provider>
   )
 }

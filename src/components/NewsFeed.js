@@ -1,19 +1,15 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-// import AsyncLoader from './AsyncLoader';
+import NewsFeedHeader from './NewsFeedHeader';
+import NewsFeedNav from './NewsFeedNav';
+import NewsFeedSlide from './NewsFeedSlide';
 
-export default function NewsFeed(props) {
-  const clickButton = () => {
-    props.dispatch({
-      type: 'CHANGE VIEW',
-      payload: './Shop',
-    })
-  };
-
+export default function NewsFeed() {
   return (
-    <div>
-      <button onClick={clickButton}>
-        NewsFeed
-      </button>
-    </div>
+    <>
+      <NewsFeedHeader />
+      <NewsFeedNav />
+      <NewsFeedSlide />
+    </>
   )
 }
