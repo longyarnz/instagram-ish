@@ -3,7 +3,7 @@ import Spinner from './Spinner';
 
 export default function AsyncImage({ src, ...props }) {
   const [ view, setView ] = useState(
-    <Spinner />
+    <Spinner style={{ fontSize: '300%' }} />
   );
 
   const fetchImage = async () => {

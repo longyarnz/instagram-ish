@@ -1,5 +1,6 @@
 import React, { Suspense, useContext } from 'react';
 import { AppContext } from '../App';
+import Spinner from './Spinner';
 
 export default function AsyncLoader({ path, ...props }) {
   const [ state, dispatch ] = useContext(AppContext);
@@ -9,7 +10,7 @@ export default function AsyncLoader({ path, ...props }) {
   );
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Spinner />}>
       <Payload state={state} dispatch={dispatch} {...props} />
     </Suspense>
   );
