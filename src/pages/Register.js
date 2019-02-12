@@ -24,7 +24,7 @@ export default function Register(props) {
       <div className="container">
         <div className="banner-content">
           <h1>
-            <img src="/assets/img/favicon.png" alt="Dominerf Logo" style={{ width: '30%'}} />
+            <img src="assets/img/favicon.png" alt="Dominerf Logo" style={{ width: '30%'}} />
           </h1>
           <form method="post" className="form-signin" onSubmit={onSubmit}>
             <h3 className="form-signin-heading">SIGN UP</h3>
