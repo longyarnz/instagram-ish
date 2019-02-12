@@ -21,12 +21,29 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+    <style>
+      @keyframes pop {
+        from{
+          transform: scale(0.8, 0.8);
+          opacity: 0.5;
+        }
+        to{
+          opacity: 1;
+          transform: scale(1, 1);
+        }
+      }
+    </style>
+
     <title>Dominerf</title>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
+    <section id="fallback" style="width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; position: absolute;z-index: -1;">
+        <img src="%PUBLIC_URL%/assets/img/favicon.png" alt="Dominerf Logo" style="height: 20vh; animation: pop 0.5s ease 0s infinite alternate forwards running;" prefetch />
+      </section>
     <main id="root"></main>
     <!--
       This HTML file is a template.

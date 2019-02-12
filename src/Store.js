@@ -1,6 +1,6 @@
 export const InitialState = {
   mutations: [],
-  view: './pages/NewsFeed.js',
+  view: './pages/Register',
   isUserLoggedIn: false
 }
 

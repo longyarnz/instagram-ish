@@ -1,16 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React from 'react';
+
 export default function Login(props) {
   return (
     <section className="login">
       <div className="container">
         <div className="banner-content">
           <h1>
-            <i className="fa fa-smile"></i> Fluffs
+          <img src="/assets/img/favicon.png" alt="Dominerf Logo" style={{ width: '30%'}} />
           </h1>
           <form method="post" className="form-signin">
-            <h3 className="form-signin-heading">Please sign in</h3>
+            <h3 className="form-signin-heading">SIGN IN</h3>
             <div className="form-group">
               <input name="email" type="text" className="form-control" placeholder="Email" />
             </div>
