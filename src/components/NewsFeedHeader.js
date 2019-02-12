@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React from 'react';
+import AsyncLoader from '../AsyncLoader';
 
 export default function NewsFeedHeader() {
   return (
@@ -46,7 +47,7 @@ export default function NewsFeedHeader() {
                         <a href="" className="text-dark"><small>Clear All</small></a>
                       </span>
                       Notification
-                </h6>
+                    </h6>
                   </div>
 
                   <div className="slimScrollDiv" style={{ position: 'relative', overflow: 'hidden', width: 'auto', height: '416.983px' }}>
@@ -140,25 +141,7 @@ export default function NewsFeedHeader() {
                 </div>
               </li>
 
-              <li className="dropdown mega-avatar">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                  <span className="avatar w-32"><img src="assets/img/users/2.jpg" className="img-resonsive img-circle" width="25" height="25" alt="..." /></span>
-
-                  <span className="'hidden'-xs">
-                    Alex Grantte
-              </span>
-                </a>
-                <div className="dropdown-menu w dropdown-menu-scale pull-right">
-                  <a className="dropdown-item" href="#"><span>New Story</span></a>
-                  <a className="dropdown-item" href="#"><span>Become a Member</span></a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#"><span>Profile</span></a>
-                  <a className="dropdown-item" href="#"><span>Settings</span></a>
-                  <a className="dropdown-item" href="#">Need help?</a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">Sign out</a>
-                </div>
-              </li>
+              <AsyncLoader path="./components/Avatar" />
 
             </ul>
           </div>

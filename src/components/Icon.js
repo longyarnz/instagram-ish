@@ -11,7 +11,7 @@ export default function Icon(props) {
 
   return (
     <div style={style}>
-      <i className={`material-icons ${props.className}`} style={props.style}>
+      <i className={`material-icons ${props.className || ''}`} style={props.style}>
         {props.name}
       </i>
     </div>
