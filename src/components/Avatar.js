@@ -5,6 +5,8 @@ import Icon from './Icon';
 import AsyncImage from './AsyncImage';
 
 export default function Avatar(props) {
+  const logUserOut = () => props.dispatch({ type: 'LOG USER OUT'});
+
   return props.state.isUserLoggedIn ? (
     <li className="dropdown mega-avatar">
       <a href="#" className="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -23,7 +25,7 @@ export default function Avatar(props) {
         <a className="dropdown-item" href="#"><span>Settings</span></a>
         <a className="dropdown-item" href="#">Need help?</a>
         <div className="dropdown-divider"></div>
-        <a className="dropdown-item" href="#">Sign out</a>
+        <a className="dropdown-item" href="#" onClick={ logUserOut }>Sign out</a>
       </div>
     </li>
   ) : (

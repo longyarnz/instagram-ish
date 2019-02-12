@@ -15,6 +15,12 @@ export function Reducers(state, action) {
     case 'REGISTER USER':
       return { ...state, mutations, isUserLoggedIn: true, user: action.payload }
 
+    case 'LOG USER IN':
+      return { ...state, mutations, isUserLoggedIn: true, user: action.payload }
+
+    case 'LOG USER OUT':
+      return { ...state, mutations, isUserLoggedIn: false, user: null }
+
     default: return state;
   }
 }

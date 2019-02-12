@@ -2,7 +2,23 @@
 
 import React from 'react';
 
+function submitLoginForm(e, dispatch, goTo){
+  e.preventDefault();
+  const [ email, password ] = e.target;
+  dispatch({
+    type: 'LOG USER IN', 
+    payload: { 
+      email: email.value,
+      username: 'Server Data',
+      password: password.value
+    }
+  });
+  goTo('./pages/NewsFeed');
+}
+
 export default function Login(props) {
+  const onSubmit = e => submitLoginForm(e, props.dispatch, props.goTo);
+
   return (
     <section className="login">
       <div className="container">
@@ -10,7 +26,7 @@ export default function Login(props) {
           <h1>
           <img src="/assets/img/favicon.png" alt="Dominerf Logo" style={{ width: '30%'}} />
           </h1>
-          <form method="post" className="form-signin">
+          <form method="post" className="form-signin" onSubmit={onSubmit}>
             <h3 className="form-signin-heading">SIGN IN</h3>
             <div className="form-group">
               <input name="email" type="text" className="form-control" placeholder="Email" />
