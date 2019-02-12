@@ -12,7 +12,7 @@ export default function Avatar(props) {
           <AsyncImage src="assets/img/users/2.jpg" className="img-resonsive img-circle" width="25" height="25" alt="..." />
         </span>
         <span className="hidden-xs">
-          Alex Grantte
+          { props.state.user.username }
         </span>
       </a>
       <div className="dropdown-menu w dropdown-menu-scale pull-right">

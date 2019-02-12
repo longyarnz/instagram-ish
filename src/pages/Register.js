@@ -2,7 +2,23 @@
 
 import React from 'react';
 
+function submitRegisterForm(e, dispatch, goTo){
+  e.preventDefault();
+  const [ email, username, password ] = e.target;
+  dispatch({
+    type: 'REGISTER USER', 
+    payload: { 
+      email: email.value,
+      username: username.value,
+      password: password.value
+    }
+  });
+  goTo('./pages/NewsFeed');
+}
+
 export default function Register(props) {
+  const onSubmit = e => submitRegisterForm(e, props.dispatch, props.goTo);
+
   return (
     <section className="login" style={{ backgroundColor: '#fff' }}>
       <div className="container">
@@ -10,7 +26,7 @@ export default function Register(props) {
           <h1>
             <img src="/assets/img/favicon.png" alt="Dominerf Logo" style={{ width: '30%'}} />
           </h1>
-          <form method="post" className="form-signin">
+          <form method="post" className="form-signin" onSubmit={onSubmit}>
             <h3 className="form-signin-heading">SIGN UP</h3>
             <div className="form-group">
               <input name="email" type="text" className="form-control" placeholder="Email" />
