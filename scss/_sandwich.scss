@@ -1,0 +1,67 @@
+@keyframes svg-Z {
+  from {
+    width: 0%;
+    opacity: 0;
+  }
+  to {
+    width: 80%;
+    opacity: 1;
+  }
+}
+
+@keyframes svg-Y {
+  from {
+    transform: rotate(40deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes svg-X {
+  from {
+    transform: rotate(-40deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.touchable{
+  transition: opacity .25s ease-out;
+
+  &:active{
+    opacity: 0;
+  }
+}
+
+svg.sandwich {
+  @extend .touchable;
+  background-color: transparent;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  
+  rect {
+    fill: #000;
+    
+    &:first-of-type {
+      animation: svg-Y .3s ease-out both;
+    }
+
+    &:nth-of-type(2) {
+      animation: svg-Z .3s ease-out both;
+    }
+
+    &:nth-of-type(3) {
+      animation: svg-X .3s ease-out both;
+      transform-origin: 0% 100%;
+    }
+  }
+
+  &:focus{
+    outline: none;
+  }
+}

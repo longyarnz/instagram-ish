@@ -1,0 +1,50 @@
+section.stories {
+  padding: 10px 0px;
+  font-family: "Montserrat";
+
+  & > h2 {
+    font-weight: 900;
+    font-size: 12px;
+    margin: 10px 0px;
+    padding-left: 15px;
+  }
+
+  & > ul {
+    width: 100%;
+    margin: 0;
+    padding: 0px 10px 5px 0px;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: auto;
+
+    li {
+      margin: 0px 10px;
+
+      &:first-of-type {
+        width: 55px;
+        align-self: flex-start;
+      }
+
+      &:last-of-type{
+        figure{
+          margin-right: 20px;
+        }
+      }
+
+      & > figure {
+        img {
+          border-radius: 5px;
+          width: 55px;
+          height: 55px;
+        }
+
+        figcaption {
+          font-size: 10px;
+          font-weight: 400;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

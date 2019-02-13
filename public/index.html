@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <!--
+
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
 
-    <link type="text/css" href="%PUBLIC_URL%/assets/css/demos/photo.css" rel="stylesheet" />
-    <!--
+  <link type="text/css" href="%PUBLIC_URL%/assets/css/demos/photo.css" rel="stylesheet" />
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -22,31 +23,63 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
 
-    <style>
-      @keyframes pop {
-        from{
-          transform: scale(0.8, 0.8);
-          opacity: 0.5;
-        }
-        to{
-          opacity: 1;
-          transform: scale(1, 1);
-        }
-      }
-      @font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:url("%PUBLIC_URL%/assets/fonts/icons.woff2") format("woff2"),url("%PUBLIC_URL%/assets/fonts/icons.woff") format("woff")}.material-icons{font-family:"Material Icons";font-weight:normal;font-style:normal;font-size:24px;line-height:1;letter-spacing:normal;text-transform:none;display:inline-block;white-space:nowrap;word-wrap:normal;direction:ltr;-webkit-font-feature-settings:"liga";-webkit-font-smoothing:antialiased;cursor:pointer;overflow:hidden}
-    </style>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-    <title>Dominerf</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <section id="fallback" style="width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; position: absolute;z-index: -1;">
-        <img src="%PUBLIC_URL%/assets/img/favicon.png" alt="Dominerf Logo" style="height: 20vh; animation: pop 0.5s ease 0s infinite alternate forwards running;" prefetch />
-      </section>
-    <main id="root"></main>
-    <!--
+    @keyframes pop {
+      from {
+        transform: scale(0.8, 0.8);
+        opacity: 0.5;
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1, 1);
+      }
+    }
+
+    @font-face {
+      font-family: "Material Icons";
+      font-style: normal;
+      font-weight: 400;
+      src: url("%PUBLIC_URL%/assets/fonts/icons.woff2") format("woff2"), url("%PUBLIC_URL%/assets/fonts/icons.woff") format("woff")
+    }
+
+    .material-icons {
+      font-family: "Material Icons";
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: "liga";
+      -webkit-font-smoothing: antialiased;
+      cursor: pointer;
+      overflow: hidden
+    }
+  </style>
+
+  <title>Dominerf</title>
+</head>
+
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <section id="fallback"
+    style="width: 100vw; height: 100vh; display: flex; justify-content: center; align-items: center; position: absolute;z-index: -1;">
+    <img src="%PUBLIC_URL%/assets/img/favicon.png" alt="Dominerf Logo"
+      style="height: 20vh; animation: pop 0.5s ease 0s infinite alternate forwards running;" prefetch />
+  </section>
+  <main id="root"></main>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -57,18 +90,19 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-    <script src="%PUBLIC_URL%/assets/js/jquery.min.js"></script>
-    <script src="%PUBLIC_URL%/assets/js/bootstrap.min.js"></script>
-    <script src="%PUBLIC_URL%/assets/js/base.js"></script>
-    <script src="%PUBLIC_URL%/assets/plugins/slimscroll/jquery.slimscroll.js"></script>
-    <script>
-      $('#Slim,#Slim2').slimScroll({
-        height: "auto",
-        position: 'right',
-        railVisible: true,
-        alwaysVisible: true,
-        size: "8px",
-      });		
-    </script>
-  </body>
+  <script src="%PUBLIC_URL%/assets/js/jquery.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/js/bootstrap.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/js/base.js"></script>
+  <script src="%PUBLIC_URL%/assets/plugins/slimscroll/jquery.slimscroll.js"></script>
+  <script>
+    $('#Slim,#Slim2').slimScroll({
+      height: "auto",
+      position: 'right',
+      railVisible: true,
+      alwaysVisible: true,
+      size: "8px",
+    });		
+  </script>
+</body>
+
 </html>

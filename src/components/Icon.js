@@ -6,11 +6,11 @@ export default function Icon(props) {
     height: '100%', 
     display: 'flex', 
     justifyContent: 'center', 
-    alignItems: 'center' 
+    alignItems: 'center'
   };
 
   return (
-    <div style={style}>
+    <div style={style} className={props.className || ''}>
       <i className={`material-icons ${props.className || ''}`} style={props.style}>
         {props.name}
       </i>
