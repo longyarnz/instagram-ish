@@ -27,14 +27,6 @@
   }
 }
 
-.touchable{
-  transition: opacity .25s ease-out;
-
-  &:active{
-    opacity: 0;
-  }
-}
-
 svg.sandwich {
   @extend .touchable;
   background-color: transparent;

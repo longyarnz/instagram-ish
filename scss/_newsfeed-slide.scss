@@ -1,0 +1,12 @@
+section.newsfeed-slide{
+  background-color: #fff;
+
+  & > div{
+    padding: 0px;
+
+    div.storybox{
+      border-radius: 0px;
+      background: #fff;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import AddStoryButton from './AddStoryButton';
 import Divider from './Divider';
 
 export default function Stories() {
+  const caption = [ 'Trouble', 'Faux Pais', 'Scream', 'Toy', "Skrillex", 'Marvel', 'Gift', 'Valentine' ];
   return (
     <section className="stories">
       <h2>Stories</h2>
@@ -17,9 +18,9 @@ export default function Stories() {
             return (
               <li key={`store ${i}`}>
                 <figure>
-                  <img src="assets/img/users/18.jpg" alt="story-caption" />
+                  <img src={`assets/img/users/${i + 2}.jpg`} alt="story-caption" />
                   <figcaption>
-                    Dominerf
+                    {caption[i]}
                   </figcaption>
                 </figure>
               </li>
@@ -27,7 +28,7 @@ export default function Stories() {
           }}
         />
       </ul>
-      <Divider width="90%" color="#ccc" />
+      <Divider width="90%" color="#ccc" height="2px" extras={{marginTop: '-5px'}} />
     </section>
   )
 }

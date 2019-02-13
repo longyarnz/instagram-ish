@@ -12,7 +12,7 @@ section.stories {
   & > ul {
     width: 100%;
     margin: 0;
-    padding: 0px 10px 5px 0px;
+    padding: 0px 10px 10px 0px;
     display: inline-flex;
     justify-content: flex-start;
     align-items: center;
@@ -22,7 +22,8 @@ section.stories {
       margin: 0px 10px;
 
       &:first-of-type {
-        width: 55px;
+        min-width: 55px;
+        height: 55px;
         align-self: flex-start;
       }
 
@@ -37,12 +38,14 @@ section.stories {
           border-radius: 5px;
           width: 55px;
           height: 55px;
+          box-shadow: 0px 4px 8px -1px rgba(0, 0, 0, .5);
         }
 
         figcaption {
           font-size: 10px;
           font-weight: 400;
           text-align: center;
+          margin-top: 3px
         }
       }
     }
