@@ -2,12 +2,12 @@
 
 import React from 'react';
 
-function submitRegisterForm(e, dispatch, goTo){
+function submitRegisterForm(e, dispatch, goTo) {
   e.preventDefault();
-  const [ email, username, password ] = e.target;
+  const [email, username, password] = e.target;
   dispatch({
-    type: 'REGISTER USER', 
-    payload: { 
+    type: 'REGISTER USER',
+    payload: {
       email: email.value,
       username: username.value,
       password: password.value
@@ -20,31 +20,32 @@ export default function Register(props) {
   const onSubmit = e => submitRegisterForm(e, props.dispatch, props.goTo);
 
   return (
-    <section className="login" style={{ backgroundColor: '#fff' }}>
+    <section className="register">
       <div className="container">
         <div className="banner-content">
-          <h1>
-            <img src="assets/img/favicon.png" alt="Dominerf Logo" style={{ width: '30%'}} />
-          </h1>
+          <img src="assets/img/favicon.png" alt="Dominerf Logo" />
           <form method="post" className="form-signin" onSubmit={onSubmit}>
-            <h3 className="form-signin-heading">SIGN UP</h3>
+            <h3 className="form-signin-heading">Nice to Meet Ya!</h3>
             <div className="form-group">
-              <input name="email" type="text" className="form-control" placeholder="Email" />
+              <input name="first" type="text" className="form-control" placeholder="First Name" />
             </div>
             <div className="form-group">
-              <input name="username" type="text" className="form-control" placeholder="Username" />
+              <input name="last" type="text" className="form-control" placeholder="Last Name" />
+            </div>
+            <div className="form-group">
+              <input name="email" type="email" className="form-control" placeholder="Email" />
             </div>
             <div className="form-group">
               <input type="password" className="form-control" name="password" placeholder="Password" />
             </div>
-            <button className="kafe-btn kafe-btn-mint btn-block" type="submit" name="subm">Sign Up</button>
+            <button className="kafe-btn kafe-btn-mint btn-block" type="submit" name="subm">SIGN UP</button>
             <br />
-            <a className="btn btn-dark " href="#" role="button" onClick={() => props.goTo('./pages/Login')}>
-              Already have an account? Click Here.
-            </a>
-            <a className="btn btn-dark " href="3" role="button" onClick={() => props.goTo('./pages/Register')}>
-              Forgot your password?
-            </a>
+            <span className="btn btn-dark " role="button" onClick={() => props.goTo('./pages/Login')}>
+              Already have an account?
+              <button>
+                CLICK HERE
+              </button>
+            </span>
           </form>
 
         </div>
