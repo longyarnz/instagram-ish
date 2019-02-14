@@ -1,25 +1,30 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React from 'react';
-import { FlatList, ForLoop } from './Utils';
-import AsyncImage from './AsyncImage';
-import { NewsFeedTab } from './NewsFeedTab';
+import { FlatList } from './Utils';
+import NewsFeedTab from './NewsFeedTab';
 
-export const Users = [
+export const Posts = [
   {
-    name: 'Eleanor Harper',
+    author: 'Eleanor Harper',
     profession: 'Continental Fashionist',
     time: (i) => `${i}hr${i > 1 ? 's' : ''} ago`,
+    likes: 25,
+    comments: 13
   },
   {
-    name: 'Christopher Williamsom',
+    author: 'Christopher Williamsom',
     profession: 'Hard Suite Tailor',
     time: (i) => `${i}hr${i > 1 ? 's' : ''} ago`,
+    likes:  75,
+    comments: 52
   },
   {
-    name: 'Felicity Smoak',
+    author: 'Felicity Smoak',
     profession: '+La Roiuge',
     time: (i) => `${i}hr${i > 1 ? 's' : ''} ago`,
+    likes: 2,
+    comments: 14
   }
 ]
 
@@ -30,98 +35,23 @@ export default function NewsFeedSlide() {
         <div className="row">
           <div className="col-lg-3">
             <FlatList
-              list={Users}
-              listView={(user, i) => (
+              list={Posts}
+              listView={(post, i) => (
                 <NewsFeedTab
-                  name={user.name}
-                  profession={user.profession}
+                  author={post.author}
+                  profession={post.profession}
                   userSrc={`assets/img/users/${++i}.jpg`}
                   src={`assets/img/posts/1.jpg`}
-                  time={user.time(i)}
+                  time={post.time(i)}
+                  likes={post.likes}
+                  comments={post.comments}
                   key={`tab-${i}`}
                 />
               )}
             />
-
-            <div className="trending-box hidden-xs hidden-md">
-              <div className="row">
-                <div className="col-lg-12">
-                  <a href="photo_stories.html"><h4>More stories</h4></a>
-                </div>
-              </div>
-            </div>
           </div>
-
         </div>
       </div>
     </section >
   )
-}
-
-function NewsFeedCardBox(props) {
-  return (
-    <div className="cardbox">
-      <div className="cardbox-heading">
-        <div className="dropdown pull-right">
-          <button className="btn btn-secondary btn-flat btn-flat-icon" type="button" data-toggle="dropdown" aria-expanded="false">
-            <em className="fa fa-ellipsis-h"></em>
-          </button>
-
-          <div className="dropdown-menu dropdown-scale dropdown-menu-right" role="menu" style={props.style}>
-            <a className="dropdown-item" href="#">Hide post</a>
-            <a className="dropdown-item" href="#">Stop following</a>
-            <a className="dropdown-item" href="#">Report</a>
-          </div>
-        </div>
-
-        <div className="media m-0">
-          <div className="d-flex mr-3">
-            <a href="#">
-              <AsyncImage className="img-responsive img-circle" src={props.userSrc} alt="User" />
-            </a>
-          </div>
-          <div className="media-body">
-            <p className="m-0">{props.name}</p>
-            <small><span>10 hours ago</span></small>
-          </div>
-        </div>
-      </div>
-
-      <div className="cardbox-item">
-        <a href="#myModal" data-toggle="modal">
-          <AsyncImage className="img-responsive" src={props.postSrc} alt="MaterialImg" />
-        </a>
-      </div>
-      <div className="cardbox-base">
-        <ul>
-          <ForLoop
-            times={5}
-            loopView={i => (
-              <li key={`link-${i}`}>
-                <a href="#">
-                  <AsyncImage
-                    src={`assets/img/users/${++i}.jpg`}
-                    className="img-responsive img-circle"
-                    alt="User"
-                  />
-                </a>
-              </li>)
-            }
-          />
-        </ul>
-      </div>
-      <div className="cardbox-like">
-        <ul>
-          <li>
-            <a href="#"><i className="fa fa-heart"></i></a>
-            <span> 786,286</span>
-          </li>
-          <li>
-            <a href="#" title="" className="com"><i className="fa fa-comments"></i></a>
-            <span className="span-last"> 126,400</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
 }

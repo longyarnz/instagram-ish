@@ -1,21 +1,22 @@
-div.newsfeed-tab{
+div.newsfeed-tab {
   margin-bottom: 20px;
 
-  header, footer{
+  header,
+  footer {
     background-color: #fff;
     padding: 10px 10px 10px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    img{
+    img {
       width: 42px;
       height: 42px;
       border-radius: 50%;
       border: 2px solid #f8ba0d;
     }
 
-    div{
+    div {
       flex: 3;
       margin-left: 10px;
       margin-right: auto;
@@ -23,35 +24,56 @@ div.newsfeed-tab{
       display: flex;
       flex-direction: column;
 
-      span{
-        &:first-of-type{
+      span {
+        &:first-of-type {
           color: #000;
           margin-bottom: 3px;
         }
 
-        &:last-of-type{
+        &:last-of-type {
           color: #aaa;
           font-size: 12px;
         }
       }
     }
 
-    i{
-      color: #aaa;
-      margin-left: auto
-    }
-  }
-
-  footer{
-    display: inline-flex;
-    justify-content: flex-start;
-
     i {
-      margin: 0px
+      color: #aaa;
+      margin-left: auto;
     }
   }
 
-  & > img{
+  footer {
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+    & > span {
+      @extend .touchable;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+
+      div {
+        flex: 1;
+        i {
+          margin: 0px;
+        }
+      }
+
+      span{
+        flex: 1
+      }
+
+      &:first-of-type{
+        border-right: 1px solid #ccc;
+      }
+    }
+  }
+
+  & > img {
     width: 100%;
   }
 }
