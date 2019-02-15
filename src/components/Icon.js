@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function Icon(props) {
   const style = { 
@@ -10,10 +10,14 @@ export default function Icon(props) {
   };
 
   return (
-    <div style={style}>
+    <div style={style} onClick={props.onClick}>
       <i className={`material-icons ${props.className || ''}`} style={props.style}>
         {props.name}
       </i>
     </div>
   )
+}
+
+export function ColorIcon(props) {
+  return <Icon style={{color: props.color}} {...props} />
 }

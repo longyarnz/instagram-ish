@@ -13,7 +13,7 @@ div.newsfeed-tab {
       width: 42px;
       height: 42px;
       border-radius: 50%;
-      border: 2px solid #f8ba0d;
+      border: 2px solid $theme-color;
     }
 
     div {
@@ -28,6 +28,7 @@ div.newsfeed-tab {
         &:first-of-type {
           color: #000;
           margin-bottom: 3px;
+          font-weight: 700;
         }
 
         &:last-of-type {
@@ -58,6 +59,8 @@ div.newsfeed-tab {
 
       div {
         flex: 1;
+        margin-left: 20px;
+
         i {
           margin: 0px;
         }
@@ -68,12 +71,16 @@ div.newsfeed-tab {
       }
 
       &:first-of-type{
-        border-right: 1px solid #ccc;
+        border-right: 1px solid #f4f4f4;
       }
     }
   }
 
   & > img {
     width: 100%;
+  }
+
+  &:last-of-type > div:last-of-type{
+    display: none;
   }
 }

@@ -28,7 +28,7 @@ export default function Stories() {
           }}
         />
       </ul>
-      <Divider width="90%" color="#ccc" height="2px" extras={{marginTop: '-4.5px'}} />
+      <Divider width="90%" color="#ccc" height="2px" extras={{marginTop: '-4.8px'}} />
     </section>
   )
 }

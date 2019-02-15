@@ -1,15 +1,19 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import NewsFeedHeader from '../components/NewsFeedHeader';
+import NavBar from '../components/NavBar';
 import NewsFeedSlide from '../components/NewsFeedSlide';
 import Stories from '../components/Stories';
+import Footer from '../components/Footer';
+import ShouldRender from '../components/ShouldRender';
 
-export default function NewsFeed() {
+export default function NewsFeed(props) {
   return (
     <>
-      <NewsFeedHeader />
-      <Stories />
+      <NavBar />
+      <ShouldRender if={props.state.userIsLoggedIn}>
+        <Stories />
+      </ShouldRender>
       <NewsFeedSlide />
+      <Footer />
     </>
   )
 }

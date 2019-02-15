@@ -1,5 +1,6 @@
 import React from 'react';
 import AsyncImage from './AsyncImage';
+import Divider from './Divider';
 import Icon from './Icon';
 
 export default function NewsFeedTab(props) {
@@ -24,6 +25,7 @@ export default function NewsFeedTab(props) {
           <span>{props.comments}</span>
         </span>
       </footer>
+      <Divider color="#f4f4f4" width="80%" />
     </div>
   );
 }

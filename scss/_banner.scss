@@ -1,0 +1,50 @@
+div.banner {
+  font-family: $font;
+  width: 100%;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background-color: #f9f9f9;
+
+  & > div {
+    position: relative;
+
+    img {
+      position: relative;
+      border-radius: 50%;
+      background-color: #fff;
+      padding: 3px;
+      border: 2px solid $theme-color;
+    }
+
+    & > div {
+      border-radius: 5px;
+      position: absolute;
+      bottom: 50px;
+      right: -30px;
+
+      i {
+        color: #000;
+      }
+    }
+  }
+
+  & > span {
+    padding: 10px 0px;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  & > button {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    border-radius: 10px;
+    padding: 7px 15px;
+    background-color: $theme-color;
+    color: #fff;
+  }
+}

@@ -1,0 +1,10 @@
+div.gallery{
+  display: inline-flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  img.tiles {
+    width: calc(100vw / 3);
+    height: calc(100vw / 3);
+  }
+}

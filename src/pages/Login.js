@@ -37,7 +37,7 @@ export default function Login(props) {
             <span className="btn btn-dark " role="button" onClick={() => props.goTo('./pages/Register')}>
               Don't have an account?
               <button>
-                CLICK HERE
+                REGISTER
               </button>
             </span>
             <span className="btn btn-dark " role="button" onClick={() => props.goTo('./pages/Register')}>

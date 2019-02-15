@@ -13,7 +13,7 @@ export const Posts = [
     comments: 13
   },
   {
-    author: 'Christopher Williamsom',
+    author: 'Christopher Williamson',
     profession: 'Hard Suite Tailor',
     time: (i) => `${i}hr${i > 1 ? 's' : ''} ago`,
     likes:  75,

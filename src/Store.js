@@ -1,7 +1,7 @@
 export const InitialState = {
   mutations: [],
-  view: './pages/Register',
-  isUserLoggedIn: false,
+  view: './pages/NewsFeed',
+  userIsLoggedIn: false,
   user: null
 }
 
@@ -13,13 +13,13 @@ export function Reducers(state, action) {
       return { ...state, mutations, view: action.payload }
 
     case 'REGISTER USER':
-      return { ...state, mutations, isUserLoggedIn: true, user: action.payload }
+      return { ...state, mutations, userIsLoggedIn: true, user: action.payload }
 
     case 'LOG USER IN':
-      return { ...state, mutations, isUserLoggedIn: true, user: action.payload }
+      return { ...state, mutations, userIsLoggedIn: true, user: action.payload }
 
     case 'LOG USER OUT':
-      return { ...state, mutations, isUserLoggedIn: false, user: null }
+      return { ...state, mutations, userIsLoggedIn: false, user: null }
 
     default: return state;
   }

@@ -4,7 +4,7 @@
   width: 100%;
 
   img{
-    width: 30%
+    width: 120px
   }
 
   div.banner-content{
@@ -14,30 +14,31 @@
 
       h3{
         color: #000;
-        font-family: Montserrat;
-        font-weight: 900;
+        font-family: $font;
+        font-weight: 700;
         margin-bottom: 20px;
       }
       
       div.form-group{
         input{
           border: 0;
-          border-bottom: 2px solid #f8ba0d;
+          border-bottom: 2px solid $theme-color;
           box-shadow: none;
-          font-family: Montserrat;
+          font-family: $font;
+          font-weight: 300;
         }
       }
       
       & > button{
-        background-color: #f8ba0d;
-        font-family: Montserrat;
+        background-color: $theme-color;
+        font-family: $font;
         margin: 30px 0px 40px;
       }
 
       span.btn{
         background-color: transparent;
         color: #000;
-        font-family: Montserrat;
+        font-family: $font;
         font-size: 12px !important;
         margin-bottom: 20px;
 
@@ -46,9 +47,9 @@
           border: 0;
           box-shadow: none;
           color: #000;
-          font-weight: 900;
+          font-weight: 700;
           text-emphasis-style: dot;
-          text-emphasis-position: under;
+          text-emphasis-position: under left;
         }
       }
     }
