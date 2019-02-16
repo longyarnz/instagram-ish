@@ -4,12 +4,14 @@ import AsyncLoader from '../AsyncLoader';
 import ShouldRender from './ShouldRender';
 
 export default function NavBar() {
-  const [showMenu, setMenu] = useState(false);
-  const [showUserMenu, setUserMenu] = useState(false);
+  const [ showMenu, setMenu ] = useState(false);
+  const [ showUserMenu, setUserMenu ] = useState(false);
+
   const toggle = () => {
     setUserMenu(false);
     setMenu(!showMenu);
   }
+
   const toggleUserMenu = () => {
     setMenu(false);
     setUserMenu(!showUserMenu);

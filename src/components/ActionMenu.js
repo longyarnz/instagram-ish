@@ -5,12 +5,10 @@ export default function ActionMenu(props) {
   const ul = useRef(null);
 
   useEffect(() => {
-    ul.current.style.width = '130px';
-    ul.current.style.height = '94px';
+    ul.current.style.transform = 'scale(1, 1)';
 
     return () => {
-      ul.current.style.width = '0px';
-      ul.current.style.height = '0px';
+      ul.current.style.transform = 'scale(0, 0)';
     }
   });
 

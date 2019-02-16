@@ -1,26 +1,57 @@
-.register{
+.register {
   background: #fff;
   height: 100vh;
   width: 100%;
+  position: relative;
 
-  img{
-    width: 120px
+  img {
+    width: 120px;
   }
 
-  div.banner-content{
-    form{
+  div.banner-content {
+    margin-top: 0px;
+    padding-top: 100px;
+
+    & > button {
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+      background: transparent;
+      border: none;
+      color: #000;
+      position: absolute;
+      top: 10px;
+      left: 0px;
+      text-emphasis-style: dot;
+      text-emphasis-position: under left;
+      text-emphasis-color: $theme-color;
+
+      span {
+        font-family: $font;
+        font-weight: 700;
+        outline: none;
+        box-shadow: none;
+        padding-left: 10px;
+      }
+
+      i {
+        font-size: 28px;
+      }
+    }
+
+    form {
       padding: 0px;
       width: 85%;
 
-      h3{
+      h3 {
         color: #000;
         font-family: $font;
         font-weight: 700;
         margin-bottom: 20px;
       }
-      
-      div.form-group{
-        input{
+
+      div.form-group {
+        input {
           border: 0;
           border-bottom: 2px solid $theme-color;
           box-shadow: none;
@@ -28,21 +59,21 @@
           font-weight: 300;
         }
       }
-      
-      & > button{
+
+      & > button {
         background-color: $theme-color;
         font-family: $font;
         margin: 30px 0px 40px;
       }
 
-      span.btn{
+      span.btn {
         background-color: transparent;
         color: #000;
         font-family: $font;
         font-size: 12px !important;
         margin-bottom: 20px;
 
-        button{
+        button {
           background: transparent;
           border: 0;
           box-shadow: none;

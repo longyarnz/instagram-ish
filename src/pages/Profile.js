@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import Gallery from '../components/Gallery';
 import Banner from '../components/Banner';
 import MenuBar from '../components/MenuBar';
-import Gallery from '../components/Gallery';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
@@ -11,9 +11,9 @@ export default function Profile(props) {
   return (
     <section className="profile">
       <NavBar />
-      <Banner />
+      <Banner goTo={props.goTo} />
       <MenuBar state={profileState} />
-      <Gallery state={profileState} />
+      <Gallery tabs={profileState} {...props} />
       <Footer />
     </section>
   )

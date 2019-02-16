@@ -1,18 +1,19 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
 import React from 'react';
+import Icon from '../components/Icon';
 
 function submitLoginForm(e, dispatch, goTo) {
   e.preventDefault();
-  const [email, password] = e.target;
+  const [ email ] = e.target;
+
   dispatch({
     type: 'LOG USER IN',
     payload: {
       email: email.value,
-      username: 'Server Data',
-      password: password.value
+      username: 'LekanMedia',
+      accountType: 'Customer'
     }
   });
+
   goTo('./pages/NewsFeed');
 }
 
@@ -23,6 +24,10 @@ export default function Login(props) {
     <section className="login register">
       <div className="container">
         <div className="banner-content">
+          <button onClick={() => props.goTo('./pages/NewsFeed')}>
+            <Icon name="home" />
+            {/* <span>HOME</span> */}
+          </button>
           <img src="assets/img/favicon.png" alt="Dominerf Logo" style={{ width: '30%' }} />
           <form method="post" className="form-signin" onSubmit={onSubmit}>
             <h3 className="form-signin-heading">We've Missed You!</h3>

@@ -1,0 +1,36 @@
+div.pick-a-file {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #f8ba0d;
+  border-radius: 50%;
+  overflow: hidden;
+
+  div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  i {
+    color: #999;
+  }
+
+  img {
+    @extend .profile-image;
+    position: absolute;
+    top: 0;
+    border: none;
+    overflow: hidden;
+    width: 100%;
+    padding: 0px;
+    box-shadow: none;
+    border-radius: 0;
+  }
+}

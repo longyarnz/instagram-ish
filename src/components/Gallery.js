@@ -1,15 +1,20 @@
 import React from 'react';
 import { ForLoop } from './Utils';
+import ProfileTab from './ProfileTab';
 import AsyncImage from './AsyncImage';
 import ShouldRender from './ShouldRender';
 import NewsFeedSlide from './NewsFeedSlide';
 
 export default function Gallery(props) {
-  const [ state ] = props.state;
+  const { tabs: [ tab ] } = props;
 
   return (
     <div className="gallery">
-      <ShouldRender if={state === 0}>
+      <ShouldRender if={tab === 0}>
+        <ProfileTab {...props} />
+      </ShouldRender>
+
+      <ShouldRender if={tab === 1}>
         <ForLoop
           times={9}
           loopView={
@@ -19,7 +24,8 @@ export default function Gallery(props) {
           }
         />
       </ShouldRender>
-      <ShouldRender if={state === 1}>
+
+      <ShouldRender if={tab === 2}>
         <NewsFeedSlide />
       </ShouldRender>
     </div>

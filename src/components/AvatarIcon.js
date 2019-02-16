@@ -8,7 +8,7 @@ export default function AvatarIcon(props) {
     <>
       <ShouldRender if={!props.state.userIsLoggedIn}>
         <div style={props.style} onClick={props.toggle}>
-          <Icon name="person" className="touchable" />
+          <Icon name="person_outline" className="touchable" />
         </div>
       </ShouldRender>
 

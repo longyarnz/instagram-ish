@@ -6,7 +6,8 @@ export default function Icon(props) {
     height: props.height, 
     display: 'flex', 
     justifyContent: 'center', 
-    alignItems: 'center'
+    alignItems: 'center',
+    ...props.container
   };
 
   return (

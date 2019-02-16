@@ -1,0 +1,35 @@
+div.edit-profile-image{
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: calc(#{ $image-height } + 40px);
+  background: #f9f9f9;
+  box-shadow: 0px 2px 4px -2px rgba(0, 0, 0, 0.2);
+
+  & > div{
+    width: 50%;
+    height: 100%;
+    position: relative;
+    padding: 20px;
+
+    &:first-of-type{
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img{
+        @extend .profile-image;
+        width: $image-width;
+        height: $image-height;
+        box-shadow: none;
+        padding: 0px;
+      }
+    }
+
+    &:last-of-type{
+      flex: 1;
+    }
+  }
+}

@@ -1,36 +1,6 @@
 ul.user-menu{
-  position: absolute;
-  display: flex;
-  flex-direction: column;
+  @extend .ul-menu;
   background: #fff;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 0px;
-  width: 0px;
-  height: 0px;
-  border-radius: 5px;
-  box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.4);
-  right: 15px;
+  height: 140px;
   top: 54px;
-  overflow: hidden;
-  transition: all .25s ease;
-
-  li{
-    display: inline-flex;
-    padding: 10px;
-    align-items: center;
-    text-transform: uppercase;
-    font-family: $font;
-    font-weight: 300;
-    font-size: 12px;
-    width: 100%;
-
-    & > span{
-      margin-left: 15px
-    }
-
-    &:active{
-      background: darken(#f9f9f9, 10%);
-    }
-  }
 }

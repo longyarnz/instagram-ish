@@ -5,13 +5,9 @@ export default function UserMenu(props) {
   const ul = useRef(null);
 
   useEffect(() => {
-    ul.current.style.width = '130px';
-    ul.current.style.height = '140px';
+    setTimeout(() => ul.current.style.transform = 'scale(1, 1)', 50);
 
-    return () => {
-      ul.current.style.width = '0px';
-      ul.current.style.height = '0px';
-    }
+    return () => ul.current.style.transform = 'scale(0, 0)';
   });
 
   return (
@@ -28,7 +24,10 @@ export default function UserMenu(props) {
           Settings
         </span>
       </li>
-      <li onClick={() => props.goTo('./pages/Login')}>
+      <li onClick={() => {
+        props.dispatch({type: 'LOG USER OUT'});
+        props.goTo('./pages/NewsFeed');
+      }}>
         <Icon name="exit_to_app" />
         <span>
           Logout

@@ -1,0 +1,46 @@
+h3.profile-tab {
+  padding: 0px 15px;
+  font-family: $font;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+ul.profile-tab {
+  padding: 0px 15px;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    font-family: $font;
+
+    i {
+      font-size: 18px;
+      margin-top: 5px;
+      color: rgb(170, 170, 170);
+    }
+
+    span {
+      font-family: $font;
+      padding-top: 0px;
+      margin-left: 12px;
+      font-weight: 300;
+      vertical-align: top;
+    }
+
+    &.upgrade {
+      padding: 10px;
+      color: #fff;
+      background: $theme-color;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 5px;
+      justify-content: center;
+
+      &:hover, &:active{
+        background: darken($theme-color, 10);
+      }
+    }
+  }
+}

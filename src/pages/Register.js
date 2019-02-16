@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
 import React from 'react';
+import Icon from '../components/Icon';
 
 function submitRegisterForm(e, dispatch, goTo) {
   e.preventDefault();
@@ -23,6 +24,10 @@ export default function Register(props) {
     <section className="register">
       <div className="container">
         <div className="banner-content">
+          <button onClick={() => props.goTo('./pages/NewsFeed')}>
+            <Icon name="home" />
+            {/* <span>HOME</span> */}
+          </button>
           <img src="assets/img/favicon.png" alt="Dominerf Logo" />
           <form method="post" className="form-signin" onSubmit={onSubmit}>
             <h3 className="form-signin-heading">Nice to Meet Ya!</h3>

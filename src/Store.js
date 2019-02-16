@@ -1,13 +1,24 @@
 export const InitialState = {
   mutations: [],
-  view: './pages/NewsFeed',
+  view: './pages/EditProfile',
   userIsLoggedIn: false,
-  user: null
+  user: {
+    firstName: 'Olalekan',
+    lastName: 'Ayodele',
+    email: 'longyarnz@gmail.com',
+    username: 'LekanMedia',
+    accountType: 'customer',
+    phone: '08082935102',
+    experience: 0,
+    about: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    \nConsequatur odio sit perferendis totam, et mollitia at tempora repellendus!
+    \nVeniam tempore officia non recusandae, quae mollitia amet inventore molestias molestiae repudiandae!`
+  }
 }
 
 export function Reducers(state, action) {
-  const mutations = [ ...state.mutations, action.type ];
-  
+  const mutations = [...state.mutations, action.type];
+
   switch (action.type) {
     case 'CHANGE VIEW':
       return { ...state, mutations, view: action.payload }
@@ -20,6 +31,9 @@ export function Reducers(state, action) {
 
     case 'LOG USER OUT':
       return { ...state, mutations, userIsLoggedIn: false, user: null }
+
+    case 'UPGRADE CUSTOMER ACCOUNT':
+      return { ...state, mutations, user: { ...state.user, accountType: 'designer' } }
 
     default: return state;
   }

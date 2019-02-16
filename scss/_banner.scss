@@ -13,11 +13,7 @@ div.banner {
     position: relative;
 
     img {
-      position: relative;
-      border-radius: 50%;
-      background-color: #fff;
-      padding: 3px;
-      border: 2px solid $theme-color;
+      @extend .profile-image;
     }
 
     & > div {
@@ -42,9 +38,16 @@ div.banner {
     outline: none;
     box-shadow: none;
     border: none;
-    border-radius: 10px;
-    padding: 7px 15px;
+    border-radius: 5px;
+    padding: 10px 50px;
     background-color: $theme-color;
     color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+
+    span{
+      margin-left: 20px;
+    }
   }
 }

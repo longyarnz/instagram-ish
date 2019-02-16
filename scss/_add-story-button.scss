@@ -13,10 +13,10 @@ div.add-story-button {
     background-color: #fff;
     width: calc(100% - 4px);
     height: calc(100% - 2px);
-    top: 2;
+    top: 2px;
     left: 2px;
     z-index: 1;
-    box-shadow: 0px 4px 8px -1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 4px 8px -1px rgba(0, 0, 0, 0.1);
   }
   
   & > figure {

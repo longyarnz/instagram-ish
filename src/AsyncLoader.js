@@ -9,7 +9,7 @@ export default function AsyncLoader({ path, ...props }) {
   const Payload = React.lazy(LoadComponent);
 
   return (
-    <Suspense fallback={props.fallback || <Spinner />}>
+    <Suspense fallback={props.fallback ? props.fallback : <Spinner />}>
       <Payload state={state} dispatch={dispatch} goTo={goTo} {...props} />
     </Suspense>
   );
