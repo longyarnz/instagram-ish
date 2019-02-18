@@ -12,7 +12,7 @@ export default function Profile(props) {
     <section className="profile">
       <NavBar />
       <Banner goTo={props.goTo} />
-      <MenuBar state={profileState} />
+      <MenuBar tabs={profileState} {...props} />
       <Gallery tabs={profileState} {...props} />
       <Footer />
     </section>
