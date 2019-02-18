@@ -58,7 +58,7 @@ nav.navbar.navbar-default {
 
   li {
     display: inline-flex;
-    padding: 10px;
+    padding: 12px 10px;
     align-items: center;
     text-transform: uppercase;
     font-family: $font;
@@ -83,4 +83,12 @@ nav.navbar.navbar-default {
   padding: 3px;
   border: 2px solid $theme-color;
   box-shadow: 0px 2px 2px -1px rgba(0, 0, 0, 0.5);
+}
+
+label {
+  font-family: $font;
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 5px;
+  font-weight: 700;
 }

@@ -10,12 +10,15 @@ export default function UserMenu(props) {
     return () => ul.current.style.transform = 'scale(0, 0)';
   });
 
+  const icon = props.state.view === './pages/Profile' ? 
+    ['home', 'Home', './pages/NewsFeed'] : ['face', 'Profile', './pages/Profile'];
+
   return (
     <ul className="user-menu" ref={ul}>
-      <li onClick={() => props.goTo('./pages/Profile')}>
-        <Icon name="face" />
+      <li onClick={() => props.goTo(icon[2])}>
+        <Icon name={icon[0]} />
         <span>
-          Profile
+          {icon[1]}
         </span>
       </li>
       <li onClick={() => props.goTo('./pages/Register')}>

@@ -15,7 +15,7 @@ export default function ActionMenu(props) {
   return (
     <ul className="action-menu" ref={ul}>
       <li onClick={() => props.goTo('./pages/Register')}>
-        <Icon name="how_to_reg" />
+        <Icon name="contacts" />
         <span>
           Register
         </span>

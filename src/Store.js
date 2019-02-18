@@ -1,6 +1,6 @@
 export const InitialState = {
   mutations: [],
-  view: './pages/EditProfile',
+  view: './pages/NewsFeed',
   userIsLoggedIn: false,
   user: {
     firstName: 'Olalekan',
@@ -9,7 +9,7 @@ export const InitialState = {
     username: 'LekanMedia',
     accountType: 'customer',
     phone: '08082935102',
-    experience: 0,
+    experience: 3,
     about: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
     \nConsequatur odio sit perferendis totam, et mollitia at tempora repellendus!
     \nVeniam tempore officia non recusandae, quae mollitia amet inventore molestias molestiae repudiandae!`

@@ -26,13 +26,12 @@ export default function Login(props) {
         <div className="banner-content">
           <button onClick={() => props.goTo('./pages/NewsFeed')}>
             <Icon name="home" />
-            {/* <span>HOME</span> */}
           </button>
           <img src="assets/img/favicon.png" alt="Dominerf Logo" style={{ width: '30%' }} />
           <form method="post" className="form-signin" onSubmit={onSubmit}>
             <h3 className="form-signin-heading">We've Missed You!</h3>
             <div className="form-group">
-              <input name="email" type="text" className="form-control" placeholder="Email" />
+              <input name="email" type="email" className="form-control" placeholder="Email" />
             </div>
             <div className="form-group">
               <input type="password" className="form-control" name="password" placeholder="Password" />

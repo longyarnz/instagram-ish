@@ -13,6 +13,12 @@ section.edit-profile {
     display: flex;
     flex-direction: column;
 
+    & > label {
+      padding: 15px 15px 0px;
+      background-color: #f9f9f9;
+      margin: 0px;
+    }
+
     & > div.input-group {
       display: flex;
       flex-direction: column;
@@ -31,14 +37,6 @@ section.edit-profile {
           outline: none;
           border-bottom: 2px solid $theme-color;
         }
-      }
-      
-      label{
-        font-family: $font;
-        display: inline-block;
-        max-width: 100%;
-        margin-bottom: 5px;
-        font-weight: 700;
       }
     }
   }

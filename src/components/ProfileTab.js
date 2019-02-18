@@ -13,18 +13,22 @@ function LI(props) {
 
 export default function ProfileTab(props) {
   const { state, dispatch } = props;
-  const years = state.user.experience > 1 ? 'yrs' : 'yr';
+  const years = Number(state.user.experience) > 1 ? 'yrs' : 'yr';
+  const experience = Number(state.user.experience) < 1 ? 'No Experience' : `
+    ${state.user.experience} ${years} of Experience
+  `;
+  console.log(experience);
 
   return (
-    <>
+    <div className="profile-tab">
       <h3 className="profile-tab">{state.user.accountType} Account</h3>
       <ul className="profile-tab">
         <LI icon="face" text={state.user.username} />
-        <LI icon="alternate_email" text={state.user.email} />
+        <LI icon="mail_outline" text={state.user.email} />
         <LI icon="contact_phone" text={state.user.phone} />
 
         <ShouldRender if={state.user.accountType === 'designer'}>
-          <LI icon="event" text={`${state.user.experience} ${years} of Experience`} />
+          <LI icon="event" text={experience} />
         </ShouldRender>
 
         <LI icon="store_mall_directory" text={state.user.about} />
@@ -35,6 +39,6 @@ export default function ProfileTab(props) {
           </li>
         </ShouldRender>
       </ul>
-    </>
+    </div>
   )
 }

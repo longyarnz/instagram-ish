@@ -19,13 +19,14 @@ export default function PickAFile(props) {
 
   const onChange = async e => {
     const image = e.target.files[0];
-    const src = URL.createObjectURL(image);
-    setSrc(src);
-    props.onSelect && props.onSelect(image);
-  }
 
-  const onClick = () => {
-    input.current.click();
+    if(image === undefined) return;
+
+    const src = URL.createObjectURL(image);
+
+    setSrc(src);
+    
+    props.onSelect && props.onSelect(image);
   }
 
   const container = {
@@ -34,10 +35,10 @@ export default function PickAFile(props) {
   }
 
   return (
-    <div className={props.className} style={divStyle} onClick={onClick}>
-      <input type="file" style={style} ref={input} onChange={onChange} />
+    <label className={props.className} style={divStyle} htmlFor="0">
+      <input type="file" style={style} ref={input} onChange={onChange} id="0" />
       <Icon name="add_a_photo" container={container} />
       <AsyncImage src={src} alt="upload" className={props.imageClass} />
-    </div>
+    </label>
   )
 }

@@ -3,4 +3,10 @@ ul.user-menu{
   background: #fff;
   height: 140px;
   top: 54px;
+
+  li{
+    &:nth-of-type(even){
+      background-color: #f9f9f9;
+    }
+  }
 }
