@@ -23,11 +23,8 @@ export function Reducers(state, action) {
     case 'CHANGE VIEW':
       return { ...state, mutations, view: action.payload }
 
-    case 'REGISTER USER':
-      return { ...state, mutations, userIsLoggedIn: true, user: action.payload }
-
     case 'LOG USER IN':
-      return { ...state, mutations, userIsLoggedIn: true, user: action.payload }
+      return { ...state, mutations, userIsLoggedIn: true, user: { ...state.user, ...action.payload } }
 
     case 'LOG USER OUT':
       return { ...state, mutations, userIsLoggedIn: false, user: null }

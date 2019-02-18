@@ -13,8 +13,8 @@ export default function MenuBar(props) {
    return (
     <div className="menu-bar">
       <ColorIcon name="person" color={hue[0]} onClick={() => setState(0)} />
-      <ColorIcon name="local_play" color={hue[1]} onClick={() => setState(1)} />
       <ColorIcon name="favorite" color={hue[2]} onClick={() => setState(2)} />
+      {/* <ColorIcon name="local_play" color={hue[1]} onClick={() => setState(1)} /> */}
     </div>
   )
 }
