@@ -27,13 +27,13 @@ export default function ProfileTab(props) {
         <LI icon="mail_outline" text={state.user.email} />
         <LI icon="contact_phone" text={state.user.phone} />
 
-        <ShouldRender if={state.user.accountType === 'designer'}>
+        <ShouldRender if={state.user.accountType === 'Fashion Designer'}>
           <LI icon="event" text={experience} />
         </ShouldRender>
 
         <LI icon="store_mall_directory" text={state.user.about} />
 
-        <ShouldRender if={state.user.accountType === 'customer'}>
+        <ShouldRender if={state.user.accountType === 'Fashion Enthusiast'}>
           <li className="upgrade" onClick={() => dispatch({ type: 'UPGRADE CUSTOMER ACCOUNT' })}>
             UPGRADE TO DESIGNER ACCOUNT
           </li>

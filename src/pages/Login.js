@@ -8,9 +8,7 @@ function submitLoginForm(e, dispatch, goTo) {
   dispatch({
     type: 'LOG USER IN',
     payload: {
-      email: email.value,
-      username: 'LekanMedia',
-      accountType: 'customer'
+      email: email.value
     }
   });
 

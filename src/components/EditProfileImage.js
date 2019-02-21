@@ -14,6 +14,8 @@ export default function EditProfileImage(props) {
         <PickAFile
           width="150px"
           height="150px"
+          radius="50%"
+          border="2px solid #f8ba0d"
           className="pick-a-file"
           src="assets/img/bg/white.png"
           onSelect={onSelect}

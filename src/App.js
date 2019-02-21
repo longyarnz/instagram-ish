@@ -6,8 +6,8 @@ export const AppContext = React.createContext([]);
 
 export default function App() {
   const appState = useReducer(Reducers, InitialState);
-  const [state] = appState;
-  window.onbeforeunload = () => `Don't leave yet`;
+  const [ state ] = appState;
+  // window.onbeforeunload = () => `Don't leave yet`;
 
   useEffect(() => {
     localStorage.clear();

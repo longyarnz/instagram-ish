@@ -1,0 +1,20 @@
+div.add-post-container {
+  position: fixed;
+  bottom: -50px;
+  right: 15px;
+  width: 50px;
+  height: 50px;
+  z-index: 9;
+  transition: all 0.25s ease;
+  
+  & > div.add-story-button {
+    & > div {
+      background-color: $theme-color;
+      box-shadow: 0px 12px 8px -4px rgba(0, 0, 0, .3);
+    }
+
+    i{
+      color: #fff;
+    }
+  }
+}

@@ -8,7 +8,7 @@ export default function MenuBar(props) {
   const hue = [
     tab === 0 ? "#f8ba0d" : "#aaa",
     tab === 1 ? "#9898d5" : "#aaa",
-    tab === 2 ? "#ff6a6a" : "#aaa"
+    tab === 2 ? "#f8ba0d" : "#aaa"
   ];
 
   return (

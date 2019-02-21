@@ -14,7 +14,9 @@ export default function PickAFile(props) {
 
   const divStyle = {
     height: props.height,
-    width: props.width
+    width: props.width,
+    border: props.border,
+    borderRadius: props.radius
   }
 
   const onChange = async e => {
@@ -36,7 +38,15 @@ export default function PickAFile(props) {
 
   return (
     <label className={props.className} style={divStyle} htmlFor="0">
-      <input type="file" style={style} ref={input} onChange={onChange} id="0" />
+      <input 
+        type="file" 
+        style={style} 
+        ref={input} 
+        onChange={onChange} 
+        id="0" 
+        required={props.required || false} 
+        name={props.name}
+      />
       <Icon name="add_a_photo" container={container} />
       <AsyncImage src={src} alt="upload" className={props.imageClass} />
     </label>

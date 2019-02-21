@@ -1,0 +1,46 @@
+$dialog-height: 0%;
+
+div.dialog{
+  position: fixed;
+  width: 100vw;
+  height: calc(100vh + 2px);
+  overflow: hidden;
+  top: 0px;
+  left: 0px;
+  z-index: 99;
+  background-color: rgba(#000, 0);
+  transition: all 0.25s ease;
+  
+  & > div.dialog-inner{
+    height: $dialog-height;
+    width: 100%;
+    background-color: #fff;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 14px;
+    font-family: $font;
+    position: absolute;
+    bottom: -#{$dialog-height};
+    z-index: 999;
+    transition: inherit;
+    border: 1px solid #fff;
+
+    header{
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+
+      h3{
+        margin: 0px;
+        font-size: 24px;
+        color: #000;
+      }
+
+      i{
+        color: red;
+      }
+    }
+  }
+}

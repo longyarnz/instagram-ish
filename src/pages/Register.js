@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from '../components/Icon';
+// import ShouldRender from '../components/ShouldRender';
 
 function submitRegisterForm(e, dispatch, goTo) {
   e.preventDefault();
@@ -18,6 +17,12 @@ function submitRegisterForm(e, dispatch, goTo) {
 }
 
 export default function Register(props) {
+  // const [isDesigner, setIsDesigner] = useState('Fashion Designer');
+
+  const onChange = e => {
+    console.log(e.target.value);
+    // setIsDesigner(e.target.value);
+  }
   const onSubmit = e => submitRegisterForm(e, props.dispatch, props.goTo);
 
   return (
@@ -31,6 +36,8 @@ export default function Register(props) {
         <h3>Nice to Meet Ya!</h3>
         <input name="first" type="text" placeholder="First Name" autoComplete="true" />
         <input name="last" type="text" placeholder="Last Name" autoComplete="true" />
+        <input name="username" type="text" placeholder="Username" autoComplete="true" />
+        {/* <input name="phone" type="number" placeholder="Phone" autoComplete="true" /> */}
         <input name="email" type="email" placeholder="Email" autoComplete="true" />
         <input type="password" name="password" placeholder="Password" autoComplete="true" />
         <input type="password" name="password" placeholder="Confirm Password" />
@@ -38,13 +45,24 @@ export default function Register(props) {
         <datalist id="sexes">
           <option value="Male" />
           <option value="Female" />
+          <select name="sex">
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+          </select>
         </datalist>
-        <input list="accounts" name="accountType" placeholder="Account Type" />
+        <input list="accounts" name="accountType" placeholder="Fashion Designer / Enthusiast" onChange={onChange} />
         <datalist id="accounts">
           <option value="Fashion Designer" />
           <option value="Fashion Enthusiast" />
+          <select name="accountType" onChange={onChange}>
+            <option value="Fashion Designer">Fashion Designer</option>
+            <option value="Fashion Enthusiast">Fashion Enthusiast</option>
+          </select>
         </datalist>
-        <button className="kafe-btn kafe-btn-mint btn-block" type="submit" name="subm">SIGN UP</button>
+        {/* <ShouldRender if={isDesigner === 'Fashion Designer'}>
+          <input name="experience" type="number" placeholder="Experience" autoComplete="true" />
+        </ShouldRender>
+        <button className="kafe-btn kafe-btn-mint btn-block" type="submit" name="subm">SIGN UP</button> */}
         <br />
         <span className="btn btn-dark " role="button" onClick={() => props.goTo('./pages/Login')}>
           Already have an account?

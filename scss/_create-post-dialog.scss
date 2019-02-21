@@ -1,0 +1,54 @@
+$dialog-height: 50%;
+
+div.create-post-dialog {
+  width: 100%;
+  height: 100%;
+
+  & > form {
+    button {
+      display: block;
+      margin: auto;
+      border: none;
+      padding: 10px;
+      background-color: $theme-color;
+      border-radius: 5px;
+      color: #fff;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 5px;
+      margin: 5px 0px 20px;
+      border: none;
+      border-bottom: 2px solid #888;
+      font-family: $font;
+      font-weight: 300;
+
+      &:focus,
+      &:hover,
+      &:active {
+        outline: none;
+        border-bottom: 2px solid $theme-color;
+      }
+    }
+
+    & > label {
+      margin-bottom: 30px;
+      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+      & > img {
+        position: relative;
+        max-height: 100%;
+      }
+
+      & > div {
+        background-color: #f9f9f9;
+
+        i {
+          color: #000;
+        }
+      }
+    }
+  }
+}
