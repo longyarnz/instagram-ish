@@ -5,6 +5,10 @@ div.create-post-dialog {
   height: 100%;
 
   & > form {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px;
+
     button {
       display: block;
       margin: auto;
@@ -19,7 +23,7 @@ div.create-post-dialog {
     textarea {
       width: 100%;
       padding: 5px;
-      margin: 5px 0px 20px;
+      margin: 5px 0px 30px;
       border: none;
       border-bottom: 2px solid #888;
       font-family: $font;
@@ -39,7 +43,7 @@ div.create-post-dialog {
 
       & > img {
         position: relative;
-        max-height: 100%;
+        max-height: 180px;
       }
 
       & > div {

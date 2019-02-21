@@ -16,7 +16,7 @@ export default function NewsFeed(props) {
       </ShouldRender>
       <ShouldRender if={props.state.showDialog}>
         <Dialog dispatch={props.dispatch}>
-          <CreatePostDialog header="CREATE POST" height="60%" />
+          <CreatePostDialog header="CREATE POST" height="62%" />
         </Dialog>
       </ShouldRender>
       <NavBar />

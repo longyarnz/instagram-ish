@@ -20,7 +20,7 @@ export default function AddPostButton(props) {
 
   return (
     <div className="add-post-container" ref={div} onClick={onClick}>
-      <AddStoryButton hideText={true} />
+      <AddStoryButton name="bubble_chart" hideText={true} />
     </div>
   )
 }

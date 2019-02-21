@@ -17,8 +17,8 @@ export default function CreatePostDialog(props) {
     <div className="create-post-dialog">
       <form onSubmit={onSubmit}>
         <PickAFile
-          width="150px"
-          height="150px"
+          width="40%"
+          height="40%"
           radius="5px"
           className="pick-a-file"
           src="assets/img/bg/white.png"

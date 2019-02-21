@@ -17,7 +17,7 @@ div.dialog{
     background-color: #fff;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    padding: 14px;
+    padding: 15px;
     font-family: $font;
     position: absolute;
     bottom: -#{$dialog-height};
@@ -30,15 +30,16 @@ div.dialog{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
 
       h3{
         margin: 0px;
-        font-size: 24px;
+        font-size: 120%;
         color: #000;
       }
-
+      
       i{
+        font-size: 150%;
         color: red;
       }
     }
