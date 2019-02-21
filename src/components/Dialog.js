@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Icon from './Icon';
 
 export default function Dialog(props) {
   const div = useRef(null);
   const inner = useRef(null);
-  const [ isClicked, setIsClicked ] = useState(false);
+  // const [ isClicked, setIsClicked ] = useState(false);
 
   const style = {
     height: props.children.props.height,
