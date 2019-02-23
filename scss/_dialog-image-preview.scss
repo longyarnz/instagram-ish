@@ -1,0 +1,24 @@
+div.dialog-image-preview {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  & > label {
+    margin: 0px;
+
+    & > img {
+      height: 100%;
+      width: auto;
+      border-radius: 5px;
+    }
+
+    & > div {
+      i {
+        color: #fff;
+        font-size: 350%;
+      }
+    }
+  }
+}

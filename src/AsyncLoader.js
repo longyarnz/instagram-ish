@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from 'react';
+import React, { Suspense, useContext, useMemo } from 'react';
 import { AppContext } from './App';
 import Spinner from './components/Spinner';
 
@@ -8,9 +8,20 @@ export default function AsyncLoader({ path, ...props }) {
   const LoadComponent = () => import(`${path}`);
   const Payload = React.lazy(LoadComponent);
 
-  return (
+  
+  let dependencies = {
+    string: () => [ 'FIXED' ],
+    object: () => props.dependencies.map(dep => state[dep]),
+    undefined: () => [ state.mutations ]
+  }
+  
+  const type = typeof props.dependencies;
+
+  dependencies = dependencies[type];
+
+  return useMemo(() => (
     <Suspense fallback={props.fallback ? props.fallback : <Spinner />}>
       <Payload state={state} dispatch={dispatch} goTo={goTo} {...props} />
-    </Suspense>
+    </Suspense>), dependencies()
   );
 }

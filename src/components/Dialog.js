@@ -4,17 +4,24 @@ import Icon from './Icon';
 export default function Dialog(props) {
   const div = useRef(null);
   const inner = useRef(null);
-  // const [ isClicked, setIsClicked ] = useState(false);
 
-  const style = {
-    height: props.children.props.height,
-    bottom: `-${props.children.props.height}`
+  const lowerStyle = {
+    height: props.lowerDialogHeight,
+    bottom: `-${props.lowerDialogHeight}`
+  }
+
+  const upperStyle = {
+    height: props.upperDialogHeight || '',
   }
 
   const onClick = () => {
     props.dispatch({
       type: 'HIDE DIALOG BOX'
-    })
+    });
+
+    props.dispatch({
+      type: 'NULL POST IMAGE'
+    });
   }
 
   useEffect(() => {
@@ -34,14 +41,17 @@ export default function Dialog(props) {
 
   return (
     <div className="dialog" ref={div}>
-      <div className="dialog-inner" ref={inner} style={style}>
+      <div className="dialog-upper-section" style={upperStyle}>
+        {props.upperDialog}
+      </div>
+      <div className="dialog-lower-section" ref={inner} style={lowerStyle}>
         <header>
           <h3>
-            {props.children.props.header || ''}
+            {props.header || ''}
           </h3>
           <Icon name="close" onClick={onClick} />
         </header>
-        { props.children }
+        {props.lowerDialog}
       </div>
     </div>
   )

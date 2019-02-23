@@ -1,41 +1,42 @@
 import React, { useEffect } from 'react'
-import PickAFile from './PickAFile';
 
 export default function CreatePostDialog(props) {
   // const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
+    return () => {
+      props.dispatch({
+        type: 'NULL PREVIEW URL',
+      });
+    }
   });
 
   const onSubmit = e => {
     e.preventDefault();
-    const [ file, text ] = e.target;
-    console.log([ file, text ]);
+    const [file, caption] = e.target;
+    console.log([file, caption]);
   }
 
   return (
     <div className="create-post-dialog">
       <form onSubmit={onSubmit}>
-        <PickAFile
-          width="40%"
-          height="40%"
-          radius="5px"
-          className="pick-a-file"
-          src="assets/img/bg/white.png"
-          required={true}
-          name="image"
-        />
-        <textarea 
-          name="text" 
-          rows="3" 
-          placeholder="Caption your post..." 
+        <select name="category" required={true}>
+          <option>Category</option>
+          <option value="gowns">Gowns</option>
+          <option value="suits">Suits</option>
+          <option value="Jackets">Jackets</option>
+        </select>
+        <input
+          type="text"
+          name="caption"
+          placeholder="Caption your post..."
           autoCapitalize="on"
           autoComplete="on"
           spellCheck="true"
           required={true}
-        ></textarea>
+        />
         <button type="submit">
-          CREATE
+          CREATE POST
         </button>
       </form>
     </div>

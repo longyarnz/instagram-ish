@@ -4,6 +4,7 @@ export const InitialState = {
   view: './pages/NewsFeed',
   userIsLoggedIn: false,
   showDialog: false,
+  createPostImage: null,
   user: {
     firstName: 'Olalekan',
     lastName: 'Ayodele',
@@ -47,6 +48,12 @@ export function Reducers(state, action) {
 
     case 'UPGRADE CUSTOMER ACCOUNT':
       return { ...state, mutations, user: { ...state.user, accountType: 'Fashion Designer' } }
+
+    case 'STORE POST IMAGE':
+      return { ...state, mutations, createPostImage: action.payload }
+
+    case 'NULL POST IMAGE':
+      return { ...state, mutations, createPostImage: null }
 
     default: return state;
   }

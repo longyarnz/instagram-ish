@@ -3,7 +3,7 @@ $dialog-height: 0%;
 div.dialog{
   position: fixed;
   width: 100vw;
-  height: calc(100vh + 2px);
+  height: calc(100vh + 0px);
   overflow: hidden;
   top: 0px;
   left: 0px;
@@ -11,7 +11,7 @@ div.dialog{
   background-color: rgba(#000, 0);
   transition: all 0.25s ease;
   
-  & > div.dialog-inner{
+  & > div.dialog-lower-section{
     height: $dialog-height;
     width: 100%;
     background-color: #fff;
@@ -30,7 +30,7 @@ div.dialog{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 
       h3{
         margin: 0px;

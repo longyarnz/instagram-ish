@@ -19,6 +19,7 @@ export default function EditProfileImage(props) {
           className="pick-a-file"
           src="assets/img/bg/white.png"
           onSelect={onSelect}
+          review={true}
         />
       </div>
     </div>

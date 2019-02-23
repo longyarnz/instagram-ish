@@ -8,6 +8,9 @@ export default function App() {
   const appState = useReducer(Reducers, InitialState);
   const [ state ] = appState;
   window.onbeforeunload = () => `Don't leave yet`;
+  const dependencies = {
+    './pages/NewsFeed': ['showDialog']
+  }
 
   useEffect(() => {
     localStorage.clear();
@@ -15,7 +18,11 @@ export default function App() {
 
   return (
     <AppContext.Provider value={appState}>
-      <AsyncLoader path={state.view} fallback={<div></div>} />
+      <AsyncLoader
+        path={state.view}
+        fallback={<div></div>}
+        dependencies={dependencies[state.view]}
+      />
     </AppContext.Provider>
   )
 }

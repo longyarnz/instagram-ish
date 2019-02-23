@@ -5,53 +5,41 @@ div.create-post-dialog {
   height: 100%;
 
   & > form {
+    height: calc(100% - 20px);
     display: flex;
     flex-direction: column;
-    padding-bottom: 10px;
+    padding: 0px 0px 50px;
+    justify-content: space-around;
 
     button {
       display: block;
-      margin: auto;
+      margin: 0px;
       border: none;
-      padding: 10px;
+      padding: 3%;
       background-color: $theme-color;
       border-radius: 5px;
       color: #fff;
+      font-size: 100%;
+      font-weight: 900;
       box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
 
-    textarea {
+    input, select {
       width: 100%;
-      padding: 5px;
-      margin: 5px 0px 30px;
+      padding: 10px 5px;
       border: none;
       border-bottom: 2px solid #888;
       font-family: $font;
       font-weight: 300;
-
+      font-size: 110%;
+      background-color: #fff;
+      
       &:focus,
       &:hover,
       &:active {
         outline: none;
         border-bottom: 2px solid $theme-color;
-      }
-    }
-
-    & > label {
-      margin-bottom: 30px;
-      box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
-      & > img {
-        position: relative;
-        max-height: 180px;
-      }
-
-      & > div {
-        background-color: #f9f9f9;
-
-        i {
-          color: #000;
-        }
+        background-color: #fff;
       }
     }
   }

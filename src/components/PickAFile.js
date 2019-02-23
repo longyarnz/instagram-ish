@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import Icon from './Icon';
 import AsyncImage from './AsyncImage';
+import ShouldRender from './ShouldRender';
 
 export default function PickAFile(props) {
-  const [ src, setSrc ] = useState(props.src);
+  const [src, setSrc] = useState(props.src);
   const input = useRef(null);
 
   const style = {
@@ -22,12 +23,13 @@ export default function PickAFile(props) {
   const onChange = async e => {
     const image = e.target.files[0];
 
-    if(image === undefined) return;
+    if (image === undefined) return;
 
-    const src = URL.createObjectURL(image);
+    else if (props.preview) {
+      const src = URL.createObjectURL(image);
+      setSrc(src);
+    }
 
-    setSrc(src);
-    
     props.onSelect && props.onSelect(image);
   }
 
@@ -38,17 +40,19 @@ export default function PickAFile(props) {
 
   return (
     <label className={props.className} style={divStyle} htmlFor="0">
-      <input 
-        type="file" 
-        style={style} 
-        ref={input} 
-        onChange={onChange} 
-        id="0" 
-        required={props.required || false} 
+      <input
+        type="file"
+        style={style}
+        ref={input}
+        onChange={onChange}
+        id="0"
+        required={props.required || false}
         name={props.name}
       />
       <Icon name="add_a_photo" container={container} />
-      <AsyncImage src={src} alt="upload" className={props.imageClass} />
+      <ShouldRender if={props.preview && src !== null}>
+        <AsyncImage src={src} alt="upload" className={props.imageClass} />
+      </ShouldRender>
     </label>
   )
 }
