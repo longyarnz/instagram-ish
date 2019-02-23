@@ -14,13 +14,12 @@ div.profile-tab {
 
     li {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       margin-bottom: 20px;
       font-family: $font;
 
       i {
         font-size: 18px;
-        margin-top: 5px;
         color: rgb(170, 170, 170);
       }
 
@@ -44,6 +43,14 @@ div.profile-tab {
         &:hover,
         &:active {
           background: darken($theme-color, 10);
+        }
+      }
+
+      &:last-of-type{
+        align-items: flex-start;
+
+        i{
+          margin-top: 3.5px;
         }
       }
     }

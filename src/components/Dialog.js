@@ -5,46 +5,74 @@ export default function Dialog(props) {
   const div = useRef(null);
   const inner = useRef(null);
 
-  const lowerStyle = {
-    height: props.lowerDialogHeight,
-    bottom: `-${props.lowerDialogHeight}`
+  const style = {
+    lower: {
+      left: {
+        height: props.lowerDialogHeight,
+        left: '-100%'
+      },
+      bottom: {
+        height: props.lowerDialogHeight,
+        bottom: `-${props.lowerDialogHeight}`
+      },
+      right: {
+        height: props.lowerDialogHeight,
+        right: '-100%'
+      }
+    },
+    upper: {
+      height: props.upperDialogHeight || ''
+    }
   }
 
-  const upperStyle = {
-    height: props.upperDialogHeight || '',
-  }
-
-  const onClick = () => {
-    props.dispatch({
-      type: 'HIDE DIALOG BOX'
-    });
-
-    props.dispatch({
-      type: 'NULL POST IMAGE'
-    });
-  }
+  const onClick = props.onClose;
 
   useEffect(() => {
     document.documentElement.style.overflow = 'hidden';
-
-    const x = setTimeout(() => inner.current.style.bottom = '0', 50);
-
     const y = setTimeout(() => div.current.style.backgroundColor = 'rgba(0, 0, 0, .6)', 250);
 
     return () => {
       document.documentElement.style.overflow = '';
-      inner.current.style.bottom = '-50%';
-      clearTimeout(x);
       clearTimeout(y);
     }
   });
 
+  useEffect(() => {
+    if(props.slide !== 'left') return;
+    const x = setTimeout(() => inner.current.style.left = '0px', 50);
+    
+    return () => {
+      inner.current.style.left = '-50px';
+      clearTimeout(x);
+    }
+  });
+  
+  useEffect(() => {
+    if(props.slide !== 'right') return;
+    const x = setTimeout(() => inner.current.style.right = '0px', 50);
+    
+    return () => {
+      inner.current.style.right = '-50px';
+      clearTimeout(x);
+    }
+  });
+  
+  useEffect(() => {
+    if(props.slide !== 'bottom') return;
+    const x = setTimeout(() => inner.current.style.bottom = '0px', 50);
+
+    return () => {
+      inner.current.style.bottom = '-50%';
+      clearTimeout(x);
+    }
+  });
+
   return (
-    <div className="dialog" ref={div}>
-      <div className="dialog-upper-section" style={upperStyle}>
+    <div className={`dialog ${props.className}`} ref={div}>
+      <div className="dialog-upper-section" style={style.upper}>
         {props.upperDialog}
       </div>
-      <div className="dialog-lower-section" ref={inner} style={lowerStyle}>
+      <div className="dialog-lower-section" ref={inner} style={style.lower[props.slide]}>
         <header>
           <h3>
             {props.header || ''}

@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
 
 export default function CreatePostDialog(props) {
-  // const [isClicked, setIsClicked] = useState(false);
-
   useEffect(() => {
     return () => {
       props.dispatch({

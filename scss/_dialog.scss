@@ -1,5 +1,3 @@
-$dialog-height: 0%;
-
 div.dialog{
   position: fixed;
   width: 100vw;
@@ -12,7 +10,6 @@ div.dialog{
   transition: all 0.25s ease;
   
   & > div.dialog-lower-section{
-    height: $dialog-height;
     width: 100%;
     background-color: #fff;
     border-top-left-radius: 15px;
@@ -20,7 +17,6 @@ div.dialog{
     padding: 15px;
     font-family: $font;
     position: absolute;
-    bottom: -#{$dialog-height};
     z-index: 999;
     transition: inherit;
     border: 1px solid #fff;

@@ -6,8 +6,15 @@ export default function AddPostButton(props) {
   const [ isClicked, setIsClicked ] = useState(false);
   const onClick = () => {
     setIsClicked(!isClicked);
+    const { scrollTop } = document.scrollingElement;
+    
     props.dispatch({
       type: 'SHOW DIALOG BOX'
+    });
+    
+    props.dispatch({
+      type: 'SET SCROLLTOP',
+      payload: scrollTop
     })
   }
 

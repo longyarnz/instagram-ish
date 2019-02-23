@@ -9,12 +9,16 @@ export default function App() {
   const [ state ] = appState;
   window.onbeforeunload = () => `Don't leave yet`;
   const dependencies = {
-    './pages/NewsFeed': ['showDialog']
+    './pages/NewsFeed': ['showDialog', 'showAppMenu']
   }
 
   useEffect(() => {
     localStorage.clear();
-  }, []);
+  }, [])
+
+  useEffect(() => {
+    console.log([ document.scrollingElement.scrollTop ]);
+  });
 
   return (
     <AppContext.Provider value={appState}>

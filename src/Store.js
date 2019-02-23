@@ -1,9 +1,11 @@
 export const InitialState = {
   stateIsLocked: false,
   mutations: [],
+  scrollTop: null,
   view: './pages/NewsFeed',
   userIsLoggedIn: false,
   showDialog: false,
+  showAppMenu: false,
   createPostImage: null,
   user: {
     firstName: 'Olalekan',
@@ -40,6 +42,12 @@ export function Reducers(state, action) {
     case 'HIDE DIALOG BOX':
       return { ...state, mutations, showDialog: false }
 
+    case 'SHOW APP MENU':
+      return { ...state, mutations, showAppMenu: true }
+
+    case 'HIDE APP MENU':
+      return { ...state, mutations, showAppMenu: false }
+
     case 'LOG USER IN':
       return { ...state, mutations, userIsLoggedIn: true, user: { ...InitialState.user, ...state.user, ...action.payload } }
 
@@ -54,6 +62,12 @@ export function Reducers(state, action) {
 
     case 'NULL POST IMAGE':
       return { ...state, mutations, createPostImage: null }
+
+    case 'SET SCROLLTOP':
+      return { ...state, mutations, scrollTop: action.payload }
+
+    case 'NULL SCROLLTOP':
+      return { ...state, mutations, scrollTop: null }
 
     default: return state;
   }

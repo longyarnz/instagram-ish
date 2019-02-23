@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import SandwichMenu from './SandwichMenu';
 import AsyncLoader from '../AsyncLoader';
 import ShouldRender from './ShouldRender';
+import Icon from './Icon';
 
-export default function NavBar() {
-  const [ showMenu, setMenu ] = useState(false);
-  const [ showUserMenu, setUserMenu ] = useState(false);
+export default function NavBar(props) {
+  const [showMenu, setMenu] = useState(false);
+  const [showUserMenu, setUserMenu] = useState(false);
 
   const toggle = () => {
     setUserMenu(false);
@@ -17,13 +18,34 @@ export default function NavBar() {
     setUserMenu(!showUserMenu);
   }
 
+  const toggleAppMenu = () => {
+    props.dispatch({
+      type: !props.showAppMenu ? 'SHOW APP MENU' : 'HIDE APP MENU'
+    });
+  }
+
   return (
     <nav>
-      <SandwichMenu />
+      <div>
+        <SandwichMenu menuIsOpened={props.showAppMenu} onClick={toggleAppMenu}  />
+        <span>DOMINERF</span>
+      </div>
+      <div>
+        <div>
+          <Icon name="notifications_none" />
+        </div>
 
-      <span>DOMINERF</span>
+        <div>
+          <Icon name="search" />
+        </div>
 
-      <AsyncLoader path="./components/AvatarIcon" toggle={toggle} toggleUserMenu={toggleUserMenu} />
+        <AsyncLoader path="./components/Avatar"
+          localState={true}
+          toggle={toggle}
+          toggleUserMenu={toggleUserMenu}
+          dependencies={[showMenu, showUserMenu]}
+        />
+      </div>
 
       <ShouldRender if={showMenu}>
         <AsyncLoader path="./components/ActionMenu" fallback=" " />

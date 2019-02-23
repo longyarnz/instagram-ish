@@ -26,9 +26,13 @@ export const Posts = [
   }
 ]
 
-export default function NewsFeedSlide() {
+export default function NewsFeedSlide(props) {
+  const tyle = props.userIsLoggedIn ? {
+    marginTop: 0 
+  } : {};
+
   return (
-    <section className="newsfeed-slide">
+    <section className="newsfeed-slide" style={tyle}>
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-3">

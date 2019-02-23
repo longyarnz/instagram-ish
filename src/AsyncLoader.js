@@ -17,7 +17,7 @@ export default function AsyncLoader({ path, ...props }) {
   
   const type = typeof props.dependencies;
 
-  dependencies = dependencies[type];
+  dependencies = props.localState ? () => props.dependencies : dependencies[type];
 
   return useMemo(() => (
     <Suspense fallback={props.fallback ? props.fallback : <Spinner />}>
