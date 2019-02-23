@@ -16,7 +16,7 @@ export default function EditProfile(props) {
         input.spellcheck = "true";
         input.id = ++i / 2;
       }
-      else{
+      else {
         console.log(input);
         input.htmlFor = (i + 2) / 2;
       }
@@ -34,9 +34,13 @@ export default function EditProfile(props) {
   return (
     <section className="edit-profile">
       <nav className="edit-profile">
-        <ColorIcon name="close" color="#f00" onClick={goBack} />
-        <span>EDIT PROFILE</span>
-        <ColorIcon name="check" color="green" onClick={saveProfile} />
+        <div>
+          <ColorIcon name="close" color="#f00" onClick={goBack} />
+          <span>EDIT PROFILE</span>
+        </div>
+        {/* <div> */}
+          <ColorIcon name="check" color="green" onClick={saveProfile} />
+        {/* </div> */}
       </nav>
 
       <form ref={form}>
@@ -58,7 +62,10 @@ export default function EditProfile(props) {
           <label>Phone</label>
           <input placeholder="Phone Number" name="phone" type="number" defaultValue={state.user.phone} />
 
-          <ShouldRender if={state.user.accountType === 'designer'}>
+          <ShouldRender if={state.user.accountType === 'Fashion Designer'}>
+            <label>Brand</label>
+            <input placeholder="Brand Name" name="brand" type="number" defaultValue={state.user.brand} />
+
             <label>Years of Experience</label>
             <input placeholder="Experience" name="experience" type="number" defaultValue={state.user.experience} />
           </ShouldRender>

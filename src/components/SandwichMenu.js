@@ -2,7 +2,7 @@ import React from 'react';
 import SVG from './SVG';
 
 export default function SandwichMenu (props) {
-  const { menuIsOpened = true, onClick, attr, style = {} } = props;
+  const { menuIsOpened = false, onClick, attr, style = {} } = props;
 
   const sandwich = (
     <SVG onClick={onClick} attr="sandwich" style={style}>

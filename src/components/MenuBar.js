@@ -13,11 +13,11 @@ export default function MenuBar(props) {
 
   return (
     <div className="menu-bar">
-      <ColorIcon name="person" color={hue[0]} onClick={() => setTab(0)} />
+      <ColorIcon name="person_outline" color={hue[0]} onClick={() => setTab(0)} />
       <ShouldRender if={props.state.user.accountType === 'designer'}>
         <ColorIcon name="local_play" color={hue[1]} onClick={() => setTab(1)} />
       </ShouldRender>
-      <ColorIcon name="favorite" color={hue[2]} onClick={() => setTab(2)} />
+      <ColorIcon name="favorite_outline" color={hue[2]} onClick={() => setTab(2)} />
     </div>
   )
 }

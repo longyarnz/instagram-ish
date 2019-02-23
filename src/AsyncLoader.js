@@ -22,6 +22,6 @@ export default function AsyncLoader({ path, ...props }) {
   return useMemo(() => (
     <Suspense fallback={props.fallback ? props.fallback : <Spinner />}>
       <Payload state={state} dispatch={dispatch} goTo={goTo} {...props} />
-    </Suspense>), dependencies()
+    </Suspense>), [dependencies().toString()]
   );
 }

@@ -14,6 +14,7 @@ export const InitialState = {
     username: 'LekanMedia',
     accountType: 'Fashion Designer',
     phone: '08082935102',
+    brand: 'LekanMedia Inc.',
     experience: 0,
     about: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
     \nConsequatur odio sit perferendis totam, et mollitia at tempora repellendus!

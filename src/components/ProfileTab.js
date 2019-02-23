@@ -17,7 +17,6 @@ export default function ProfileTab(props) {
   const experience = Number(state.user.experience) < 1 ? 'No Experience' : `
     ${state.user.experience} ${years} of Experience
   `;
-  console.log(experience);
 
   return (
     <div className="profile-tab">
@@ -28,6 +27,7 @@ export default function ProfileTab(props) {
         <LI icon="contact_phone" text={state.user.phone} />
 
         <ShouldRender if={state.user.accountType === 'Fashion Designer'}>
+          <LI icon="insert_emoticon" text={state.user.brand || 'No Brand'} />
           <LI icon="event" text={experience} />
         </ShouldRender>
 

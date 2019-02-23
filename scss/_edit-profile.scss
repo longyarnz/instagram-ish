@@ -6,6 +6,12 @@ section.edit-profile {
   & > nav.edit-profile {
     position: fixed;
     top: 0px;
+
+    & > div {
+      &:last-of-type {
+        min-width: 0px;
+      }
+    }
   }
 
   & > form {
@@ -24,7 +30,8 @@ section.edit-profile {
       flex-direction: column;
       padding: 15px;
 
-      input, textarea {
+      input,
+      textarea {
         padding: 10px 0px;
         margin: 10px 0px 30px;
         box-shadow: none;
@@ -32,8 +39,9 @@ section.edit-profile {
         font-weight: 300;
         border: 0;
         border-bottom: 2px solid #999;
-        
-        &:hover, &:focus{
+
+        &:hover,
+        &:focus {
           outline: none;
           border-bottom: 2px solid $theme-color;
         }
