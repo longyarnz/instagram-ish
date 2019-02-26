@@ -6,6 +6,8 @@ export const InitialState = {
   userIsLoggedIn: false,
   showDialog: false,
   showAppMenu: false,
+  showNotifications: false,
+  showSearch: false,
   createPostImage: null,
   user: {
     firstName: 'Olalekan',
@@ -48,6 +50,18 @@ export function Reducers(state, action) {
 
     case 'HIDE APP MENU':
       return { ...state, mutations, showAppMenu: false }
+
+    case 'SHOW NOTIFICATIONS':
+      return { ...state, mutations, showNotifications: true }
+
+    case 'HIDE NOTIFICATIONS':
+      return { ...state, mutations, showNotifications: false }
+
+    case 'SHOW SEARCH':
+      return { ...state, mutations, showSearch: true }
+
+    case 'HIDE SEARCH':
+      return { ...state, mutations, showSearch: false }
 
     case 'LOG USER IN':
       return { ...state, mutations, userIsLoggedIn: true, user: { ...InitialState.user, ...state.user, ...action.payload } }

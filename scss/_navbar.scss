@@ -31,5 +31,21 @@ nav {
         height: 20px;
       }
     }
+
+    & > div.notifications-icon{
+      position: relative;
+      // display: inline-flex;
+      // justify-content: space-around;
+      // align-items: center;
+
+      span{
+        padding: 3px;
+        background-color: red;
+        border-radius: 10px;
+        position: absolute;
+        right: -1px;
+        top: 3px;
+      }
+    }
   }
 }

@@ -3,6 +3,8 @@ import Dialog from './Dialog';
 import DialogImagePreview from './DialogImagePreview';
 import CreatePostDialog from './CreatePostDialog';
 import MenuDialog from './MenuDialog';
+import SearchDialog from './SearchDialog';
+import NotificationDialog from './NotificationDialog';
 
 export function CreatePostModal(props) {
   const onClose = () => {
@@ -54,10 +56,60 @@ export function MenuModal(props) {
       onClose={onClose}
       upperDialog={null}
       lowerDialog={
-        <MenuDialog dispatch={props.dispatch} />
+        <MenuDialog
+          dispatch={props.dispatch}
+          goTo={props.goTo}
+          userIsLoggedIn={props.userIsLoggedIn}
+        />
       }
       lowerDialogHeight="80%"
       upperDialogHeight="20%"
+    />
+  )
+}
+
+export function NotificationModal(props) {
+  const onClose = () => {
+    props.dispatch({
+      type: 'HIDE NOTIFICATIONS'
+    });
+  }
+
+  return (
+    <Dialog
+      className={props.className}
+      slide="bottom"
+      header="NOTIFICATIONS"
+      onClose={onClose}
+      upperDialog={null}
+      lowerDialog={
+        <NotificationDialog dispatch={props.dispatch} goTo={props.goTo} />
+      }
+      lowerDialogHeight="80%"
+      upperDialogHeight="20%"
+    />
+  )
+}
+
+export function SearchModal(props) {
+  const onClose = () => {
+    props.dispatch({
+      type: 'HIDE SEARCH'
+    });
+  }
+
+  return (
+    <Dialog
+      className={props.className}
+      slide="bottom"
+      header="SEARCH"
+      onClose={onClose}
+      upperDialog={null}
+      lowerDialog={
+        <SearchDialog dispatch={props.dispatch} goTo={props.goTo} />
+      }
+      lowerDialogHeight="100%"
+      upperDialogHeight="0%"
     />
   )
 }

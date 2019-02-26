@@ -1,0 +1,35 @@
+div.notifications-dialog{
+  & > div.dialog-lower-section{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    overflow-y: scroll;
+
+    header{
+      h3{
+        font-weight: 900;
+      }
+    }
+
+    div.notifications-tab > div{
+      display: inline-flex;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 10px;
+
+      img{
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 2px solid $theme-color;
+      }
+
+      span{
+        font-size: 100%;
+        font-family: $font;
+        font-weight: 300;
+        margin-left: 15px;
+        color: #000;
+      }
+    }
+  }
+}

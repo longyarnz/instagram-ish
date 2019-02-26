@@ -24,18 +24,34 @@ export default function NavBar(props) {
     });
   }
 
+  const toggleNotificationMenu = () => {
+    props.dispatch({
+      type: !props.showAppMenu ? 'SHOW NOTIFICATIONS' : 'HIDE NOTIFICATIONS'
+    });
+  }
+
+  const toggleSearch = () => {
+    props.dispatch({
+      type: !props.showAppMenu ? 'SHOW SEARCH' : 'HIDE SEARCH'
+    });
+  }
+
   return (
     <nav>
       <div>
-        <SandwichMenu menuIsOpened={props.showAppMenu} onClick={toggleAppMenu}  />
+        <SandwichMenu
+          menuIsOpened={props.showAppMenu || props.showNotifications || props.menuIsOpened}
+          onClick={props.goBack || toggleAppMenu}
+        />
         <span>DOMINERF</span>
       </div>
       <div>
-        <div>
+        <div className="notifications-icon" onClick={toggleNotificationMenu}>
           <Icon name="notifications_none" />
+          <span></span>
         </div>
 
-        <div>
+        <div onClick={toggleSearch}>
           <Icon name="search" />
         </div>
 

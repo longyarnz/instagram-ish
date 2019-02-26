@@ -3,6 +3,6 @@ import Icon from './Icon';
 
 export default function Spinner(props) {
   return (
-    <Icon name="donut_small" className="fa-spin" style={props.style} {...props} />
+    <Icon name="donut_large" className="fa-spin" style={props.style} {...props} />
   )
 }

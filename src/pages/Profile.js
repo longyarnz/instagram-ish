@@ -10,7 +10,7 @@ export default function Profile(props) {
 
   return (
     <section className="profile">
-      <NavBar menuIsOpened={props.showAppMenu} />
+      <NavBar menuIsOpened={true} goBack={() => props.goTo('./pages/NewsFeed')} />
       <Banner goTo={props.goTo} />
       <MenuBar tabs={profileState} {...props} />
       <Gallery tabs={profileState} {...props} />

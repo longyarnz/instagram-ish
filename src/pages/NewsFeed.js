@@ -5,7 +5,7 @@ import Stories from '../components/Stories';
 import Footer from '../components/Footer';
 import AddPostButton from '../components/AddPostButton';
 import ShouldRender from '../components/ShouldRender';
-import { CreatePostModal, MenuModal } from '../components/Modals';
+import { CreatePostModal, MenuModal, NotificationModal, SearchModal } from '../components/Modals';
 
 export default function NewsFeed(props) {
   useEffect(() => {
@@ -26,19 +26,44 @@ export default function NewsFeed(props) {
       </ShouldRender>
 
       <ShouldRender if={props.state.showAppMenu}>
-        <MenuModal dispatch={props.dispatch} className="menu-dialog" />
+        <MenuModal
+          dispatch={props.dispatch}
+          goTo={props.goTo}
+          userIsLoggedIn={props.state.userIsLoggedIn}
+          className="menu-dialog"
+        />
+      </ShouldRender>
+
+      <ShouldRender if={props.state.showNotifications}>
+        <NotificationModal
+          dispatch={props.dispatch}
+          goTo={props.goTo}
+          className="notifications-dialog"
+        />
+      </ShouldRender>
+
+      <ShouldRender if={props.state.showSearch}>
+        <SearchModal
+          dispatch={props.dispatch}
+          goTo={props.goTo}
+          className="search-dialog"
+        />
       </ShouldRender>
 
       <ShouldRender if={props.state.showDialog}>
         <CreatePostModal dispatch={props.dispatch} />
       </ShouldRender>
 
-      <NavBar dispatch={props.dispatch} showAppMenu={props.state.showAppMenu} />
+      <NavBar
+        dispatch={props.dispatch}
+        showAppMenu={props.state.showAppMenu}
+        showNotifications={props.state.showNotifications}
+      />
 
       <ShouldRender if={props.state.userIsLoggedIn}>
         <Stories />
       </ShouldRender>
-      
+
       <NewsFeedSlide userIsLoggedIn={props.state.userIsLoggedIn} />
       <Footer />
     </>
