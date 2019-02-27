@@ -31,6 +31,13 @@ export default function NewsFeedSlide(props) {
     marginTop: 0 
   } : {};
 
+  const loadComments = () => {
+    console.log('Clicked');
+    props.dispatch({
+      type: 'SHOW COMMENTS'
+    });
+  }
+
   return (
     <section className="newsfeed-slide" style={tyle}>
       <div className="container-fluid">
@@ -47,6 +54,7 @@ export default function NewsFeedSlide(props) {
                   time={post.time(i)}
                   likes={post.likes}
                   comments={post.comments}
+                  loadComments={loadComments}
                   key={`tab-${i}`}
                 />
               )}

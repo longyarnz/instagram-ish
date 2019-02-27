@@ -4,6 +4,7 @@ import DialogImagePreview from './DialogImagePreview';
 import CreatePostDialog from './CreatePostDialog';
 import MenuDialog from './MenuDialog';
 import SearchDialog from './SearchDialog';
+import CommentDialog from './CommentDialog';
 import NotificationDialog from './NotificationDialog';
 
 export function CreatePostModal(props) {
@@ -107,6 +108,29 @@ export function SearchModal(props) {
       upperDialog={null}
       lowerDialog={
         <SearchDialog dispatch={props.dispatch} goTo={props.goTo} />
+      }
+      lowerDialogHeight="100%"
+      upperDialogHeight="0%"
+    />
+  )
+}
+
+export function CommentModal(props) {
+  const onClose = () => {
+    props.dispatch({
+      type: 'HIDE COMMENTS'
+    });
+  }
+
+  return (
+    <Dialog
+      className={props.className}
+      slide="bottom"
+      header="COMMENTS"
+      onClose={onClose}
+      upperDialog={null}
+      lowerDialog={
+        <CommentDialog dispatch={props.dispatch} goTo={props.goTo} />
       }
       lowerDialogHeight="100%"
       upperDialogHeight="0%"

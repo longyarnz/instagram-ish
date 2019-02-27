@@ -5,7 +5,7 @@ export default function ActionMenu(props) {
   const ul = useRef(null);
 
   useEffect(() => {
-    ul.current.style.transform = 'scale(1, 1)';
+    setTimeout(() => ul.current.style.transform = 'scale(1, 1)', 50);
 
     return () => {
       ul.current.style.transform = 'scale(0, 0)';

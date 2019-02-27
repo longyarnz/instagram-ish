@@ -16,6 +16,11 @@ div.newsfeed-tab {
       border: 2px solid $theme-color;
     }
 
+    & > span.time{
+      font-size: 65%;
+      color: #aaa;
+    }
+
     div {
       flex: 3;
       margin-left: 10px;

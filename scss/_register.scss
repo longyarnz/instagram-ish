@@ -30,8 +30,8 @@
     border: none;
     color: #000;
     position: absolute;
-    top: 10px;
-    left: 0px;
+    top: 20px;
+    left: 20px;
     text-emphasis-style: dot;
     text-emphasis-position: under left;
     text-emphasis-color: $theme-color;
@@ -101,7 +101,7 @@
       font-family: $font;
       font-size: 12px !important;
       margin-bottom: 20px;
-      display: inline-block;
+      display: block;
 
       button {
         margin-left: 5px;

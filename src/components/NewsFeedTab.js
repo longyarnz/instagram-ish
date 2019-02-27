@@ -12,7 +12,9 @@ export default function NewsFeedTab(props) {
           <span>{props.author}</span>
           <span>{props.profession}</span>
         </div>
-        <Icon name="more_vert" />
+        <span className="time">
+          {new Date().toLocaleTimeString()}
+        </span>
       </header>
       <AsyncImage src={props.src} alt="user" />
       <footer>
@@ -20,7 +22,7 @@ export default function NewsFeedTab(props) {
           <Icon name="favorite_border" />
           <span>{props.likes}</span>
         </span>
-        <span>
+        <span onClick={props.loadComments}>
           <Icon name="comment" />
           <span>{props.comments}</span>
         </span>

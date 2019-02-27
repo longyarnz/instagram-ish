@@ -3,6 +3,8 @@ import SandwichMenu from './SandwichMenu';
 import AsyncLoader from '../AsyncLoader';
 import ShouldRender from './ShouldRender';
 import Icon from './Icon';
+import ActionMenu from './ActionMenu';
+import UserMenu from './UserMenu';
 
 export default function NavBar(props) {
   const [showMenu, setMenu] = useState(false);
@@ -20,40 +22,44 @@ export default function NavBar(props) {
 
   const toggleAppMenu = () => {
     props.dispatch({
-      type: !props.showAppMenu ? 'SHOW APP MENU' : 'HIDE APP MENU'
+      type: !props.state.showAppMenu ? 'SHOW APP MENU' : 'HIDE APP MENU'
     });
   }
 
   const toggleNotificationMenu = () => {
     props.dispatch({
-      type: !props.showAppMenu ? 'SHOW NOTIFICATIONS' : 'HIDE NOTIFICATIONS'
+      type: !props.state.showAppMenu ? 'SHOW NOTIFICATIONS' : 'HIDE NOTIFICATIONS'
     });
   }
 
   const toggleSearch = () => {
     props.dispatch({
-      type: !props.showAppMenu ? 'SHOW SEARCH' : 'HIDE SEARCH'
+      type: !props.state.showAppMenu ? 'SHOW SEARCH' : 'HIDE SEARCH'
     });
   }
+
+  const showAllIcons = props.state.view === './pages/NewsFeed';
 
   return (
     <nav>
       <div>
         <SandwichMenu
-          menuIsOpened={props.showAppMenu || props.showNotifications || props.menuIsOpened}
+          menuIsOpened={props.state.showAppMenu || props.state.showNotifications || props.menuIsOpened}
           onClick={props.goBack || toggleAppMenu}
         />
         <span>DOMINERF</span>
       </div>
-      <div>
-        <div className="notifications-icon" onClick={toggleNotificationMenu}>
-          <Icon name="notifications_none" />
-          <span></span>
-        </div>
+      <div style={{justifyContent: !showAllIcons ? 'flex-end' : ''}}>
+        <ShouldRender if={showAllIcons}>
+          <div className="notifications-icon" onClick={toggleNotificationMenu}>
+            <Icon name="notifications_none" />
+            <span></span>
+          </div>
 
-        <div onClick={toggleSearch}>
-          <Icon name="search" />
-        </div>
+          <div onClick={toggleSearch}>
+            <Icon name="search" />
+          </div>
+        </ShouldRender>
 
         <AsyncLoader path="./components/Avatar"
           localState={true}
@@ -64,11 +70,15 @@ export default function NavBar(props) {
       </div>
 
       <ShouldRender if={showMenu}>
-        <AsyncLoader path="./components/ActionMenu" fallback=" " />
+        <ActionMenu goTo={props.goTo} state={props.state} />
       </ShouldRender>
 
       <ShouldRender if={showUserMenu}>
-        <AsyncLoader path="./components/UserMenu" fallback=" " />
+        <UserMenu
+          dispatch={props.dispatch}
+          state={props.state}
+          goTo={props.goTo}
+        />
       </ShouldRender>
     </nav>
   )

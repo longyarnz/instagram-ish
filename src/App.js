@@ -9,7 +9,7 @@ export default function App() {
   const [ state ] = appState;
   window.onbeforeunload = () => `Don't leave yet`;
   const dependencies = {
-    './pages/NewsFeed': [ 'showDialog', 'showAppMenu', 'showNotifications', 'showSearch' ],
+    './pages/NewsFeed': [ 'showDialog', 'showAppMenu', 'showNotifications', 'showSearch', 'userIsLoggedIn', 'showComment' ],
     './pages/Login': undefined
   }
 

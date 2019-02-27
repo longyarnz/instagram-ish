@@ -8,6 +8,7 @@ export const InitialState = {
   showAppMenu: false,
   showNotifications: false,
   showSearch: false,
+  showComment: false,
   createPostImage: null,
   user: {
     firstName: 'Olalekan',
@@ -62,6 +63,12 @@ export function Reducers(state, action) {
 
     case 'HIDE SEARCH':
       return { ...state, mutations, showSearch: false }
+
+    case 'SHOW COMMENTS':
+      return { ...state, mutations, showComment: true }
+
+    case 'HIDE COMMENTS':
+      return { ...state, mutations, showComment: false }
 
     case 'LOG USER IN':
       return { ...state, mutations, userIsLoggedIn: true, user: { ...InitialState.user, ...state.user, ...action.payload } }
