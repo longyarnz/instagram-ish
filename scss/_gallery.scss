@@ -4,6 +4,10 @@ div.gallery{
   justify-content: flex-start;
   flex-wrap: wrap;
 
+  section{
+    margin-top: 0px;
+  }
+
   img.tiles {
     width: calc(100vw / 3);
     height: calc(100vw / 3);

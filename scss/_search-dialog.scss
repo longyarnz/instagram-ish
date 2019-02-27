@@ -9,7 +9,7 @@ div.search-dialog {
         font-weight: 900;
       }
     }
-
+    
     div.search {
       form {
         padding: 20px 0px 0px;
@@ -19,7 +19,7 @@ div.search-dialog {
         justify-content: space-between;
         align-items: center;
         border-bottom: 2px solid $theme-color;
-
+        
         input {
           width: 100%;
           border: 0;
@@ -31,14 +31,14 @@ div.search-dialog {
           padding: 10px 10px 2.5px 5px;
           font-size: 15px;
           background-color: transparent;
-
+          
           &:focus,
           &:hover {
             outline: none;
             box-shadow: none;
           }
         }
-
+        
         & > button {
           background-color: transparent;
           padding: 0px;
@@ -46,14 +46,15 @@ div.search-dialog {
           border: 0;
         }
       }
-
+      
       div.search-results {
         h3{
           font-size: 120%;
           font-family: $font;
           font-weight: 400;
+          margin: 20px 0px 10px;
         }
-
+        
         div {
           &.spinner{
             width: 100%;
@@ -77,7 +78,7 @@ div.search-dialog {
             }
 
             span {
-              font-size: 100%;
+              font-size: 80%;
               font-family: $font;
               font-weight: 300;
               margin-left: 15px;

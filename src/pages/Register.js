@@ -61,10 +61,10 @@ export default function Register(props) {
         </datalist>
         {/* <ShouldRender if={isDesigner === 'Fashion Designer'}>
           <input name="experience" type="number" placeholder="Experience" autoComplete="true" />
-        </ShouldRender>
-        <button className="kafe-btn kafe-btn-mint btn-block" type="submit" name="subm">SIGN UP</button> */}
+        </ShouldRender> */}
+        <button className="btn-block" type="submit" name="subm">SIGN UP</button>
         <br />
-        <span className="btn btn-dark " role="button" onClick={() => props.goTo('./pages/Login')}>
+        <span className="btn btn-dark" role="button" onClick={() => props.goTo('./pages/Login')}>
           Already have an account?
           <button>LOG IN</button>
         </span>

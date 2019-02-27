@@ -42,7 +42,7 @@ div.menu-dialog{
         font-family: $font;
         padding: 5px 0px 5px 10px;
         font-weight: 300;
-        font-size: 100%;
+        font-size: 85%;
         color: #000;
         text-transform: uppercase;
       }
@@ -64,8 +64,8 @@ div.menu-dialog{
         
         li{
           @extend .li-menu;
-          font-size: 95%;
-          text-transform: capitalize;
+          font-size: 85%;
+          text-transform: uppercase;
           
           i{
             color: #aaa;

@@ -7,6 +7,8 @@ div.profile-tab {
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
+    margin: 20px 0px 10px;
+    color: #888;
   }
 
   ul.profile-tab {
@@ -29,6 +31,8 @@ div.profile-tab {
         margin-left: 12px;
         font-weight: 300;
         vertical-align: top;
+        font-size: 85%;
+        color: #000;
       }
 
       &.upgrade {

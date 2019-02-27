@@ -87,6 +87,12 @@
       background-color: $theme-color;
       font-family: $font;
       margin-bottom: 30px;
+      display: block;
+      width: 100%;
+      padding: 10px;
+      color: #fff;
+      font-weight: 700;
+      border-radius: 5px;
     }
 
     span.btn {
@@ -95,8 +101,10 @@
       font-family: $font;
       font-size: 12px !important;
       margin-bottom: 20px;
+      display: inline-block;
 
       button {
+        margin-left: 5px;
         background: transparent;
         border: 0;
         box-shadow: none;
