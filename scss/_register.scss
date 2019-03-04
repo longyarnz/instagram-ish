@@ -88,8 +88,9 @@
       font-family: $font;
       margin-bottom: 30px;
       display: block;
-      width: 100%;
-      padding: 10px;
+      margin: auto;
+      min-width: 100px;
+      padding: 10px 15px;
       color: #fff;
       font-weight: 700;
       border-radius: 5px;
@@ -100,7 +101,7 @@
       color: #000;
       font-family: $font;
       font-size: 12px !important;
-      margin-bottom: 20px;
+      margin: 20px 0px 10px;
       display: block;
 
       button {

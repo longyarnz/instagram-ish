@@ -21,8 +21,6 @@ export default function AddPostButton(props) {
   useEffect(() => {
     const position = isClicked ? '325px' : '35px';
     setTimeout(() => div.current.style.bottom = position, 50);
-
-    return () => div.current.style.bottom = '-50px';
   });
 
   return (

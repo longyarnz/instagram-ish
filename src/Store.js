@@ -10,6 +10,7 @@ export const InitialState = {
   showSearch: false,
   showComment: false,
   createPostImage: null,
+  posts: [],
   user: {
     firstName: 'Olalekan',
     lastName: 'Ayodele',
@@ -26,7 +27,7 @@ export const InitialState = {
 }
 
 export function Reducers(state, action) {
-  if(state.stateIsLocked && action.type !== 'UNLOCK STATE') return;
+  if (state.stateIsLocked && action.type !== 'UNLOCK STATE') return;
 
   const mutations = [...state.mutations, action.type];
 
@@ -70,11 +71,42 @@ export function Reducers(state, action) {
     case 'HIDE COMMENTS':
       return { ...state, mutations, showComment: false }
 
+    case 'FETCH POSTS':
+      return { ...state, mutations, posts: action.payload, hasPosts: true }
+
+    case 'CLEAR POSTS':
+      return { ...state, mutations, posts: [], hasPosts: false }
+
+    case 'FETCH COMMENTS':
+      return { ...state, mutations, comments: { ...state.comments, ...action.payload } }
+
+    case 'CLEAR COMMENTS':
+      return { ...state, mutations, comments: { ...state.comments, [action.paylaod]: [] } }
+
     case 'LOG USER IN':
-      return { ...state, mutations, userIsLoggedIn: true, user: { ...InitialState.user, ...state.user, ...action.payload } }
+      const { user, token } = action.payload;
+      return {
+        ...state,
+        mutations,
+        token,
+        userIsLoggedIn: true,
+        user: process.env.NODE_ENV === 'production' ? {
+          firstName: user.fullName.split(' ')[0],
+          lastName: user.fullName.split(' ')[1],
+          email: user.email,
+          sex: user.sex,
+          username: user.username,
+          accountType: user.userType === 'user' ? 'Fashion Enthusiast' : 'Fashion Designer',
+          phone: user.phone,
+          brand: user.brandName,
+          experience: user.experience || 0,
+          about: user.about || 0,
+          photo: user.photoPath
+        } : { ...InitialState.user, ...state.user, ...action.payload }
+      }
 
     case 'LOG USER OUT':
-      return { ...state, mutations, userIsLoggedIn: false, user: null }
+      return { ...state, mutations, userIsLoggedIn: false, user: null, token: null }
 
     case 'UPGRADE CUSTOMER ACCOUNT':
       return { ...state, mutations, user: { ...state.user, accountType: 'Fashion Designer' } }

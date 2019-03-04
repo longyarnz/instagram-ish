@@ -6,10 +6,17 @@ export const AppContext = React.createContext([]);
 
 export default function App() {
   const appState = useReducer(Reducers, InitialState);
-  const [ state ] = appState;
-  window.onbeforeunload = () => `Don't leave yet`;
+  const [state] = appState;
+  // window.onbeforeunload = () => `Don't leave yet`;
   const dependencies = {
-    './pages/NewsFeed': [ 'showDialog', 'showAppMenu', 'showNotifications', 'showSearch', 'userIsLoggedIn', 'showComment' ],
+    './pages/NewsFeed': [
+      'showDialog',
+      'showAppMenu',
+      'showNotifications',
+      'showSearch',
+      'userIsLoggedIn',
+      'showComment'
+    ],
     './pages/Login': undefined
   }
 
@@ -18,7 +25,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    console.log([ document.scrollingElement.scrollTop ]);
+    console.log([document.scrollingElement.scrollTop]);
   });
 
   return (

@@ -14,6 +14,10 @@ export default function NewsFeed(props) {
     document.scrollingElement.scrollTop = scrollTop;
   });
 
+  useEffect(() => {
+      
+  }, []);
+
   return (
     <>
       <ShouldRender
