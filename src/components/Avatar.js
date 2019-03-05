@@ -13,7 +13,11 @@ export default function Avatar(props) {
       </ShouldRender>
 
       <ShouldRender if={props.state.userIsLoggedIn}>
-        <AsyncImage className="avatar" src="assets/img/users/2.jpg" alt="user"onClick={props.toggleUserMenu} />
+        <AsyncImage 
+          className="avatar" 
+          src={props.state.user.photo || 'assets/img/user.png'} 
+          alt="user"onClick={props.toggleUserMenu} 
+        />
       </ShouldRender>
     </>
   )

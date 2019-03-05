@@ -7,7 +7,7 @@ export const AppContext = React.createContext([]);
 export default function App() {
   const appState = useReducer(Reducers, InitialState);
   const [state] = appState;
-  // window.onbeforeunload = () => `Don't leave yet`;
+  window.onbeforeunload = () => `Don't leave yet`;
   const dependencies = {
     './pages/NewsFeed': [
       'showDialog',
@@ -15,7 +15,9 @@ export default function App() {
       'showNotifications',
       'showSearch',
       'userIsLoggedIn',
-      'showComment'
+      'showComment',
+      'hasPosts',
+      'hasComments'
     ],
     './pages/Login': undefined
   }

@@ -10,7 +10,11 @@ export const InitialState = {
   showSearch: false,
   showComment: false,
   createPostImage: null,
+  hasPosts: false,
+  hasComments: false,
   posts: [],
+  comments: [],
+  token: null,
   user: {
     firstName: 'Olalekan',
     lastName: 'Ayodele',
@@ -78,10 +82,10 @@ export function Reducers(state, action) {
       return { ...state, mutations, posts: [], hasPosts: false }
 
     case 'FETCH COMMENTS':
-      return { ...state, mutations, comments: { ...state.comments, ...action.payload } }
+      return { ...state, mutations, comments: action.payload, hasComments: true }
 
     case 'CLEAR COMMENTS':
-      return { ...state, mutations, comments: { ...state.comments, [action.paylaod]: [] } }
+      return { ...state, mutations, comments: [], hasComments: false }
 
     case 'LOG USER IN':
       const { user, token } = action.payload;
@@ -106,7 +110,7 @@ export function Reducers(state, action) {
       }
 
     case 'LOG USER OUT':
-      return { ...state, mutations, userIsLoggedIn: false, user: null, token: null }
+      return { ...state, mutations, userIsLoggedIn: false, user: {}, token: null }
 
     case 'UPGRADE CUSTOMER ACCOUNT':
       return { ...state, mutations, user: { ...state.user, accountType: 'Fashion Designer' } }

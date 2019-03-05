@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import AddPostButton from '../components/AddPostButton';
 import ShouldRender from '../components/ShouldRender';
 import { CreatePostModal, MenuModal, NotificationModal, SearchModal, CommentModal } from '../components/Modals';
+import { FETCH_POSTS } from '../Actions';
 
 export default function NewsFeed(props) {
   useEffect(() => {
@@ -15,8 +16,10 @@ export default function NewsFeed(props) {
   });
 
   useEffect(() => {
-      
-  }, []);
+    if (!props.state.hasPosts && props.state.token !== null) {
+      FETCH_POSTS(props.dispatch, props.state.token);
+    }
+  });
 
   return (
     <>
@@ -76,7 +79,11 @@ export default function NewsFeed(props) {
         <Stories />
       </ShouldRender>
 
-      <NewsFeedSlide dispatch={props.dispatch} userIsLoggedIn={props.state.userIsLoggedIn} />
+      <NewsFeedSlide
+        posts={props.state.posts}
+        dispatch={props.dispatch}
+        userIsLoggedIn={props.state.userIsLoggedIn}
+      />
       <Footer />
     </>
   )

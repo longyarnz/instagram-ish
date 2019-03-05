@@ -38,13 +38,15 @@ export default function NewsFeedSlide(props) {
     });
   }
 
+  const loadedPosts = props.posts.length === 0 ? Posts : props.posts;
+
   return (
     <section className="newsfeed-slide" style={tyle}>
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-3">
             <FlatList
-              list={Posts}
+              list={loadedPosts}
               listView={(post, i) => (
                 <NewsFeedTab
                   author={post.author}
