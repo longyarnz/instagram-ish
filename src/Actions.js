@@ -2,14 +2,14 @@ export async function FETCH_POSTS(dispatch, callback){
   let posts = await fetch('http://18.223.1.218/api/posts');
   posts = await posts.json();
 
-  posts.message === 'success' && dispatch({
+  posts.msg === 'success' && dispatch({
     type: 'FETCH POSTS',
     payload: posts.data
   });
 
   callback && callback();
   
-  return posts.message === 'success' ? true : posts.data;
+  return posts.msg === 'success' ? true : posts.data;
 }
 
 export async function FETCH_COMMENTS(dispatch, postId, callback){
@@ -24,7 +24,7 @@ export async function FETCH_COMMENTS(dispatch, postId, callback){
   });
   comments = await comments.json();
 
-  comments.message === 'success' && dispatch({
+  comments.msg === 'success' && dispatch({
     type: 'FETCH COMMENTS',
     payload: {
       postId: comments.data
@@ -33,7 +33,7 @@ export async function FETCH_COMMENTS(dispatch, postId, callback){
 
   callback && callback();
 
-  return comments.message === 'success' ? true : comments.data;
+  return comments.msg === 'success' ? true : comments.data;
 }
 
 export async function REGISTER_USER(dispatch, body, callback){
@@ -48,7 +48,7 @@ export async function REGISTER_USER(dispatch, body, callback){
   });
   user = await user.json();
 
-  user.message === 'success' && dispatch({
+  user.msg === 'success' && dispatch({
     type: 'LOG USER IN',
     payload: {
       token: user.data.token,
@@ -58,7 +58,7 @@ export async function REGISTER_USER(dispatch, body, callback){
 
   callback && callback();
 
-  return user.message === 'success' ? true : user.data;
+  return user.msg === 'success' ? true : user.data;
 }
 
 export async function LOG_USER_IN(dispatch, email, password, callback){
@@ -72,10 +72,8 @@ export async function LOG_USER_IN(dispatch, email, password, callback){
     })
   });
   user = await user.json();
-
-  callback && callback();
-
-  user.message === 'success' && dispatch({
+  
+  user.msg === 'success' && dispatch({
     type: 'LOG USER IN',
     payload: {
       token: user.data.token,
@@ -83,7 +81,9 @@ export async function LOG_USER_IN(dispatch, email, password, callback){
     }
   });
 
-  return user.message === 'success' ? true : user.data;
+  callback && callback();
+
+  return user.msg === 'success' ? true : user.data;
 }
 
 export async function CREATE_POST(dispatch, email, password, callback){
@@ -97,16 +97,18 @@ export async function CREATE_POST(dispatch, email, password, callback){
     })
   });
   user = await user.json();
-
-  callback && callback();
-
-  user.message === 'success' && dispatch({
+  
+  user.msg === 'success' && dispatch({
     type: 'LOG USER IN',
     payload: {
       token: user.data.token,
       user: user.data.user
     }
   });
+  
+  callback && callback();
 
-  return user.message === 'success' ? true : user.data;
+  return user.msg === 'success' ? true : user.data;
 }
+
+// {"body":{"first_name":"Michael","last_name":"Rumble","email":"lekan@gmail.com","username":"Miru","phone":"08082935102","sex":"male","password":"12345","c_password":"12345","user_type_id":2}}
