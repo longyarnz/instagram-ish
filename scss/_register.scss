@@ -94,6 +94,10 @@
       color: #fff;
       font-weight: 700;
       border-radius: 5px;
+
+      &.disabled{
+        cursor: not-allowed;
+      }
     }
 
     span.btn {

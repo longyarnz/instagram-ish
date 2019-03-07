@@ -1,13 +1,15 @@
 div.newsfeed-tab {
   margin-bottom: 20px;
+  width: 100%;
 
   header,
   footer {
     background-color: #fff;
-    padding: 10px 10px 10px 15px;
+    padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 
     main{
       height: 42px;
@@ -27,7 +29,7 @@ div.newsfeed-tab {
     }
 
     div {
-      flex: 3;
+      flex: 2;
       margin-left: 10px;
       margin-right: auto;
       font-weight: 400;
@@ -46,6 +48,7 @@ div.newsfeed-tab {
           font-weight: 300;
           color: #aaa;
           font-size: 12px;
+          flex: 1;
         }
       }
 

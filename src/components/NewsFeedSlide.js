@@ -2,6 +2,8 @@ import React from 'react';
 import { FlatList } from './Utils';
 import NewsFeedTab from './NewsFeedTab';
 
+const time = (i) => `${i}hr${i > 1 ? 's' : ''} ago`;
+
 export const Posts = [
   {
     author: 'Eleanor Harper',
@@ -14,7 +16,7 @@ export const Posts = [
     author: 'Christopher Williamson',
     profession: 'Hard Suite Tailor',
     time: (i) => `${i}hr${i > 1 ? 's' : ''} ago`,
-    likes:  75,
+    likes: 75,
     comments: 52
   },
   {
@@ -28,13 +30,13 @@ export const Posts = [
 
 export default function NewsFeedSlide(props) {
   const tyle = props.userIsLoggedIn ? {
-    marginTop: 0 
+    marginTop: 0
   } : {};
 
-  const loadComments = () => {
-    console.log('Clicked');
+  const loadComments = (postId) => {
     props.dispatch({
-      type: 'SHOW COMMENTS'
+      type: 'SHOW COMMENTS',
+      payload: postId
     });
   }
 
@@ -42,28 +44,23 @@ export default function NewsFeedSlide(props) {
 
   return (
     <section className="newsfeed-slide" style={tyle}>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-lg-3">
-            <FlatList
-              list={loadedPosts}
-              listView={(post, i) => (
-                <NewsFeedTab
-                  author={post.author}
-                  profession={post.profession}
-                  userSrc={`assets/img/users/${++i}.jpg`}
-                  src={`assets/img/posts/1.jpg`}
-                  time={post.time(i)}
-                  likes={post.likes}
-                  comments={post.comments}
-                  loadComments={loadComments}
-                  key={`tab-${i}`}
-                />
-              )}
-            />
-          </div>
-        </div>
-      </div>
+      <FlatList
+        list={loadedPosts}
+        listView={(post, i) => (
+          <NewsFeedTab
+            author={post.name || post.author}
+            profession={post.brandName || post.profession || ''}
+            userSrc={`assets/img/users/${Math.ceil(Math.random() * 10)}.jpg`}
+            src={post.imagePath || `assets/img/posts/1.jpg`}
+            caption={post.caption}
+            time={post.time && post.time(i) | time(i)}
+            likes={post.likes || Math.floor(Math.random() * 20)}
+            comments={post.comments || Math.floor(Math.random() * 20)}
+            loadComments={() => loadComments(post.postId)}
+            key={`tab-${i}`}
+          />
+        )}
+      />
     </section >
   )
 }

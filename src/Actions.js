@@ -1,5 +1,4 @@
 export async function FETCH_POSTS(dispatch, token, callback) {
-  console.log(`Bearer ${token}`);
   try {
     let posts = await fetch('http://18.223.1.218/api/posts', {
       headers: {
@@ -9,8 +8,6 @@ export async function FETCH_POSTS(dispatch, token, callback) {
       method: 'GET'
     });
     posts = await posts.json();
-
-    console.log(posts);
 
     callback && callback();
 

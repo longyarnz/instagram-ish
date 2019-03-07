@@ -6,7 +6,7 @@ export const AppContext = React.createContext([]);
 
 export default function App() {
   const appState = useReducer(Reducers, InitialState);
-  const [state] = appState;
+  const [ state, dispatch ] = appState;
   window.onbeforeunload = () => `Don't leave yet`;
   const dependencies = {
     './pages/NewsFeed': [
@@ -23,8 +23,23 @@ export default function App() {
   }
 
   useEffect(() => {
-    localStorage.clear();
-  }, [])
+    let cache = localStorage.staleState;
+    if (cache && typeof JSON.parse(cache) === 'object') {
+      console.log('Remount');
+      dispatch({
+        type: 'RESTORE STATE',
+        payload: JSON.parse(localStorage.staleState)
+      });
+
+      return () => {
+        dispatch({ type: 'CACHE STATE' })
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.removeItem('cachedImages');
+  }, []);
 
   useEffect(() => {
     console.log([document.scrollingElement.scrollTop]);

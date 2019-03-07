@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList } from './Utils';
 import AsyncImage from './AsyncImage';
 import Divider from './Divider';
 import Icon from './Icon';
 import Spinner from './Spinner';
 import ShouldRender from './ShouldRender';
+import { FETCH_COMMENTS } from '../Actions';
 
 const results = [
   {
@@ -41,7 +42,7 @@ const results = [
   },
 ];
 
-function SearchResults(props) {
+function Comments(props) {
   return (
     <div className="search-results">
       <h3>10 / 54 Comments</h3>
@@ -53,7 +54,7 @@ function SearchResults(props) {
       </ShouldRender>
 
       <FlatList
-        list={results}
+        list={props.comments.length > 0 && props.comments | results}
         listView={(result, i) => (
           <div key={`search-${i}`}>
             <div>
@@ -78,13 +79,29 @@ function LoadMore(props) {
 }
 
 export default function CommentDialog(props) {
-  const [isLoading, setIsLoading] = useState(false);
+  const { state, dispatch } = props;
+  const [isLoading, setIsLoading] = useState(true);
 
   const onSubmit = e => {
     e.preventDefault();
     setIsLoading(true);
     console.log(e.target[0]);
   }
+
+  useEffect(() => {
+    if (state.hasComments && state.comments.includes(state.postId)) {
+      return;
+    }
+
+    const callback = () => {
+      setIsLoading(false);
+    }
+    
+    FETCH_COMMENTS(dispatch, state.token, state.postId, callback);
+  }, [0]);
+
+  const comments = state.comments && state.postId ? state.comments[state.postId] : [];
+
   return (
     <div className="comment">
       <form onSubmit={onSubmit}>
@@ -93,7 +110,7 @@ export default function CommentDialog(props) {
           <Icon name="chat_bubble_outline" />
         </button>
       </form>
-      <SearchResults isLoading={isLoading} />
+      <Comments isLoading={isLoading} comments={comments} />
       <LoadMore />
     </div>
   )

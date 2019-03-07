@@ -12,12 +12,17 @@ export default class ErrorBoundary extends Component {
   }
   
   componentDidCatch(error, info){
+    localStorage.removeItem('staleState');
     this.setState({ 
       error: true,
       view: (
         <AsyncLoader path="./components/Error" error={error} info={info} /> 
       )
     });
+
+    const reset = () => this.setState({ error: false });
+
+    setTimeout(reset, 2000);
   }
 
   render() {

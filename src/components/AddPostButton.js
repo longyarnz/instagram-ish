@@ -15,11 +15,21 @@ export default function AddPostButton(props) {
     props.dispatch({
       type: 'SET SCROLLTOP',
       payload: scrollTop
-    })
+    });
   }
 
   useEffect(() => {
-    const position = isClicked ? '325px' : '35px';
+    console.log(props.lastAction);
+    const style = ['CHANGE VIEW', 'NULL POST IMAGE', 'FETCH POSTS'];
+
+    if(!props.hasPosts) return;
+
+    if(!style.includes(props.lastAction)) {
+      div.current.style.bottom = '35px';
+      return;
+    }
+
+    const position = isClicked ? '0px' : '35px';
     setTimeout(() => div.current.style.bottom = position, 50);
   });
 

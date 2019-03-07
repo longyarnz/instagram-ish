@@ -2,39 +2,65 @@ import React, { useState, useRef } from 'react';
 import Icon from '../components/Icon';
 import { REGISTER_USER } from '../Actions';
 import Spinner from '../components/Spinner';
+import ShouldRender from '../components/ShouldRender';
 
 async function submitRegisterForm(e, dispatch, callback) {
-  e.preventDefault();
-  const [first, last, username, phone, email, password, ,sex, accountType] = e.target;
+  const [first, last, username, email, password, c_password, accountType, brand] = e.target;
+  
   const body = {
     first_name: first.value,
     last_name: last.value,
     email: email.value,
     username: username.value,
-    phone: phone.value,
-    sex: sex.value,
     password: password.value,
-    c_password: password.value,
-    user_type_id: accountType.value === 'Fashion Enthusiast' ? 1 : 2
+    c_password: c_password.value,
+    user_type_id: accountType.value === 'Fashion Enthusiast' ? 1 : 2,
+    brand_name: brand && brand.value && accountType.value === 'Fashion Designer' ? brand.value : null
   }
   const success = await REGISTER_USER(dispatch, body, callback);
   console.log(success);
 }
 
 export default function Register(props) {
-  const [ isLoading, setIsLoading ] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [account, setAccount] = useState(undefined);
+  const [match, setMatch] = useState(false);
 
   const password = useRef(null);
+  const c_password = useRef(null);
 
   const onChange = e => {
-    const confirm = e.target;
-    const check = confirm.value !== password.current.value ? 'Passwords do not match!' : '';
-    confirm.setCustomValidity(check);
+    const check = c_password.current.value !== password.current.value ? 'Passwords do not match!' : '';
+    c_password.current.setCustomValidity(check);
+    setMatch(check === '');
+  }
+
+  const onChangeSelect = e => {
+    const select = e.target;
+    const check = select.value === undefined ? 'Select an account type' : '';
+    select.setCustomValidity(check);
+    setAccount(select.value);
   }
 
   const onSubmit = e => {
-    setIsLoading(true);
+    e.preventDefault();
 
+    if (isLoading) {
+      return;
+    }
+
+    else if (account === undefined) {
+      e.target[6].setCustomValidity('Select an account type');
+      return;
+    }
+
+    else if (!match) {
+      e.target[5].setCustomValidity('Passwords do not match');
+      return;
+    }
+
+    console.log(account);
+    setIsLoading(true);
     const callback = () => {
       setIsLoading(false);
       props.goTo('./pages/NewsFeed');
@@ -43,7 +69,7 @@ export default function Register(props) {
     submitRegisterForm(e, props.dispatch, callback);
   }
 
-  const button = isLoading ? <Spinner style={{animationDuration: '.55s'}} /> : 'SIGN UP';
+  const button = isLoading ? <Spinner style={{ animationDuration: '.55s' }} /> : 'SIGN UP';
 
   return (
     <section className="register">
@@ -54,22 +80,70 @@ export default function Register(props) {
 
       <form method="post" onSubmit={onSubmit}>
         <h3>Nice to Meet Ya!</h3>
-        <input name="first" type="text" placeholder="First Name" autoComplete="true" required />
-        <input name="last" type="text" placeholder="Last Name" autoComplete="true" required />
-        <input name="username" type="text" placeholder="Username" autoComplete="true" required />
-        <input name="phone" type="number" placeholder="Phone" autoComplete="true" required />
-        <input name="email" type="email" placeholder="Email" autoComplete="true" required />
-        <input type="password" name="password" placeholder="Password" autoComplete="true" ref={password} required />
-        <input type="password" name="password" placeholder="Confirm Password" onChange={onChange} required />
-        <select name="sex">
-          <option value="female">Female</option>
-          <option value="male">Male</option>
-        </select>
-        <select name="accountType">
-          <option value="Fashion Designer">Fashion Designer</option>
+        <input
+          name="first"
+          type="text"
+          placeholder="First Name"
+          autoComplete="true"
+          required
+        />
+        <input
+          name="last"
+          type="text"
+          placeholder="Last Name"
+          autoComplete="true"
+          required
+        />
+        <input
+          name="username"
+          type="text"
+          placeholder="Username"
+          autoComplete="true"
+          required
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          autoComplete="true"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          autoComplete="true"
+          ref={password}
+          required
+          onChange={onChange}
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          onChange={onChange}
+          ref={c_password}
+          required
+        />
+        <select name="accountType" onChange={onChangeSelect} required>
+          <option value={undefined}>Account Type</option>
           <option value="Fashion Enthusiast">Fashion Enthusiast</option>
+          <option value="Fashion Designer">Fashion Designer</option>
         </select>
-        <button className="btn-block" type="submit" name="subm">{ button }</button>
+
+        <ShouldRender if={account === 'Fashion Designer'}>
+          <input
+            name="brand_name"
+            type="text"
+            placeholder="Brand Name"
+            autoComplete="true"
+            required
+          />
+        </ShouldRender>
+
+        <button disabled={isLoading} className="btn-block" type="submit">
+          {button}
+        </button>
+
         <span className="btn btn-dark" role="button" onClick={() => props.goTo('./pages/Login')}>
           Already have an account?
           <button>LOG IN</button>

@@ -9,39 +9,44 @@ import { CreatePostModal, MenuModal, NotificationModal, SearchModal, CommentModa
 import { FETCH_POSTS } from '../Actions';
 
 export default function NewsFeed(props) {
+  const { state } = props;
   useEffect(() => {
-    const { scrollTop } = props.state;
+    const { scrollTop } = state;
     if (scrollTop === null) return;
     document.scrollingElement.scrollTop = scrollTop;
   });
 
   useEffect(() => {
-    if (!props.state.hasPosts && props.state.token !== null) {
-      FETCH_POSTS(props.dispatch, props.state.token);
+    if (!state.hasPosts && state.token !== null) {
+      FETCH_POSTS(props.dispatch, state.token);
     }
-  });
+  }, [state.hasPosts, state.token]);
 
   return (
     <>
       <ShouldRender
         if={
-          props.state.userIsLoggedIn &&
-          props.state.user.accountType === 'Fashion Designer'
+          state.userIsLoggedIn &&
+          state.user.accountType === 'Fashion Designer'
         }
       >
-        <AddPostButton dispatch={props.dispatch} />
+        <AddPostButton
+          hasPosts={state.hasPosts}
+          lastAction={[...state.mutations].pop()}
+          dispatch={props.dispatch}
+        />
       </ShouldRender>
 
-      <ShouldRender if={props.state.showAppMenu}>
+      <ShouldRender if={state.showAppMenu}>
         <MenuModal
           dispatch={props.dispatch}
           goTo={props.goTo}
-          userIsLoggedIn={props.state.userIsLoggedIn}
+          userIsLoggedIn={state.userIsLoggedIn}
           className="menu-dialog"
         />
       </ShouldRender>
 
-      <ShouldRender if={props.state.showNotifications}>
+      <ShouldRender if={state.showNotifications}>
         <NotificationModal
           dispatch={props.dispatch}
           goTo={props.goTo}
@@ -49,7 +54,7 @@ export default function NewsFeed(props) {
         />
       </ShouldRender>
 
-      <ShouldRender if={props.state.showSearch}>
+      <ShouldRender if={state.showSearch}>
         <SearchModal
           dispatch={props.dispatch}
           goTo={props.goTo}
@@ -57,32 +62,33 @@ export default function NewsFeed(props) {
         />
       </ShouldRender>
 
-      <ShouldRender if={props.state.showComment}>
+      <ShouldRender if={state.showComment}>
         <CommentModal
           dispatch={props.dispatch}
           goTo={props.goTo}
+          state={state}
           className="comment-dialog"
         />
       </ShouldRender>
 
-      <ShouldRender if={props.state.showDialog}>
+      <ShouldRender if={state.showDialog}>
         <CreatePostModal dispatch={props.dispatch} />
       </ShouldRender>
 
       <NavBar
         dispatch={props.dispatch}
-        state={props.state}
+        state={state}
         goTo={props.goTo}
       />
 
-      <ShouldRender if={props.state.userIsLoggedIn}>
+      <ShouldRender if={state.userIsLoggedIn}>
         <Stories />
       </ShouldRender>
 
       <NewsFeedSlide
-        posts={props.state.posts}
+        posts={state.posts}
         dispatch={props.dispatch}
-        userIsLoggedIn={props.state.userIsLoggedIn}
+        userIsLoggedIn={state.userIsLoggedIn}
       />
       <Footer />
     </>

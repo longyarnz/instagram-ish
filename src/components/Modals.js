@@ -130,7 +130,11 @@ export function CommentModal(props) {
       onClose={onClose}
       upperDialog={null}
       lowerDialog={
-        <CommentDialog dispatch={props.dispatch} goTo={props.goTo} />
+        <CommentDialog
+          dispatch={props.dispatch}
+          goTo={props.goTo}
+          state={props.state}
+        />
       }
       lowerDialogHeight="100%"
       upperDialogHeight="0%"

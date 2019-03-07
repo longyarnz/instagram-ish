@@ -6,8 +6,8 @@ import Spinner from '../components/Spinner';
 async function submitLoginForm(e, dispatch, callback) {
   e.preventDefault();
   const [ email, password ] = e.target;
-  const success = await LOG_USER_IN(dispatch, email.value, password.value, callback);
-  console.log(success);
+  await LOG_USER_IN(dispatch, email.value, password.value, callback);
+  dispatch({ type: 'CACHE STATE'});
 }
 
 export default function Login(props) {

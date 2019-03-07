@@ -13,7 +13,8 @@ export const InitialState = {
   hasPosts: false,
   hasComments: false,
   posts: [],
-  comments: [],
+  postId: null,
+  comments: null,
   token: null,
   user: {
     firstName: 'Olalekan',
@@ -70,7 +71,7 @@ export function Reducers(state, action) {
       return { ...state, mutations, showSearch: false }
 
     case 'SHOW COMMENTS':
-      return { ...state, mutations, showComment: true }
+      return { ...state, mutations, showComment: true, postId: action.payload }
 
     case 'HIDE COMMENTS':
       return { ...state, mutations, showComment: false }
@@ -82,7 +83,7 @@ export function Reducers(state, action) {
       return { ...state, mutations, posts: [], hasPosts: false }
 
     case 'FETCH COMMENTS':
-      return { ...state, mutations, comments: action.payload, hasComments: true }
+      return { ...state, mutations, comments: {...state.comments, ...action.payload}, hasComments: true }
 
     case 'CLEAR COMMENTS':
       return { ...state, mutations, comments: [], hasComments: false }
@@ -126,6 +127,17 @@ export function Reducers(state, action) {
 
     case 'NULL SCROLLTOP':
       return { ...state, mutations, scrollTop: null }
+
+    case 'RESTORE STATE':
+      return { ...state, mutations, ...action.payload }
+
+    case 'CACHE STATE':
+      localStorage.staleState = JSON.stringify({
+        token: state.token,
+        userIsLoggedIn: state.userIsLoggedIn,
+        user: state.user
+      });
+      return state;
 
     default: return state;
   }
