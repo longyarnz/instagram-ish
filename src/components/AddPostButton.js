@@ -19,7 +19,6 @@ export default function AddPostButton(props) {
   }
 
   useEffect(() => {
-    console.log(props.lastAction);
     const style = ['CHANGE VIEW', 'NULL POST IMAGE', 'FETCH POSTS'];
 
     if(!props.hasPosts) return;

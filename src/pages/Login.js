@@ -20,14 +20,14 @@ export default function Login(props) {
       props.goTo('./pages/NewsFeed');
     }
     
-    const onError = (err) => {
-      console.log(err);
+    const onError = (caption) => {
+      console.log(caption);
       setIsLoading(false);
-      setCaption(err);
+      setCaption(caption);
     }
 
     submitLoginForm(e, props.dispatch, callback, onError)
-      .then(() => props.dispatch({ type: 'CACHE STATE'}));
+      .then(res => res && props.dispatch({ type: 'CACHE STATE'}));
   }
 
   const errStyle = {

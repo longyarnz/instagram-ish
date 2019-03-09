@@ -69,11 +69,15 @@ export async function REGISTER_USER(dispatch, body, callback, onError) {
     });
     
     user.msg === 'success' && callback && callback();
-    user.msg === 'failed, wrong parameters' && onError && onError('Please, Fill Your Details Correctly');
+
+    if(user.msg === 'failed, wrong parameters') throw user;
+
+    return true;
   }
   catch (err) {
     console.log(err);
-    onError && onError();
+    onError && onError(err);
+    return false;
   }
 }
 
@@ -99,11 +103,12 @@ export async function LOG_USER_IN(dispatch, email, password, callback, onError) 
     });
 
     user.msg === 'success' && callback && callback();
-    user.msg === 'Unauthorised' && onError && onError('Credentials are Invalid!');
+    if(user.msg === 'Unauthorised') throw user;
   }
   catch (err) {
-    console.log(err);
-    onError && onError();
+    const caption = 'Credentials are Invalid!';
+    onError && onError(caption);
+    return false;
   }
 }
 

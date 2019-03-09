@@ -83,6 +83,15 @@
       }
     }
 
+    label {
+      text-align: left;
+      width: 100%;
+      font-size: 70%;
+      color: #d43f3a;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
     & > button {
       background-color: $theme-color;
       font-family: $font;
@@ -95,7 +104,7 @@
       font-weight: 700;
       border-radius: 5px;
 
-      &.disabled{
+      &.disabled {
         cursor: not-allowed;
       }
     }

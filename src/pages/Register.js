@@ -21,10 +21,16 @@ async function submitRegisterForm(e, dispatch, callback, onError) {
 }
 
 export default function Register(props) {
-  const [caption, setCaption] = useState('Nice to Meet Ya!');
+  const initialErrorState = {
+    username: [],
+    brand_name: [],
+    email: []
+  }
+  const [ caption ] = useState('Nice to Meet Ya!');
   const [isLoading, setIsLoading] = useState(false);
   const [account, setAccount] = useState(undefined);
   const [match, setMatch] = useState(false);
+  const [error, setError] = useState(initialErrorState);
 
   const password = useRef(null);
   const c_password = useRef(null);
@@ -64,16 +70,15 @@ export default function Register(props) {
     const onError = (err) => {
       console.log(err);
       setIsLoading(false);
-      setCaption(err);
+      setError({...initialErrorState, ...err.error});
     }
 
-    console.log(account);
     const callback = () => {
       props.goTo('./pages/NewsFeed');
     }
 
     submitRegisterForm(e, props.dispatch, callback, onError)
-      .then(() => props.dispatch({ type: 'CACHE STATE' }));
+      .then(res => res && props.dispatch({ type: 'CACHE STATE' }));
   }
 
   const button = isLoading ? <Spinner style={{ animationDuration: '.55s' }} /> : 'SIGN UP';
@@ -92,58 +97,68 @@ export default function Register(props) {
           type="text"
           placeholder="First Name"
           autoComplete="true"
-
+          required
         />
+
         <input
           name="last"
           type="text"
           placeholder="Last Name"
           autoComplete="true"
-
+          required
         />
+
+        <label htmlFor="username">{error.username[0]}</label>
         <input
           name="username"
           type="text"
           placeholder="Username"
           autoComplete="true"
-
+          required
+          id="username"
         />
+
+        <label htmlFor="email">{error.email[0]}</label>
         <input
           name="email"
           type="email"
           placeholder="Email"
           autoComplete="true"
-
+          required
+          id="email"
         />
+
         <input
           type="password"
           name="password"
           placeholder="Password"
           autoComplete="true"
+          required
           ref={password}
-
-          onChange={onChange}
         />
+
         <input
           type="password"
           placeholder="Confirm Password"
           onChange={onChange}
           ref={c_password}
-
         />
-        <select name="accountType" onChange={onChangeSelect} >
+
+        <select name="accountType" onChange={onChangeSelect} required>
           <option value={undefined}>Account Type</option>
           <option value="Fashion Enthusiast">Fashion Enthusiast</option>
           <option value="Fashion Designer">Fashion Designer</option>
         </select>
 
         <ShouldRender if={account === 'Fashion Designer'}>
+          <label htmlFor="brand">{error.brand_name[0]}</label>
           <input
             name="brand_name"
             type="text"
             placeholder="Brand Name"
             autoComplete="true"
-
+            required
+            id="brand"
           />
         </ShouldRender>
 
