@@ -99,6 +99,7 @@ export async function LOG_USER_IN(dispatch, email, password, callback, onError) 
     });
 
     user.msg === 'success' && callback && callback();
+    user.msg === 'Unauthorised' && onError && onError('Credentials are Invalid!');
   }
   catch (err) {
     console.log(err);

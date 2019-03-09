@@ -50,7 +50,7 @@ export default function NewsFeedSlide(props) {
     });
   }
 
-  const loadedPosts = props.posts.length === 0 ? Posts : props.posts;
+  const loadedPosts = props.posts.length === 0 ? [] : props.posts;
 
   return (
     <section className="newsfeed-slide" style={style}>

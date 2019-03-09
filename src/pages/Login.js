@@ -11,7 +11,7 @@ async function submitLoginForm(e, dispatch, callback, onError) {
 
 export default function Login(props) {
   const [ isLoading, setIsLoading ] = useState(false);
-  // const [ error, setError ] = useState(null);
+  const [ error, setError ] = useState('We Have Missed You!');
 
   const onSubmit = e => {
     setIsLoading(true);
@@ -21,12 +21,17 @@ export default function Login(props) {
     }
     
     const onError = (err) => {
+      console.log(err);
       setIsLoading(false);
-      // setError(err);
+      setError(err);
     }
 
     submitLoginForm(e, props.dispatch, callback, onError)
       .then(() => props.dispatch({ type: 'CACHE STATE'}));
+  }
+
+  const errStyle = {
+    color: error !== 'We Have Missed You!' ? '#d43f3a' : null
   }
 
   const button = isLoading ? <Spinner style={{animationDuration: '.55s'}} /> : 'LOG IN';
@@ -38,7 +43,7 @@ export default function Login(props) {
       </button>
       <img src="assets/img/favicon.png" alt="Dominerf Logo" />
       <form method="post" onSubmit={onSubmit}>
-        <h3>We've Missed You!</h3>
+        <h3 style={errStyle}>{ error }</h3>
         <input name="email" type="email" placeholder="Email" />
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">{ button }</button>

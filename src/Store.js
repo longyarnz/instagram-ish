@@ -2,7 +2,7 @@ export const InitialState = {
   stateIsLocked: false,
   mutations: [],
   scrollTop: null,
-  view: './pages/NewsFeed',
+  view: './pages/Login',
   userIsLoggedIn: false,
   showDialog: false,
   showAppMenu: false,
