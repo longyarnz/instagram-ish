@@ -49,7 +49,7 @@ export async function FETCH_COMMENTS(dispatch, token, postId, callback) {
   }
 }
 
-export async function REGISTER_USER(dispatch, body, callback) {
+export async function REGISTER_USER(dispatch, body, callback, onError) {
   try {
     let user = await fetch('http://18.223.1.218/api/register', {
       method: 'POST',
@@ -62,8 +62,6 @@ export async function REGISTER_USER(dispatch, body, callback) {
     });
     user = await user.json();
 
-    callback && callback();
-
     user.msg === 'success' && dispatch({
       type: 'LOG USER IN',
       payload: {
@@ -71,9 +69,13 @@ export async function REGISTER_USER(dispatch, body, callback) {
         user: user.data.user
       }
     });
+    
+    user.msg === 'success' && callback && callback();
+    user.msg === 'failed, wrong parameters' && onError && onError('Please, Fill Your Details Correctly');
   }
   catch (err) {
     console.log(err);
+    onError && onError();
   }
 }
 
@@ -107,7 +109,7 @@ export async function LOG_USER_IN(dispatch, email, password, callback, onError) 
   }
 }
 
-export async function CREATE_POST(dispatch, token, email, password, callback) {
+export async function CREATE_POST(dispatch, token, email, password, callback, onError) {
   try {
     let user = await fetch('http://18.223.1.218/api/login', {
       method: 'POST',
@@ -120,9 +122,7 @@ export async function CREATE_POST(dispatch, token, email, password, callback) {
       })
     });
     user = await user.json();
-
-    callback && callback();
-
+    
     user.msg === 'success' && dispatch({
       type: 'LOG USER IN',
       payload: {
@@ -130,8 +130,11 @@ export async function CREATE_POST(dispatch, token, email, password, callback) {
         user: user.data.user
       }
     });
+    
+    user.msg === 'success' && callback && callback();
   }
   catch (err) {
     console.log(err);
+    onError && onError();
   }
 }

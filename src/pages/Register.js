@@ -4,9 +4,19 @@ import { REGISTER_USER } from '../Actions';
 import Spinner from '../components/Spinner';
 import ShouldRender from '../components/ShouldRender';
 
-async function submitRegisterForm(e, dispatch, callback) {
+async function submitRegisterForm(e, dispatch, callback, onError) {
   const [first, last, username, email, password, c_password, accountType, brand] = e.target;
-  
+
+  // const body = {
+  //   "first_name": "Michael",
+  //   "last_name": "Smith",
+  //   "email": "m.smith@gmail.com",
+  //   "username": "Smithman",
+  //   "password": "123",
+  //   "c_password": "123",
+  //   "user_type_id": "2",
+  //   "brand_name": "Smithsonian" 
+  // }
   const body = {
     first_name: first.value,
     last_name: last.value,
@@ -14,14 +24,15 @@ async function submitRegisterForm(e, dispatch, callback) {
     username: username.value,
     password: password.value,
     c_password: c_password.value,
-    user_type_id: accountType.value === 'Fashion Enthusiast' ? 1 : 2,
+    user_type_id: accountType.value === 'Fashion Enthusiast' ? '1' : '2',
     brand_name: brand && brand.value && accountType.value === 'Fashion Designer' ? brand.value : null
   }
-  const success = await REGISTER_USER(dispatch, body, callback);
+  const success = await REGISTER_USER(dispatch, body, callback, onError);
   console.log(success);
 }
 
 export default function Register(props) {
+  const [caption, setCaption] = useState('Nice to Meet Ya!');
   const [isLoading, setIsLoading] = useState(false);
   const [account, setAccount] = useState(undefined);
   const [match, setMatch] = useState(false);
@@ -59,14 +70,20 @@ export default function Register(props) {
       return;
     }
 
-    console.log(account);
     setIsLoading(true);
-    const callback = () => {
+
+    const onError = (err) => {
+      console.log(err);
       setIsLoading(false);
+      setCaption(err);
+    }
+
+    console.log(account);
+    const callback = () => {
       props.goTo('./pages/NewsFeed');
     }
 
-    submitRegisterForm(e, props.dispatch, callback);
+    submitRegisterForm(e, props.dispatch, callback, onError);
   }
 
   const button = isLoading ? <Spinner style={{ animationDuration: '.55s' }} /> : 'SIGN UP';
@@ -79,7 +96,7 @@ export default function Register(props) {
       <img src="assets/img/favicon.png" alt="Dominerf Logo" />
 
       <form method="post" onSubmit={onSubmit}>
-        <h3>Nice to Meet Ya!</h3>
+        <h3>{caption}</h3>
         <input
           name="first"
           type="text"
