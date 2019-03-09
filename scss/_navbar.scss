@@ -4,7 +4,7 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 0px 15px;
-  height: 50px;
+  height: $navbar-height;
   background-color: #fff;
   position: fixed;
   top: 0px;
@@ -23,17 +23,21 @@ nav {
       & > span {
         font-family: $font;
         font-weight: 900;
-        margin-left: 10px;
+        margin-left: 15px;
       }
 
       & > div.svg {
         width: 26px;
-        height: 20px;
+        height: 26px;
       }
     }
 
     &:last-of-type {
       flex-direction: row-reverse;
+
+      & > div > div > i{
+        font-size: 26px;
+      }
     }
 
     & > div.notifications-icon {
