@@ -86,6 +86,7 @@ export default function NewsFeed(props) {
       </ShouldRender>
 
       <NewsFeedSlide
+        hasPosts={state.hasPosts}
         posts={state.posts}
         dispatch={props.dispatch}
         userIsLoggedIn={state.userIsLoggedIn}

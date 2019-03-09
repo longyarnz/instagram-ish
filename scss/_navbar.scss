@@ -16,7 +16,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     &:first-of-type {
       min-width: 120px;
 
@@ -32,13 +32,14 @@ nav {
       }
     }
 
-    & > div.notifications-icon{
-      position: relative;
-      // display: inline-flex;
-      // justify-content: space-around;
-      // align-items: center;
+    &:last-of-type {
+      flex-direction: row-reverse;
+    }
 
-      span{
+    & > div.notifications-icon {
+      position: relative;
+
+      span {
         padding: 3px;
         background-color: red;
         border-radius: 10px;

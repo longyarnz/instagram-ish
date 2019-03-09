@@ -36,21 +36,26 @@ export default function NewsFeedSlide(props) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(false);
-  }, [0])
+    !localStorage.staleState && setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    props.hasPosts && setIsLoading(false);
+  });
 
   const style = props.userIsLoggedIn ? {
     paddingTop: 0
   } : {};
 
   const loadComments = (postId) => {
+    console.log(postId);
     props.dispatch({
       type: 'SHOW COMMENTS',
       payload: postId
     });
   }
 
-  const loadedPosts = props.posts.length === 0 ? [] : props.posts;
+  const loadedPosts = props.posts;
 
   return (
     <section className="newsfeed-slide" style={style}>
@@ -69,7 +74,7 @@ export default function NewsFeedSlide(props) {
                   time={post.time || time(i)}
                   likes={post.likes_count}
                   comments={post.comments_count}
-                  loadComments={() => loadComments(post.postId)}
+                  loadComments={() => loadComments(post.post_id)}
                   key={`tab-${i}`}
                 />
               )}

@@ -27,15 +27,15 @@ export default function NavBar(props) {
   }
 
   const toggleNotificationMenu = () => {
-    props.dispatch({
+    props.state.userIsLoggedIn ? props.dispatch({
       type: !props.state.showAppMenu ? 'SHOW NOTIFICATIONS' : 'HIDE NOTIFICATIONS'
-    });
+    }) : props.goTo('./pages/Login');
   }
 
   const toggleSearch = () => {
-    props.dispatch({
+    props.state.userIsLoggedIn ? props.dispatch({
       type: !props.state.showAppMenu ? 'SHOW SEARCH' : 'HIDE SEARCH'
-    });
+    }) : props.goTo('./pages/Login');
   }
 
   const showAllIcons = props.state.view === './pages/NewsFeed';
@@ -49,24 +49,24 @@ export default function NavBar(props) {
         />
         <span>DOMINERF</span>
       </div>
+      
       <div style={{justifyContent: !showAllIcons ? 'flex-end' : ''}}>
-        <ShouldRender if={showAllIcons}>
-          <div className="notifications-icon" onClick={toggleNotificationMenu}>
-            <Icon name="notifications_none" />
-            <span></span>
-          </div>
-
-          <div onClick={toggleSearch}>
-            <Icon name="search" />
-          </div>
-        </ShouldRender>
-
         <AsyncLoader path="./components/Avatar"
           localState={true}
           toggle={toggle}
           toggleUserMenu={toggleUserMenu}
           dependencies={[showMenu, showUserMenu]}
         />
+        <ShouldRender if={showAllIcons}>
+          <div onClick={toggleSearch}>
+            <Icon name="search" />
+          </div>
+
+          <div className="notifications-icon" onClick={toggleNotificationMenu}>
+            <Icon name="notifications_none" />
+            <span></span>
+          </div>
+        </ShouldRender>
       </div>
 
       <ShouldRender if={showMenu}>

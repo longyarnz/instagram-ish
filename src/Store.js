@@ -2,7 +2,7 @@ export const InitialState = {
   stateIsLocked: false,
   mutations: [],
   scrollTop: null,
-  view: './pages/Login',
+  view: './pages/Register',
   userIsLoggedIn: false,
   showDialog: false,
   showAppMenu: false,
@@ -111,7 +111,8 @@ export function Reducers(state, action) {
       }
 
     case 'LOG USER OUT':
-      return { ...state, mutations, userIsLoggedIn: false, user: {}, token: null }
+      localStorage.removeItem('staleState');
+      return { ...state, mutations: [], userIsLoggedIn: false, user: {}, token: null, hasPosts: false, posts: [] }
 
     case 'UPGRADE CUSTOMER ACCOUNT':
       return { ...state, mutations, user: { ...state.user, accountType: 'Fashion Designer' } }

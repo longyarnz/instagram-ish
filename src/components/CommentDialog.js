@@ -97,6 +97,8 @@ export default function CommentDialog(props) {
       setIsLoading(false);
     }
 
+    console.log(dispatch, state.token, state.postId);
+
     FETCH_COMMENTS(dispatch, state.token, state.postId, callback);
   }, [0]);
 
