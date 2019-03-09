@@ -7,16 +7,6 @@ import ShouldRender from '../components/ShouldRender';
 async function submitRegisterForm(e, dispatch, callback, onError) {
   const [first, last, username, email, password, c_password, accountType, brand] = e.target;
 
-  // const body = {
-  //   "first_name": "Michael",
-  //   "last_name": "Smith",
-  //   "email": "m.smith@gmail.com",
-  //   "username": "Smithman",
-  //   "password": "123",
-  //   "c_password": "123",
-  //   "user_type_id": "2",
-  //   "brand_name": "Smithsonian" 
-  // }
   const body = {
     first_name: first.value,
     last_name: last.value,
@@ -26,9 +16,8 @@ async function submitRegisterForm(e, dispatch, callback, onError) {
     c_password: c_password.value,
     user_type_id: accountType.value === 'Fashion Enthusiast' ? '1' : '2',
     brand_name: brand && brand.value && accountType.value === 'Fashion Designer' ? brand.value : null
-  }
-  const success = await REGISTER_USER(dispatch, body, callback, onError);
-  console.log(success);
+  };
+  await REGISTER_USER(dispatch, body, callback, onError);
 }
 
 export default function Register(props) {
@@ -83,7 +72,8 @@ export default function Register(props) {
       props.goTo('./pages/NewsFeed');
     }
 
-    submitRegisterForm(e, props.dispatch, callback, onError);
+    submitRegisterForm(e, props.dispatch, callback, onError)
+      .then(() => props.dispatch({ type: 'CACHE STATE' }));
   }
 
   const button = isLoading ? <Spinner style={{ animationDuration: '.55s' }} /> : 'SIGN UP';
@@ -102,28 +92,28 @@ export default function Register(props) {
           type="text"
           placeholder="First Name"
           autoComplete="true"
-          required
+
         />
         <input
           name="last"
           type="text"
           placeholder="Last Name"
           autoComplete="true"
-          required
+
         />
         <input
           name="username"
           type="text"
           placeholder="Username"
           autoComplete="true"
-          required
+
         />
         <input
           name="email"
           type="email"
           placeholder="Email"
           autoComplete="true"
-          required
+
         />
         <input
           type="password"
@@ -131,7 +121,7 @@ export default function Register(props) {
           placeholder="Password"
           autoComplete="true"
           ref={password}
-          required
+
           onChange={onChange}
         />
         <input
@@ -139,9 +129,9 @@ export default function Register(props) {
           placeholder="Confirm Password"
           onChange={onChange}
           ref={c_password}
-          required
+
         />
-        <select name="accountType" onChange={onChangeSelect} required>
+        <select name="accountType" onChange={onChangeSelect} >
           <option value={undefined}>Account Type</option>
           <option value="Fashion Enthusiast">Fashion Enthusiast</option>
           <option value="Fashion Designer">Fashion Designer</option>
@@ -153,7 +143,7 @@ export default function Register(props) {
             type="text"
             placeholder="Brand Name"
             autoComplete="true"
-            required
+
           />
         </ShouldRender>
 

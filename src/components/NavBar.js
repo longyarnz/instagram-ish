@@ -50,7 +50,7 @@ export default function NavBar(props) {
         <span>DOMINERF</span>
       </div>
       
-      <div style={{justifyContent: !showAllIcons ? 'flex-end' : ''}}>
+      <div>
         <AsyncLoader path="./components/Avatar"
           localState={true}
           toggle={toggle}

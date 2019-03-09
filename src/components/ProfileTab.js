@@ -24,14 +24,14 @@ export default function ProfileTab(props) {
       <ul className="profile-tab">
         <LI icon="face" text={state.user.username} />
         <LI icon="mail_outline" text={state.user.email} />
-        <LI icon="contact_phone" text={state.user.phone} />
+        <LI icon="contact_phone" text={state.user.phone || 'No Phone Number'} />
 
         <ShouldRender if={state.user.accountType === 'Fashion Designer'}>
           <LI icon="insert_emoticon" text={state.user.brand || 'No Brand'} />
           <LI icon="event" text={experience} />
         </ShouldRender>
 
-        <LI icon="store_mall_directory" text={state.user.about} />
+        <LI icon="store_mall_directory" text={state.user.about || 'No Description'} />
 
         <ShouldRender if={state.user.accountType === 'Fashion Enthusiast'}>
           <li className="upgrade" onClick={() => dispatch({ type: 'UPGRADE CUSTOMER ACCOUNT' })}>

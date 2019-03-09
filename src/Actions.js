@@ -56,9 +56,7 @@ export async function REGISTER_USER(dispatch, body, callback, onError) {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        body
-      })
+      body: JSON.stringify(body)
     });
     user = await user.json();
 

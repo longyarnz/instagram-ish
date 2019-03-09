@@ -17,7 +17,7 @@ export default function Profile(props) {
         menuIsOpened={true}
         goBack={() => props.goTo('./pages/NewsFeed')}
       />
-      <Banner goTo={props.goTo} />
+      <Banner goTo={props.goTo} src={props.state.user.photo} />
       <MenuBar tabs={profileState} {...props} />
       <Gallery tabs={profileState} {...props} />
       <Footer />

@@ -2,7 +2,7 @@ export const InitialState = {
   stateIsLocked: false,
   mutations: [],
   scrollTop: null,
-  view: './pages/Register',
+  view: './pages/NewsFeed',
   userIsLoggedIn: false,
   showDialog: false,
   showAppMenu: false,
@@ -25,6 +25,7 @@ export const InitialState = {
     phone: '08082935102',
     brand: 'LekanMedia Inc.',
     experience: 0,
+    photo: null,
     about: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
     \nConsequatur odio sit perferendis totam, et mollitia at tempora repellendus!
     \nVeniam tempore officia non recusandae, quae mollitia amet inventore molestias molestiae repudiandae!`
@@ -136,7 +137,7 @@ export function Reducers(state, action) {
       localStorage.staleState = JSON.stringify({
         token: state.token ? state.token : null,
         userIsLoggedIn: state.userIsLoggedIn ? state.userIsLoggedIn : false,
-        user: state.user ? state.userIsLoggedIn : {},
+        user: state.user ? state.user : {},
         hasPosts: state.hasPosts ? state.hasPosts : false,
         posts: state.posts.length > 0 ? state.posts : []
       });
