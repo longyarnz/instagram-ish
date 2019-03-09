@@ -11,7 +11,7 @@ div.newsfeed-tab {
     align-items: center;
     width: 100%;
 
-    main{
+    main {
       height: 42px;
       margin-top: 2px;
     }
@@ -23,7 +23,7 @@ div.newsfeed-tab {
       border: 2px solid $theme-color;
     }
 
-    & > span.time{
+    & > span.time {
       font-size: 65%;
       color: #aaa;
     }
@@ -35,7 +35,7 @@ div.newsfeed-tab {
       font-weight: 400;
       display: flex;
       flex-direction: column;
-      
+
       span {
         &:first-of-type {
           width: 100%;
@@ -43,7 +43,7 @@ div.newsfeed-tab {
           margin-bottom: 3px;
           font-weight: 700;
         }
-        
+
         &:last-of-type {
           font-weight: 300;
           color: #aaa;
@@ -52,7 +52,7 @@ div.newsfeed-tab {
         }
       }
 
-      &:last-of-type{
+      &:last-of-type {
         flex: 1;
       }
     }
@@ -87,16 +87,16 @@ div.newsfeed-tab {
         }
       }
 
-      span{
+      span {
         flex: 1;
         font-size: 85%;
       }
 
-      &:first-of-type{
+      &:first-of-type {
         border-right: 1px solid #f4f4f4;
 
-        div:first-of-type{
-          i{
+        div:first-of-type {
+          i {
             color: red;
           }
         }
@@ -108,7 +108,16 @@ div.newsfeed-tab {
     width: 100%;
   }
 
-  &:last-of-type > div:last-of-type{
+  & > span {
+    width: 100%;
+    display: block;
+    text-align: left;
+    padding: 10px 15px 0px 15px;
+    font-size: 85%;
+    color: #888;
+  }
+
+  &:last-of-type > div:last-of-type {
     display: none;
   }
 }

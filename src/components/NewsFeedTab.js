@@ -3,7 +3,9 @@ import AsyncImage from './AsyncImage';
 import Divider from './Divider';
 import Icon from './Icon';
 
-export default function NewsFeedTab(props) {
+export default function NewsFeedTab({ src, ...props }) {
+  src = src.search('///') ? src.replace('///', '/640/480/') : src;
+
   return (
     <div className="newsfeed-tab">
       <header>
@@ -13,10 +15,13 @@ export default function NewsFeedTab(props) {
           <span>{props.profession}</span>
         </div>
         <span className="time">
-          {new Date().toLocaleTimeString()}
+          {props.time}
         </span>
       </header>
-      <AsyncImage src={props.src} alt="user" />
+      <AsyncImage src={src} alt="user" />
+      <span>
+        {props.caption}
+      </span>
       <footer>
         <span>
           <Icon name="favorite_border" />

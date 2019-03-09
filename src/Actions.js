@@ -77,7 +77,7 @@ export async function REGISTER_USER(dispatch, body, callback) {
   }
 }
 
-export async function LOG_USER_IN(dispatch, email, password, callback) {
+export async function LOG_USER_IN(dispatch, email, password, callback, onError) {
   try {
     let user = await fetch('http://18.223.1.218/api/login', {
       method: 'POST',
@@ -89,19 +89,20 @@ export async function LOG_USER_IN(dispatch, email, password, callback) {
       })
     });
     user = await user.json();
-
-    callback && callback();
-
-    user.msg === 'success' && dispatch({
+    
+    await user.msg === 'success' && dispatch({
       type: 'LOG USER IN',
       payload: {
         token: user.data.token,
         user: user.data.user
       }
     });
+
+    user.msg === 'success' && callback && callback();
   }
   catch (err) {
     console.log(err);
+    onError && onError();
   }
 }
 
@@ -133,5 +134,3 @@ export async function CREATE_POST(dispatch, token, email, password, callback) {
     console.log(err);
   }
 }
-
-// {"body":{"first_name":"Michael","last_name":"Rumble","email":"lekan@gmail.com","username":"Miru","phone":"08082935102","sex":"male","password":"12345","c_password":"12345","user_type_id":2}}

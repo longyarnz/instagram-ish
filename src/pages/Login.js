@@ -3,25 +3,30 @@ import Icon from '../components/Icon';
 import { LOG_USER_IN } from '../Actions';
 import Spinner from '../components/Spinner';
 
-async function submitLoginForm(e, dispatch, callback) {
+async function submitLoginForm(e, dispatch, callback, onError) {
   e.preventDefault();
   const [ email, password ] = e.target;
-  await LOG_USER_IN(dispatch, email.value, password.value, callback);
-  dispatch({ type: 'CACHE STATE'});
+  await LOG_USER_IN(dispatch, email.value, password.value, callback, onError);
 }
 
 export default function Login(props) {
   const [ isLoading, setIsLoading ] = useState(false);
+  // const [ error, setError ] = useState(null);
 
   const onSubmit = e => {
     setIsLoading(true);
 
     const callback = () => {
-      setIsLoading(false);
       props.goTo('./pages/NewsFeed');
     }
+    
+    const onError = (err) => {
+      setIsLoading(false);
+      // setError(err);
+    }
 
-    submitLoginForm(e, props.dispatch, callback);
+    submitLoginForm(e, props.dispatch, callback, onError)
+      .then(() => props.dispatch({ type: 'CACHE STATE'}));
   }
 
   const button = isLoading ? <Spinner style={{animationDuration: '.55s'}} /> : 'LOG IN';

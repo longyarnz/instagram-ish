@@ -1,13 +1,24 @@
 section.newsfeed-slide{
   background-color: #fff;
-  margin-top: 50px;
-
+  padding-top: 50px;
+  min-height: calc(100vh - 38px);
+  
   & > div{
     padding: 0px;
-
+    
     div.storybox{
       border-radius: 0px;
       background: #fff;
+    }
+    
+    &.empty{
+      min-height: calc(100vh - 88px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #ccc;
+      font-size: 85%;
     }
   }
 }

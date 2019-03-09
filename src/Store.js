@@ -95,7 +95,7 @@ export function Reducers(state, action) {
         mutations,
         token,
         userIsLoggedIn: true,
-        user: process.env.NODE_ENV === 'production' ? {
+        user: {
           firstName: user.fullName.split(' ')[0],
           lastName: user.fullName.split(' ')[1],
           email: user.email,
@@ -107,7 +107,7 @@ export function Reducers(state, action) {
           experience: user.experience || 0,
           about: user.about || 0,
           photo: user.photoPath
-        } : { ...InitialState.user, ...state.user, ...action.payload }
+        } 
       }
 
     case 'LOG USER OUT':
@@ -133,9 +133,11 @@ export function Reducers(state, action) {
 
     case 'CACHE STATE':
       localStorage.staleState = JSON.stringify({
-        token: state.token,
-        userIsLoggedIn: state.userIsLoggedIn,
-        user: state.user
+        token: state.token ? state.token : null,
+        userIsLoggedIn: state.userIsLoggedIn ? state.userIsLoggedIn : false,
+        user: state.user ? state.userIsLoggedIn : {},
+        hasPosts: state.hasPosts ? state.hasPosts : false,
+        posts: state.posts.length > 0 ? state.posts : []
       });
       return state;
 

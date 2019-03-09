@@ -45,7 +45,7 @@ const results = [
 function Comments(props) {
   return (
     <div className="search-results">
-      <h3>10 / 54 Comments</h3>
+      <h3>{props.comments.length || 4} Comments</h3>
 
       <ShouldRender if={props.isLoading}>
         <div className="spinner">
@@ -96,7 +96,7 @@ export default function CommentDialog(props) {
     const callback = () => {
       setIsLoading(false);
     }
-    
+
     FETCH_COMMENTS(dispatch, state.token, state.postId, callback);
   }, [0]);
 
@@ -110,7 +110,10 @@ export default function CommentDialog(props) {
           <Icon name="chat_bubble_outline" />
         </button>
       </form>
-      <Comments isLoading={isLoading} comments={comments} />
+      <Comments
+        isLoading={isLoading}
+        comments={comments}
+      />
       <LoadMore />
     </div>
   )
