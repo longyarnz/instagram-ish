@@ -16,6 +16,8 @@ export const InitialState = {
   posts: [],
   postId: null,
   comments: {},
+  likes: [5, 8, 20],
+  isChangingLikeStatus: [20],
   isFetchingComments: false,
   removeModalTransition: false,
   token: null,
@@ -41,6 +43,32 @@ export function Reducers(state, action) {
   const mutations = [...state.mutations, action.type];
 
   switch (action.type) {
+    case 'LOG USER IN':
+      const { user, token } = action.payload;
+      return {
+        ...state,
+        mutations,
+        token,
+        userIsLoggedIn: true,
+        user: {
+          firstName: user.fullName.split(' ')[0],
+          lastName: user.fullName.split(' ')[1],
+          email: user.email,
+          sex: user.sex,
+          username: user.username,
+          accountType: user.userType === 'user' ? 'Fashion Enthusiast' : 'Fashion Designer',
+          phone: user.phone,
+          brand: user.brandName,
+          experience: user.experience || 0,
+          about: user.about || 0,
+          photo: user.photoPath
+        }
+      }
+
+    case 'LOG USER OUT':
+      localStorage.removeItem('staleState');
+      return { ...state, mutations: [], userIsLoggedIn: false, user: {}, token: null, hasPosts: false, posts: [] }
+
     case 'LOCK STATE':
       return { ...state, mutations, stateIsLocked: true }
 
@@ -87,36 +115,28 @@ export function Reducers(state, action) {
       return { ...state, mutations, posts: [], hasPosts: false }
 
     case 'FETCH COMMENTS':
-      return { ...state, mutations, comments: {...state.comments, ...action.payload}, hasComments: true }
+      return { ...state, mutations, comments: { ...state.comments, ...action.payload }, hasComments: true }
 
     case 'CLEAR COMMENTS':
       return { ...state, mutations, comments: [], hasComments: false }
 
-    case 'LOG USER IN':
-      const { user, token } = action.payload;
-      return {
-        ...state,
-        mutations,
-        token,
-        userIsLoggedIn: true,
-        user: {
-          firstName: user.fullName.split(' ')[0],
-          lastName: user.fullName.split(' ')[1],
-          email: user.email,
-          sex: user.sex,
-          username: user.username,
-          accountType: user.userType === 'user' ? 'Fashion Enthusiast' : 'Fashion Designer',
-          phone: user.phone,
-          brand: user.brandName,
-          experience: user.experience || 0,
-          about: user.about || 0,
-          photo: user.photoPath
-        } 
-      }
+    case 'START CHANGING LIKE STATUS':
+      return { ...state, mutations, isChangingLikeStatus: [...state.isChangingLikeStatus, action.payload] }
 
-    case 'LOG USER OUT':
-      localStorage.removeItem('staleState');
-      return { ...state, mutations: [], userIsLoggedIn: false, user: {}, token: null, hasPosts: false, posts: [] }
+    case 'STOP CHANGING LIKE STATUS':
+      let isChangingLikeStatus = [...state.isChangingLikeStatus];
+      isChangingLikeStatus = isChangingLikeStatus.map(i => i !== action.payload ? i : null);
+      isChangingLikeStatus = isChangingLikeStatus.join('|').replace('||', '|').split('|');
+      return { ...state, mutations, isChangingLikeStatus }
+
+    case 'LIKE A POST':
+      return { ...state, mutations, likes: [...state.likes, action.payload] }
+
+    case 'UNLIKE A POST':
+      let likes = [...state.likes];
+      likes = likes.map(i => i !== action.payload ? i : null);
+      likes = likes.join('|').replace('||', '|').split('|');
+      return { ...state, mutations, likes }
 
     case 'UPGRADE CUSTOMER ACCOUNT':
       return { ...state, mutations, user: { ...state.user, accountType: 'Fashion Designer' } }

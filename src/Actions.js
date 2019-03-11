@@ -76,6 +76,72 @@ export async function FETCH_COMMENTS(dispatch, token, postId, callback, preFetch
   }
 }
 
+export async function LIKE_A_POST(dispatch, token, userId, postId, callback) {
+  dispatch({
+    type: 'START CHANGING LIKE STATUS',
+    payload: postId
+  });
+
+  try {
+    let like = await fetch(`${API}/posts/like`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId, postId
+      })
+    });
+    like = await like.json();
+
+    callback && callback();
+
+    like.msg === 'success' && dispatch({
+      type: 'LIKE A POST',
+      payload: postId
+    });
+
+    if (like.msg !== 'success') throw like;
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+export async function UNLIKE_A_POST(dispatch, token, userId, postId, callback) {
+  dispatch({
+    type: 'STOP CHANGING LIKE STATUS',
+    payload: postId
+  });
+
+  try {
+    let like = await fetch(`${API}/posts/like`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId, postId
+      })
+    });
+    like = await like.json();
+
+    callback && callback();
+
+    like.msg === 'success' && dispatch({
+      type: 'UNLIKE A POST',
+      payload: postId
+    });
+
+    if (like.msg !== 'success') throw like;
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
 export async function REGISTER_USER(dispatch, body, callback, onError) {
   try {
     let user = await fetch(`${API}/register`, {

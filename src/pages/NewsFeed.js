@@ -33,6 +33,10 @@ export default function NewsFeed(props) {
       </ShouldRender>
 
       <NewsFeedSlide
+        changingLikeStatus={state.isChangingLikeStatus}
+        token={state.token}
+        userId={state.user.userId}
+        likes={state.likes}
         hasPosts={state.hasPosts}
         posts={state.posts}
         dispatch={props.dispatch}
