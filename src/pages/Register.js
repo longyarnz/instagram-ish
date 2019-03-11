@@ -17,7 +17,7 @@ async function submitRegisterForm(e, dispatch, callback, onError) {
     user_type_id: accountType.value === 'Fashion Enthusiast' ? '1' : '2',
     brand_name: brand && brand.value && accountType.value === 'Fashion Designer' ? brand.value : null
   };
-  await REGISTER_USER(dispatch, body, callback, onError);
+  return await REGISTER_USER(dispatch, body, callback, onError);
 }
 
 export default function Register(props) {

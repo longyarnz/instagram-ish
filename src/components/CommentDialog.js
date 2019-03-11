@@ -43,9 +43,12 @@ const results = [
 ];
 
 function Comments(props) {
+  let totalComments = results && props.comments && props.comments.length;
+  totalComments = `${totalComments} comment${totalComments > 1 ? 's' : ''}`;
+
   return (
     <div className="search-results">
-      <h3>{props.comments.length || 4} Comments</h3>
+      <h3>{totalComments}</h3>
 
       <ShouldRender if={props.isLoading}>
         <div className="spinner">
@@ -53,24 +56,26 @@ function Comments(props) {
         </div>
       </ShouldRender>
 
-      <FlatList
-        list={props.comments.length > 0 && props.comments | results}
-        listView={(result, i) => (
-          <div key={`search-${i}`}>
-            <div>
-              <AsyncImage src={result.userSrc} alt="user" />
-              <span>{result.text}</span>
+      <ShouldRender if={!props.isLoading}>
+        <FlatList
+          list={props.comments && props.comments.length > 0 && props.comments}
+          listView={(result, i) => (
+            <div key={`search-${i}`}>
+              <div>
+                <AsyncImage src={result.userSrc} alt="user" />
+                <span>{result.text}</span>
+              </div>
+              <footer>{new Date().toLocaleTimeString()}</footer>
+              <Divider color="#f4f4f4" width="100%" />
             </div>
-            <footer>{new Date().toLocaleTimeString()}</footer>
-            <Divider color="#f4f4f4" width="100%" />
-          </div>
-        )}
-      />
+          )}
+        />
+      </ShouldRender>
     </div>
   )
 }
 
-function LoadMore(props) {
+function LoadMore() {
   return (
     <div className="load-more">
       Load more comments
@@ -81,40 +86,46 @@ function LoadMore(props) {
 export default function CommentDialog(props) {
   const { state, dispatch } = props;
   const [isLoading, setIsLoading] = useState(true);
+  const [placeholder, setPlaceholder] = useState('Make a comment');
+  const { comments, hasComments, postId } = state;
+  const isAlreadyFetched = Object.keys(comments).includes(postId.toString());
+  const loadedComments = comments && comments[postId] ? comments[postId] : [];
 
   const onSubmit = e => {
     e.preventDefault();
     setIsLoading(true);
-    console.log(e.target[0]);
   }
 
   useEffect(() => {
-    if (state.hasComments && state.comments.includes(state.postId)) {
+    if (state.isFetchingComments) {
       return;
     }
 
-    const callback = () => {
+    if (hasComments && isAlreadyFetched) {
       setIsLoading(false);
+      return;
     }
 
-    console.log(dispatch, state.token, state.postId);
+    FETCH_COMMENTS(dispatch, state.token, postId);
+  }, []);
 
-    FETCH_COMMENTS(dispatch, state.token, state.postId, callback);
-  }, [0]);
-
-  const comments = state.comments && state.postId ? state.comments[state.postId] : [];
+  useEffect(() => {
+    if (isLoading) return;
+    const text = loadedComments.length > 0 ? 'Make a comment.' : 'Be the first to make a comment.';
+    setPlaceholder(text);
+  });
 
   return (
     <div className="comment">
       <form onSubmit={onSubmit}>
-        <input type="text" name="comment" placeholder="Make a comment" />
+        <input type="text" name="comment" placeholder={placeholder} />
         <button type="submit">
           <Icon name="chat_bubble_outline" />
         </button>
       </form>
       <Comments
         isLoading={isLoading}
-        comments={comments}
+        comments={loadedComments}
       />
       <LoadMore />
     </div>

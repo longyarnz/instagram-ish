@@ -20,22 +20,25 @@ export default function NavBar(props) {
     setUserMenu(!showUserMenu);
   }
 
-  const toggleAppMenu = () => {
+  const toggleModal = (modal) => {
     props.dispatch({
-      type: !props.state.showAppMenu ? 'SHOW APP MENU' : 'HIDE APP MENU'
+      type: !props.state.showAppMenu ? 'SET MODAL VIEW' : 'NULL MODAL VIEW',
+      payload: `./components/${modal}`
     });
   }
 
+  const toggleAppMenu = () => toggleModal('MenuModal');
+
   const toggleNotificationMenu = () => {
-    props.state.userIsLoggedIn ? props.dispatch({
-      type: !props.state.showAppMenu ? 'SHOW NOTIFICATIONS' : 'HIDE NOTIFICATIONS'
-    }) : props.goTo('./pages/Login');
+    props.state.userIsLoggedIn ?
+      toggleModal('NotificationModal')
+      : props.goTo('./pages/Login');
   }
 
   const toggleSearch = () => {
-    props.state.userIsLoggedIn ? props.dispatch({
-      type: !props.state.showAppMenu ? 'SHOW SEARCH' : 'HIDE SEARCH'
-    }) : props.goTo('./pages/Login');
+    props.state.userIsLoggedIn ?
+      toggleModal('SearchModal')
+      : props.goTo('./pages/Login');
   }
 
   const showAllIcons = props.state.view === './pages/NewsFeed';
@@ -49,7 +52,7 @@ export default function NavBar(props) {
         />
         <span>DOMINERF</span>
       </div>
-      
+
       <div>
         <AsyncLoader path="./components/Avatar"
           localState={true}

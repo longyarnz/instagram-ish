@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import Spinner from './Spinner';
+import Spinner from './Spinner';
 import ShouldRender from './ShouldRender';
 
 export default function AsyncImage({ src, ...props }) {
@@ -25,14 +25,13 @@ export default function AsyncImage({ src, ...props }) {
     !cachedImages.some(imageSrc => imageSrc === src) : true;
 
   const style = {
-    // position: 'relative',
     ...props.style
   }
 
   return (
     <>
       <ShouldRender if={view && imageHasNotBeenLoaded}>
-        {/* <Spinner style={{ fontSize: '300%' }} container={{position: 'absolute', zIndex: '99999' }} /> */}
+        <Spinner style={{ fontSize: '300%', color: 'transparent' }} container={{position: 'absolute', zIndex: '99999' }} />
         <div style={{ width: 50, height: 50, position: 'absolute' }}></div>
       </ShouldRender>
       <img src={src} onLoad={removeSpinner} alt={props.alt} style={style} {...props} />

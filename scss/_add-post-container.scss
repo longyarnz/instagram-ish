@@ -1,11 +1,11 @@
 div.add-post-container {
   position: fixed;
-  bottom: -100px;
+  bottom: -30px;
   right: 15px;
   width: 70px;
   height: 70px;
-  z-index: 9;
-  transition: all 0.25s ease;
+  z-index: 9999999;
+  transition: bottom 0.25s ease, opacity .5s ease;
   
   & > div.add-story-button {
     & > div {

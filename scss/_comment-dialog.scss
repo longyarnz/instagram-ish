@@ -48,6 +48,8 @@ div.comment-dialog {
       }
       
       div.search-results {
+        min-height: calc(100vh - 175px);
+        
         h3{
           font-size: 120%;
           font-family: $font;
@@ -65,23 +67,26 @@ div.comment-dialog {
           }
 
           div {
-            display: inline-flex;
-            justify-content: flex-start;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             margin-top: 10px;
 
             img {
-              width: 42px;
+              min-width: 42px;
               height: 42px;
               border-radius: 50%;
+              // flex: 1;
+              margin-right: auto;
               border: 2px solid $theme-color;
             }
-
+            
             span {
+              // flex: 1;
               font-size: 80%;
               font-family: $font;
               font-weight: 300;
-              margin-left: 15px;
+              margin-left: 10px;
               color: #000;
             }
           }

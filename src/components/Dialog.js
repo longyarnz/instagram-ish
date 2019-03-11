@@ -49,6 +49,7 @@ export default function Dialog(props) {
   
   useEffect(() => {
     if(props.slide !== 'right') return;
+
     const x = setTimeout(() => inner.current.style.right = '0px', 50);
     
     return () => {
@@ -59,6 +60,11 @@ export default function Dialog(props) {
   
   useEffect(() => {
     if(props.slide !== 'bottom') return;
+    if(props.removeTransition) {
+      inner.current.style.bottom = '0px';
+      return;
+    }
+
     const x = setTimeout(() => inner.current.style.bottom = '0px', 50);
 
     return () => {
@@ -67,8 +73,12 @@ export default function Dialog(props) {
     }
   });
 
+  const removeTransition = props.removeTransition ? {
+    transition: 'none'
+  } : null;
+
   return (
-    <div className={`dialog ${props.className}`} ref={div}>
+    <div className={`dialog ${props.className}`} ref={div} style={removeTransition}>
       <div className="dialog-upper-section" style={style.upper}>
         {props.upperDialog}
       </div>

@@ -48,7 +48,11 @@ export default function NewsFeedSlide(props) {
   } : {};
 
   const loadComments = (postId) => {
-    console.log(postId);
+    props.dispatch({
+      type: 'SET MODAL VIEW',
+      payload: './components/CommentModal'
+    });
+
     props.dispatch({
       type: 'SHOW COMMENTS',
       payload: postId

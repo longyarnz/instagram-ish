@@ -6,7 +6,7 @@ import Spinner from '../components/Spinner';
 async function submitLoginForm(e, dispatch, callback, onError) {
   e.preventDefault();
   const [ email, password ] = e.target;
-  await LOG_USER_IN(dispatch, email.value, password.value, callback, onError);
+  return await LOG_USER_IN(dispatch, email.value, password.value, callback, onError);
 }
 
 export default function Login(props) {

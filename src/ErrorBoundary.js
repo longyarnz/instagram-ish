@@ -12,7 +12,7 @@ export default class ErrorBoundary extends Component {
   }
   
   componentDidCatch(error, info){
-    localStorage.removeItem('staleState');
+    // localStorage.removeItem('staleState');
     this.setState({ 
       error: true,
       view: (

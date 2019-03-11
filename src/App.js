@@ -1,25 +1,25 @@
 import React, { useReducer, useEffect } from 'react';
 import AsyncLoader from './AsyncLoader';
 import { Reducers, InitialState } from './Store';
+import ShouldRender from './components/ShouldRender';
 
 export const AppContext = React.createContext([]);
 
 export default function App() {
   const appState = useReducer(Reducers, InitialState);
-  const [ state, dispatch ] = appState;
-  // window.onbeforeunload = () => `Don't leave yet`;
+  const [state, dispatch] = appState;
+  window.onbeforeunload = () => `Don't leave yet`;
   const dependencies = {
     './pages/NewsFeed': [
-      'showDialog',
-      'showAppMenu',
-      'showNotifications',
-      'showSearch',
       'userIsLoggedIn',
       'showComment',
       'hasPosts',
       'hasComments'
     ],
-    './pages/Login': undefined
+    './pages/Login': undefined,
+    './components/CommentModal': [
+      'modalView', 'hasComments', 'isFetchingComments'
+    ]
   }
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    console.log([document.scrollingElement.scrollTop]);
+    // console.log([document.scrollingElement.scrollTop]);
   });
 
   return (
@@ -52,6 +52,28 @@ export default function App() {
         fallback={<div></div>}
         dependencies={dependencies[state.view]}
       />
+      <ShouldRender if={state.modalView}>
+        <AsyncLoader
+          path={state.modalView}
+          fallback={<div></div>}
+          dependencies={dependencies[state.modalView]}
+        />
+      </ShouldRender>
+      <ShouldRender
+        if={
+          state.userIsLoggedIn &&
+          state.user.accountType === 'Fashion Designer' &&
+          state.view === './pages/NewsFeed' 
+        }
+      >
+        <AsyncLoader
+          path="./components/AddPostButton"
+          hasPosts={state.hasPosts}
+          lastAction={[...state.mutations].pop()}
+          dispatch={dispatch}
+          dependencies={['createPostImage', 'hasPosts', 'view', 'modalView']}
+        />
+      </ShouldRender>
     </AppContext.Provider>
   )
 }

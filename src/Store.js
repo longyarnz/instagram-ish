@@ -3,6 +3,7 @@ export const InitialState = {
   mutations: [],
   scrollTop: null,
   view: './pages/NewsFeed',
+  modalView: null,
   userIsLoggedIn: false,
   showDialog: false,
   showAppMenu: false,
@@ -14,7 +15,9 @@ export const InitialState = {
   hasComments: false,
   posts: [],
   postId: null,
-  comments: null,
+  comments: {},
+  isFetchingComments: false,
+  removeModalTransition: false,
   token: null,
   user: {
     firstName: 'Olalekan',
@@ -130,6 +133,24 @@ export function Reducers(state, action) {
     case 'NULL SCROLLTOP':
       return { ...state, mutations, scrollTop: null }
 
+    case 'SET MODAL VIEW':
+      return { ...state, mutations, modalView: action.payload }
+
+    case 'NULL MODAL VIEW':
+      return { ...state, mutations, modalView: null }
+
+    case 'SET FETCHING STATUS FOR COMMENTS':
+      return { ...state, mutations, isFetchingComments: true }
+
+    case 'NULL FETCHING STATUS FOR COMMENTS':
+      return { ...state, mutations, isFetchingComments: false }
+
+    case 'SET REMOVE TRANSITION':
+      return { ...state, mutations, removeModalTransition: true }
+
+    case 'NULL REMOVE TRANSITION':
+      return { ...state, mutations, removeModalTransition: false }
+
     case 'RESTORE STATE':
       return { ...state, mutations, ...action.payload }
 
@@ -141,7 +162,7 @@ export function Reducers(state, action) {
         hasPosts: state.hasPosts ? state.hasPosts : false,
         posts: state.posts.length > 0 ? state.posts : []
       });
-      return state;
+      return { ...state, mutations };
 
     default: return state;
   }
