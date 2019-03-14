@@ -37,7 +37,7 @@ export async function CREATE_POST(dispatch, token, formData, callback, onError) 
         // 'content-type': 'multipart/form-data',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify(formData)
+      body: formData
     });
     post = await post.json();
 
