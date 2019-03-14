@@ -28,14 +28,16 @@ export async function FETCH_POSTS(dispatch, token, callback) {
 }
 
 export async function CREATE_POST(dispatch, token, formData, callback, onError) {
+  console.log(formData);
   try {
     let post = await fetch(`${API}/posts`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
+        // 'content-type': 'multipart/form-data',
         'Authorization': `Bearer ${token}`
       },
-      body: formData
+      body: JSON.stringify(formData)
     });
     post = await post.json();
 
@@ -102,18 +104,6 @@ export async function FETCH_COMMENTS(dispatch, token, postId, callback, onError)
 }
 
 export async function POST_A_COMMENT(dispatch, token, userId, postId, text, callback, onError) {
-  // const comment = {
-  //   userSrc: 'assets/img/users/1.jpg',
-  //   postId: 2,
-  //   commentId: 1,
-  //   userId,
-  //   username: 'koryoesz',
-  //   brandName: 'dominerf - house',
-  //   name: 'Yomi Kolawole',
-  //   comment: text,
-  //   time: '1 second ago'
-  // }
-
   dispatch({
     type: 'SET SENDING STATUS FOR COMMENTS'
   });
@@ -215,13 +205,13 @@ export async function UNLIKE_A_POST(dispatch, token, userId, postId, callback) {
 
   try {
     let like = await fetch(`${API}/posts/like-remove`, {
-      method: 'POST',
+      method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        userId, postId
+        postId
       })
     });
     like = await like.json();

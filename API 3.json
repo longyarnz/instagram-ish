@@ -1,0 +1,395 @@
+[
+  {
+    "url": "http://18.223.1.218/api/register",
+    "method": "POST",
+    "body": {
+      "first_name": "Laura",
+      "last_name": "Traversy",
+      "email": "ltraversy@yahoo.com",
+      "username": "La Trav",
+      "password": "SecretStringWithNumbers",
+      "c_password": "SecretStringWithNumbers",
+      "brand_name": null,
+      "user_type_id": [
+        1,
+        2
+      ]
+    },
+    "response": {
+      "msg": "success",
+      "error": null,
+      "data": {
+        "token": "llk",
+        "user": {
+          "userId": 7,
+          "username": "koryoes",
+          "fullName": "Yomi Kolawole",
+          "email": "kor@gmail.com",
+          "photoPath": null,
+          "brandName": null,
+          "phone": null,
+          "address": null,
+          "sex": null,
+          "userType": "user"
+        }
+      }
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/login",
+    "method": "POST",
+    "body": {
+      "email": "Laura@mail.com",
+      "password": "Traversy"
+    },
+    "response": {
+      "msg": "success",
+      "error": null,
+      "data": {
+        "token": "llk",
+        "user": {
+          "userId": 7,
+          "username": "koryoes",
+          "fullName": "Yomi Kolawole",
+          "email": "kor@gmail.com",
+          "photoPath": null,
+          "brandName": null,
+          "phone": null,
+          "address": null,
+          "sex": null,
+          "userType": "user"
+        }
+      }
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/posts",
+    "method": "get",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "response": {
+      "msg": "success",
+      "data": [
+        {
+          "post_id": 29,
+          "user_id": 6,
+          "username": "koryoesz",
+          "brand_name": null,
+          "name": "Oluwayomi Kolawole",
+          "caption": "Timi Dakolo",
+          "image_path": "storage/posts/IRgZPXPhpoMm7s1P4nHN72BgoKZAFl24l52NrYt6.jpeg",
+          "category": "Buba",
+          "image_size": "116",
+          "time": "7 hours ago",
+          "profile_photo": null,
+          "likes_count": 2,
+          "liked_by_me": true,
+          "comments_count": 0
+        },
+        {
+          "post_id": 28,
+          "user_id": 6,
+          "username": "koryoesz",
+          "brand_name": null,
+          "name": "Oluwayomi Kolawole",
+          "caption": "Hello gift",
+          "image_path": "storage/posts/QLvauWK0xarVtjr8w2kkSY9GujaIEOm8A5EwqRS5.png",
+          "category": "Skirt",
+          "image_size": "512",
+          "time": "20 hours ago",
+          "profile_photo": null,
+          "likes_count": 1,
+          "liked_by_me": true,
+          "comments_count": 0
+        },
+        {
+          "post_id": 27,
+          "user_id": 6,
+          "username": "koryoesz",
+          "brand_name": null,
+          "name": "Oluwayomi Kolawole",
+          "caption": "Hello gift",
+          "image_path": "storage/posts/wpp8tqyQX0w7evHSnjFwvM0kCqOPwjHOPaW0Grnu.png",
+          "category": "Skirt",
+          "image_size": "512",
+          "time": "20 hours ago",
+          "profile_photo": null,
+          "likes_count": 0,
+          "liked_by_me": false,
+          "comments_count": 0
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/posts",
+    "method": "post",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "body": {
+      "image": file,
+      "caption": "",
+      "categoryId": 1
+    },
+    "response": {
+      "msg": "success",
+      "data": [
+        {
+          "post_id": 30,
+          "user_id": 6,
+          "username": "koryoesz",
+          "brand_name": "dominerf-house",
+          "name": "Yomi Kolawole",
+          "caption": "Timi Dakolo",
+          "image_path": "storage/posts/6fsnR0fqwvKELrXpPVIfqDQjrkFIbplC4UcjPCN3.jpeg",
+          "category": "Buba",
+          "image_size": 116,
+          "time": "1 second ago",
+          "profile_photo": null,
+          "likes_count": 0,
+          "comments_count": 0
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/posts",
+    "method": "delete",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "body": {
+      "postId": 1
+    },
+    "response": {
+      "msg": "success"
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/category",
+    "method": "get",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "response": {
+      "msg": "success",
+      "data": [
+        {
+          "categoryId": 7,
+          "name": "Agbada"
+        },
+        {
+          "categoryId": 9,
+          "name": "Ankara"
+        },
+        {
+          "categoryId": 2,
+          "name": "Blouse"
+        },
+        {
+          "categoryId": 8,
+          "name": "Buba"
+        },
+        {
+          "categoryId": 4,
+          "name": "Female Suit"
+        },
+        {
+          "categoryId": 1,
+          "name": "Gown"
+        },
+        {
+          "categoryId": 10,
+          "name": "Jeans"
+        },
+        {
+          "categoryId": 11,
+          "name": "Jump Suit"
+        },
+        {
+          "categoryId": 3,
+          "name": "Men Suit"
+        },
+        {
+          "categoryId": 12,
+          "name": "Others"
+        },
+        {
+          "categoryId": 5,
+          "name": "Skirt"
+        },
+        {
+          "categoryId": 6,
+          "name": "Trousers"
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/posts/like",
+    "method": "post",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "body": {
+      "postId": 1
+    },
+    "response": {
+      "msg": "success"
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/posts/get-likes-count",
+    "method": "post",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "body": {
+      "postId": 1
+    },
+    "response": {
+      "msg": "success",
+      "data": 1
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/posts/like-remove",
+    "method": "post",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "body": {
+      "postId": 3
+    },
+    "response": {
+      "msg": "success"
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/posts/comment",
+    "method": "post",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "body": {
+      "postId": 2,
+      "comment": "Lorem Ipsum dolor at."
+    },
+    "response": {
+      "msg": "success",
+      "data": {
+        "postId": 2,
+        "commentId": 2,
+        "comment": "This is yomi.. dont make noise",
+        "time": "1 second ago",
+        "user": [
+          {
+            "userId": 6,
+            "username": "koryoesz",
+            "brandName": null,
+            "name": "Oluwayomi Kolawole",
+            "profilePhoto": null
+          }
+        ]
+      }
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/posts/get-comments",
+    "method": "post",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "body": {
+      "postId": 2
+    },
+    "response": {
+      "msg": "success",
+      "data": [
+        {
+          "postId": 2,
+          "commentId": 1,
+          "comment": "Lorem Ipsum dolor at.",
+          "time": "6 hours ago",
+          "user": [
+            {
+              "userId": 6,
+              "username": "koryoesz",
+              "brandName": null,
+              "name": "Oluwayomi Kolawole",
+              "profilePhoto": null
+            }
+          ]
+        },
+        {
+          "postId": 2,
+          "commentId": 2,
+          "comment": "This is yomi.. dont make noise",
+          "time": "8 seconds ago",
+          "user": [
+            {
+              "userId": 6,
+              "username": "koryoesz",
+              "brandName": null,
+              "name": "Oluwayomi Kolawole",
+              "profilePhoto": null
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "url": "http://18.223.1.218/api/posts/get-likes-users",
+    "method": "post",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer {token}",
+      "Accept": "application/json"
+    },
+    "body": {
+      "postId": 2
+    },
+    "response": {
+      "msg": "success",
+      "data": [
+        {
+          "user_id": 3,
+          "name": "Magali Weissnat",
+          "username": "fabian80",
+          "brandName": "Yundt, Keebler and Nikolaus",
+          "profilePhoto": null,
+          "time": "1 day ago"
+        },
+        {
+          "user_id": 6,
+          "name": "Oluwayomi Kolawole",
+          "username": "koryoesz",
+          "brandName": null,
+          "profilePhoto": null,
+          "time": "21 hours ago"
+        }
+      ]
+    }
+  }
+]

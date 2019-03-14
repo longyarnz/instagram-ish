@@ -109,9 +109,9 @@ export default function CommentDialog(props) {
       setIsSending(false);
     }
 
-    const onError = response => {
+    const onError = () => {
       if (_this.current === 'UNMOUNTED') return;
-      typeof response === 'string' && setPlaceholder(response);
+      setPlaceholder('Network Error: Unable to post comment.');
       setIsSending(false);
     }
 
