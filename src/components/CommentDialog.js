@@ -135,6 +135,7 @@ export default function CommentDialog(props) {
           }
         </button>
       </form>
+      <Divider className="border" color="#f8ba0d" width="calc(100% - 28px)" height="3px" />
       <Comments
         isLoading={isLoading}
         comments={loadedComments}

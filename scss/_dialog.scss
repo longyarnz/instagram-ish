@@ -1,4 +1,4 @@
-div.dialog{
+div.dialog {
   position: fixed;
   width: 100vw;
   height: calc(100vh + 0px);
@@ -8,12 +8,12 @@ div.dialog{
   z-index: 99;
   background-color: rgba(#000, 0);
   transition: all 0.25s ease;
-  
-  & > div.dialog-lower-section{
+
+  & > div.dialog-lower-section {
     width: 100%;
     background-color: #fff;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     padding: 15px;
     font-family: $font;
     position: absolute;
@@ -21,23 +21,31 @@ div.dialog{
     transition: inherit;
     border: 1px solid #fff;
 
-    header{
+    header {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 10px;
 
-      h3{
+      h3 {
         margin: 0px;
-        font-size: 120%;
+        font-size: 105%;
         color: #000;
       }
-      
-      i{
+
+      i {
         font-size: 150%;
         color: red;
       }
+    }
+  }
+
+  @media screen and (min-width: 676px) {
+    & > div {
+      width: calc(100vw * 3 / 6) !important;
+      margin: auto;
+      left: 25%;
     }
   }
 }

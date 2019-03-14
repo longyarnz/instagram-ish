@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Divider(props) {
   return (
-    <div style={{
+    <div className={props.className} style={{
       margin: 'auto',
       backgroundColor: props.color || '#000',
       width: props.width || '100%',

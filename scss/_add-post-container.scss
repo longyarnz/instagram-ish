@@ -19,4 +19,8 @@ div.add-post-container {
       font-size: 250%;
     }
   }
+
+  @media screen and (min-width: 676px) {
+    right: calc(25% + 10px);
+  }
 }

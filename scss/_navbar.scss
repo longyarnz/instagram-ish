@@ -35,7 +35,7 @@ nav {
     &:last-of-type {
       flex-direction: row-reverse;
 
-      & > div > div > i{
+      & > div > div > i {
         font-size: 26px;
       }
     }
@@ -52,5 +52,10 @@ nav {
         top: 3px;
       }
     }
+  }
+
+  @media screen and (min-width: 676px) {
+    width: calc(100vw * 3 / 6);
+    margin: auto;
   }
 }
