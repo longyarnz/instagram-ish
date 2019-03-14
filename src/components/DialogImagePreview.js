@@ -26,7 +26,7 @@ export default function DialogImagePreview(props) {
         height="100%"
         radius="5px"
         className="pick-a-file"
-        src={null}
+        src={props.src}
         required={true}
         name="image"
         preview={true}

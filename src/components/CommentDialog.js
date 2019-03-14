@@ -1,50 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FlatList } from './Utils';
-import AsyncImage from './AsyncImage';
 import Divider from './Divider';
 import Icon from './Icon';
 import Spinner from './Spinner';
 import ShouldRender from './ShouldRender';
-import { FETCH_COMMENTS } from '../Actions';
-
-const results = [
-  {
-    userSrc: 'assets/img/users/10.jpg',
-    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-  },
-  {
-    userSrc: 'assets/img/users/11.jpg',
-    text: 'Fugit quaerat reprehenderit culpa sint soluta voluptas eos illum modi sapiente maxime sequi repellendus blanditiis.'
-  },
-  {
-    userSrc: 'assets/img/users/12.jpg',
-    text: 'Explicabo corporis, veritatis sint minima voluptates sequi eligendi debitis maxime, quidem quia sunt.'
-  },
-  {
-    userSrc: 'assets/img/users/13.jpg',
-    text: 'Laboriosam architecto unde temporibus qui numquam et assumenda distinctio obcaecati sunt'
-  },
-  {
-    userSrc: 'assets/img/users/10.jpg',
-    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.'
-  },
-  {
-    userSrc: 'assets/img/users/11.jpg',
-    text: 'Fugit quaerat reprehenderit culpa sint soluta voluptas eos illum modi sapiente maxime sequi repellendus blanditiis.'
-  },
-  {
-    userSrc: 'assets/img/users/12.jpg',
-    text: 'Explicabo corporis, veritatis sint minima voluptates sequi eligendi debitis maxime, quidem quia sunt.'
-  },
-  {
-    userSrc: 'assets/img/users/13.jpg',
-    text: 'Laboriosam architecto unde temporibus qui numquam et assumenda distinctio obcaecati sunt'
-  },
-];
+import { FETCH_COMMENTS, POST_A_COMMENT } from '../Actions';
 
 function Comments(props) {
-  let totalComments = results && props.comments && props.comments.length;
-  totalComments = `${totalComments} comment${totalComments > 1 ? 's' : ''}`;
+  let totalComments = props.comments.length;
+  totalComments = `${totalComments || 'No'} comment${totalComments !== 1 ? 's' : ''}`;
 
   return (
     <div className="search-results">
@@ -58,14 +22,14 @@ function Comments(props) {
 
       <ShouldRender if={!props.isLoading}>
         <FlatList
-          list={props.comments && props.comments.length > 0 && props.comments}
+          list={props.comments}
           listView={(result, i) => (
             <div key={`search-${i}`}>
               <div>
-                <AsyncImage src={result.userSrc} alt="user" />
-                <span>{result.text}</span>
+                <span>{result.user[0].username}:</span>
+                <span>{result.comment}</span>
               </div>
-              <footer>{new Date().toLocaleTimeString()}</footer>
+              <footer>{result.time}</footer>
               <Divider color="#f4f4f4" width="100%" />
             </div>
           )}
@@ -84,50 +48,100 @@ function LoadMore() {
 }
 
 export default function CommentDialog(props) {
-  const { state, dispatch } = props;
   const [isLoading, setIsLoading] = useState(true);
+  const [localComments, setLocalComments] = useState([]);
+  const [isSending, setIsSending] = useState(false);
   const [placeholder, setPlaceholder] = useState('Make a comment');
+
+  const _this = useRef(null);
+  const { state, dispatch } = props;
   const { comments, hasComments, postId } = state;
   const isAlreadyFetched = Object.keys(comments).includes(postId.toString());
-  const loadedComments = comments && comments[postId] ? comments[postId] : [];
-
-  const onSubmit = e => {
-    e.preventDefault();
-    setIsLoading(true);
-  }
 
   useEffect(() => {
-    if (state.isFetchingComments) {
+    _this.current = 'MOUNTED';
+    return () => {
+      _this.current = 'UNMOUNTED';
+    }
+  }, []);
+
+  useEffect(() => {
+    if (state.isFetchingComments || isSending) {
       return;
     }
 
-    if (hasComments && isAlreadyFetched) {
+    if (hasComments && isAlreadyFetched && state.comments[postId]) {
       setIsLoading(false);
       return;
     }
 
-    FETCH_COMMENTS(dispatch, state.token, postId);
+    const callback = response => {
+      if (_this.current === 'UNMOUNTED') return;
+      setIsLoading(false);
+      !Array.isArray(response) && setPlaceholder('Error: Failed To Fetch Comments');
+      Array.isArray(response) && setLocalComments(response);
+    }
+
+    const onError = () => {
+      if (_this.current === 'UNMOUNTED') return;
+      setPlaceholder('Network Error: Failed to load comments.');
+      setIsLoading(false);
+    }
+
+    FETCH_COMMENTS(dispatch, state.token, postId, callback, onError);
   }, []);
 
   useEffect(() => {
     if (isLoading) return;
     const text = loadedComments.length > 0 ? 'Make a comment.' : 'Be the first to make a comment.';
     setPlaceholder(text);
-  });
+  }, [localComments]);
+
+  const onSubmit = e => {
+    e.preventDefault();
+    if (isLoading || isSending) return;
+
+    const callback = response => {
+      if (_this.current === 'UNMOUNTED') return;
+      comment.value = null;
+      typeof response === 'string' && setPlaceholder(response);
+      setLocalComments(localComments.concat([response]));
+      setIsSending(false);
+    }
+
+    const onError = response => {
+      if (_this.current === 'UNMOUNTED') return;
+      typeof response === 'string' && setPlaceholder(response);
+      setIsSending(false);
+    }
+
+    setIsSending(true);
+    const [comment] = e.target;
+    POST_A_COMMENT(props.dispatch, state.token, state.user.id, postId, comment.value, callback, onError);
+  }
+
+  const loadedComments = comments && comments[postId] ?
+    [...comments[postId], ...localComments] : localComments;
 
   return (
     <div className="comment">
       <form onSubmit={onSubmit}>
         <input type="text" name="comment" placeholder={placeholder} />
         <button type="submit">
-          <Icon name="chat_bubble_outline" />
+          {
+            !isSending ? <Icon name="chat_bubble_outline" /> : (
+              <Spinner style={{ color: '#ccc', animationDuration: '.5s' }} />
+            )
+          }
         </button>
       </form>
       <Comments
         isLoading={isLoading}
         comments={loadedComments}
       />
-      <LoadMore />
+      <ShouldRender if={false}>
+        <LoadMore />
+      </ShouldRender>
     </div>
   )
 }

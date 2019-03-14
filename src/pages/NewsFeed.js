@@ -16,7 +16,8 @@ export default function NewsFeed(props) {
 
   useEffect(() => {
     if (!state.hasPosts && state.token !== null) {
-      FETCH_POSTS(props.dispatch, state.token);
+      FETCH_POSTS(props.dispatch, state.token)
+        .then(res => res && props.dispatch({ type: 'CACHE STATE' }));
     }
   }, [state.hasPosts, state.token]);
 
@@ -35,13 +36,14 @@ export default function NewsFeed(props) {
       <NewsFeedSlide
         changingLikeStatus={state.isChangingLikeStatus}
         token={state.token}
-        userId={state.user.userId}
+        userId={state.user.id}
         likes={state.likes}
         hasPosts={state.hasPosts}
         posts={state.posts}
         dispatch={props.dispatch}
         userIsLoggedIn={state.userIsLoggedIn}
       />
+      
       <Footer />
     </>
   )

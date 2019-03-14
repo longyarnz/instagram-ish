@@ -16,41 +16,46 @@ export const InitialState = {
   posts: [],
   postId: null,
   comments: {},
-  likes: [5, 8, 20],
-  isChangingLikeStatus: [20],
+  likes: [],
+  isSendingComment: false,
+  isChangingLikeStatus: [],
   isFetchingComments: false,
-  removeModalTransition: false,
   token: null,
   user: {
-    firstName: 'Olalekan',
-    lastName: 'Ayodele',
-    email: 'longyarnz@gmail.com',
-    username: 'LekanMedia',
-    accountType: 'Fashion Designer',
-    phone: '08082935102',
-    brand: 'LekanMedia Inc.',
-    experience: 0,
-    photo: null,
-    about: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    \nConsequatur odio sit perferendis totam, et mollitia at tempora repellendus!
-    \nVeniam tempore officia non recusandae, quae mollitia amet inventore molestias molestiae repudiandae!`
+    // id: 0,
+    // firstName: 'Olalekan',
+    // lastName: 'Ayodele',
+    // email: 'longyarnz@gmail.com',
+    // username: 'LekanMedia',
+    // accountType: 'Fashion Designer',
+    // phone: '08082935102',
+    // brand: 'LekanMedia Inc.',
+    // experience: 0,
+    // photo: null,
+    // about: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    // \nConsequatur odio sit perferendis totam, et mollitia at tempora repellendus!
+    // \nVeniam tempore officia non recusandae, quae mollitia amet inventore molestias molestiae repudiandae!`
   }
 }
 
 export function Reducers(state, action) {
-  if (state.stateIsLocked && action.type !== 'UNLOCK STATE') return;
+  let posts, comments, likes, isChangingLikeStatus;
+  const { type, payload } = action;
 
-  const mutations = [...state.mutations, action.type];
+  if (state.stateIsLocked && type !== 'UNLOCK STATE') return;
 
-  switch (action.type) {
+  const mutations = [...state.mutations, type];
+
+  switch (type) {
     case 'LOG USER IN':
-      const { user, token } = action.payload;
+      const { user, token } = payload;
       return {
         ...state,
         mutations,
         token,
         userIsLoggedIn: true,
         user: {
+          id: user.userId,
           firstName: user.fullName.split(' ')[0],
           lastName: user.fullName.split(' ')[1],
           email: user.email,
@@ -67,7 +72,7 @@ export function Reducers(state, action) {
 
     case 'LOG USER OUT':
       localStorage.removeItem('staleState');
-      return { ...state, mutations: [], userIsLoggedIn: false, user: {}, token: null, hasPosts: false, posts: [] }
+      return InitialState;
 
     case 'LOCK STATE':
       return { ...state, mutations, stateIsLocked: true }
@@ -76,7 +81,7 @@ export function Reducers(state, action) {
       return { ...state, mutations, stateIsLocked: false }
 
     case 'CHANGE VIEW':
-      return { ...state, mutations, view: action.payload }
+      return { ...state, mutations, view: payload }
 
     case 'SHOW DIALOG BOX':
       return { ...state, mutations, showDialog: true }
@@ -103,58 +108,82 @@ export function Reducers(state, action) {
       return { ...state, mutations, showSearch: false }
 
     case 'SHOW COMMENTS':
-      return { ...state, mutations, showComment: true, postId: action.payload }
+      return { ...state, mutations, showComment: true, postId: payload }
 
     case 'HIDE COMMENTS':
       return { ...state, mutations, showComment: false }
 
     case 'FETCH POSTS':
-      return { ...state, mutations, posts: action.payload, hasPosts: true }
+      return { ...state, mutations, posts: payload, hasPosts: true }
 
     case 'CLEAR POSTS':
       return { ...state, mutations, posts: [], hasPosts: false }
 
+    case 'ADD NEW POST':
+      return { ...state, mutations, posts: [payload, ...state.posts] }
+
     case 'FETCH COMMENTS':
-      return { ...state, mutations, comments: { ...state.comments, ...action.payload }, hasComments: true }
+      return { ...state, mutations, comments: { ...state.comments, ...payload }, hasComments: true }
 
     case 'CLEAR COMMENTS':
       return { ...state, mutations, comments: [], hasComments: false }
 
+    case 'ADD NEW COMMENT':
+      comments = { ...state.comments };
+      comments = comments[payload.postId] || [];
+      comments.push(payload.comment);
+      comments = { [payload.postId]: comments }
+      posts = [...state.posts];
+      posts.forEach(post => post.post_id === payload.postId && ++post.comments_count);
+      return { ...state, mutations, comments: { ...state.comments, ...comments }, hasComments: true, posts }
+
     case 'START CHANGING LIKE STATUS':
-      return { ...state, mutations, isChangingLikeStatus: [...state.isChangingLikeStatus, action.payload] }
+      return { ...state, mutations, isChangingLikeStatus: [...state.isChangingLikeStatus, payload] }
 
     case 'STOP CHANGING LIKE STATUS':
-      let isChangingLikeStatus = [...state.isChangingLikeStatus];
-      isChangingLikeStatus = isChangingLikeStatus.map(i => i !== action.payload ? i : null);
-      isChangingLikeStatus = isChangingLikeStatus.join('|').replace('||', '|').split('|');
+      isChangingLikeStatus = [...state.isChangingLikeStatus];
+      isChangingLikeStatus = isChangingLikeStatus.filter(i => i !== payload);
       return { ...state, mutations, isChangingLikeStatus }
 
     case 'LIKE A POST':
-      return { ...state, mutations, likes: [...state.likes, action.payload] }
+      posts = [...state.posts];
+      posts.forEach(post => {
+        if (post.post_id === payload) {
+          ++post.likes_count;
+          post.liked_by_me = true;
+        }
+      });
+      return { ...state, mutations, likes: [...state.likes, payload], posts }
 
     case 'UNLIKE A POST':
-      let likes = [...state.likes];
-      likes = likes.map(i => i !== action.payload ? i : null);
-      likes = likes.join('|').replace('||', '|').split('|');
-      return { ...state, mutations, likes }
+      likes = [...state.likes];
+      likes = likes.filter(i => i !== payload);
+      posts = [...state.posts];
+      posts.forEach(post => {
+        if (post.post_id === payload) {
+          --post.likes_count;
+          post.liked_by_me = false;
+        }
+      });
+      return { ...state, mutations, likes, posts }
 
     case 'UPGRADE CUSTOMER ACCOUNT':
       return { ...state, mutations, user: { ...state.user, accountType: 'Fashion Designer' } }
 
     case 'STORE POST IMAGE':
-      return { ...state, mutations, createPostImage: action.payload }
+      return { ...state, mutations, createPostImage: payload }
 
     case 'NULL POST IMAGE':
       return { ...state, mutations, createPostImage: null }
 
     case 'SET SCROLLTOP':
-      return { ...state, mutations, scrollTop: action.payload }
+      return { ...state, mutations, scrollTop: payload }
 
     case 'NULL SCROLLTOP':
       return { ...state, mutations, scrollTop: null }
 
     case 'SET MODAL VIEW':
-      return { ...state, mutations, modalView: action.payload }
+      return { ...state, mutations, modalView: payload }
 
     case 'NULL MODAL VIEW':
       return { ...state, mutations, modalView: null }
@@ -165,14 +194,14 @@ export function Reducers(state, action) {
     case 'NULL FETCHING STATUS FOR COMMENTS':
       return { ...state, mutations, isFetchingComments: false }
 
-    case 'SET REMOVE TRANSITION':
-      return { ...state, mutations, removeModalTransition: true }
+    case 'SET SENDING STATUS FOR COMMENTS':
+      return { ...state, mutations, isSendingComment: true }
 
-    case 'NULL REMOVE TRANSITION':
-      return { ...state, mutations, removeModalTransition: false }
+    case 'NULL SENDING STATUS FOR COMMENTS':
+      return { ...state, mutations, isSendingComment: false }
 
     case 'RESTORE STATE':
-      return { ...state, mutations, ...action.payload }
+      return { ...state, mutations, ...payload }
 
     case 'CACHE STATE':
       localStorage.staleState = JSON.stringify({

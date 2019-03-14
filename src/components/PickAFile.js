@@ -1,11 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from './Icon';
 import AsyncImage from './AsyncImage';
 import ShouldRender from './ShouldRender';
 
 export default function PickAFile(props) {
-  const [src, setSrc] = useState(props.src);
-  const input = useRef(null);
+  const [src, setSrc] = useState(props.src || null);
+
+  useEffect(() => {
+    setSrc(null);
+  }, [ props.src ]);
 
   const style = {
     width: 0,
@@ -35,7 +38,7 @@ export default function PickAFile(props) {
 
   const container = {
     ...props.iconContainer,
-    zIndex: src === props.src ? 1 : -1
+    zIndex: src ? -1 : 1
   }
 
   return (
@@ -43,14 +46,14 @@ export default function PickAFile(props) {
       <input
         type="file"
         style={style}
-        ref={input}
         onChange={onChange}
         id="0"
         required={props.required || false}
         name={props.name}
+        accept="image/*"
       />
       <Icon name="add_a_photo" container={container} />
-      <ShouldRender if={props.preview && src !== null}>
+      <ShouldRender if={props.preview && src !== null && props.src !== null}>
         <AsyncImage src={src} alt="upload" className={props.imageClass} />
       </ShouldRender>
     </label>

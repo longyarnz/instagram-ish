@@ -14,18 +14,22 @@ export default function App() {
       'userIsLoggedIn',
       'showComment',
       'hasPosts',
-      'hasComments'
+      'hasComments',
+      'isChangingLikeStatus',
+      'likes',
+      'isSendingComments',
+      'comments'
     ],
     './pages/Login': undefined,
-    './components/CommentModal': [
-      'modalView', 'hasComments', 'isFetchingComments'
+    './components/CommentModal': 'DO NOT RERENDER',
+    './components/CreatePostModal': [
+      'modalView'
     ]
   }
 
   useEffect(() => {
     let cache = localStorage.staleState;
     if (cache && typeof JSON.parse(cache) === 'object') {
-      console.log('Remount');
       dispatch({
         type: 'RESTORE STATE',
         payload: JSON.parse(localStorage.staleState)
