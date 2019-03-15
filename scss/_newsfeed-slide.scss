@@ -1,17 +1,17 @@
-section.newsfeed-slide{
+section.newsfeed-slide {
   background-color: #fff;
   padding-top: 50px;
   min-height: calc(100vh - 38px);
-  
-  & > div{
+
+  & > div {
     padding: 0px;
-    
-    div.storybox{
+
+    div.storybox {
       border-radius: 0px;
       background: #fff;
     }
-    
-    &.empty{
+
+    &.empty {
       min-height: calc(100vh - #{$navbar-height} - 38px);
       display: flex;
       align-items: center;
@@ -19,6 +19,15 @@ section.newsfeed-slide{
       font-weight: 700;
       color: #ccc;
       font-size: 70%;
+    }
+
+    &.loader {
+      height: calc(100vh * 0.75) !important;
+      
+      @media screen and (min-width: 676px) {
+        width: calc(100vw * 0.5) !important;
+        margin: auto;
+      }
     }
   }
 }

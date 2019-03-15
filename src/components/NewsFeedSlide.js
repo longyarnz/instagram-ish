@@ -3,6 +3,7 @@ import { FlatList } from './Utils';
 import NewsFeedTab from './NewsFeedTab';
 import { FullPageLoader } from './FullPageSpinner';
 import { LIKE_A_POST, UNLIKE_A_POST } from '../Actions';
+import ShouldRender from './ShouldRender';
 
 export default function NewsFeedSlide(props) {
   const [isLoading, setIsLoading] = useState(true);
@@ -41,36 +42,38 @@ export default function NewsFeedSlide(props) {
 
   return (
     <section className="newsfeed-slide" style={style}>
-      {
-        isLoading ? <FullPageLoader /> : (
-          loadedPosts.length === 0 ?
-            <div className="empty">MORE POSTS COMING SOON!</div> :
-            (
-              <FlatList
-                list={loadedPosts}
-                listView={(post, i) => (
-                  <NewsFeedTab
-                    key={`tab-${i}`}
-                    author={post.username}
-                    profession={post.brand_name}
-                    userSrc={post.profile_photo || `assets/img/users/${Math.ceil(Math.random() * 10)}.jpg`}
-                    src={post.image_path || `assets/img/posts/1.jpg`}
-                    caption={post.caption}
-                    category={post.category}
-                    categoryId={post.categoryId}
-                    time={post.time}
-                    likes={post.likes_count}
-                    isChangingLikeStatus={fetchStatusOf(post.post_id)}
-                    userLikesPost={post.liked_by_me}
-                    comments={post.comments_count}
-                    loadComments={() => loadComments(post.post_id)}
-                    changeLikeStatus={() => changeLikeStatus(post.post_id, post.liked_by_me)}
-                  />
-                )}
-              />
-            )
-        )
-      }
+      <ShouldRender if={isLoading}>
+        <FullPageLoader className="loader" />
+      </ShouldRender>
+
+      <ShouldRender if={!isLoading && loadedPosts.length === 0}>
+        <div className="empty">MORE POSTS COMING SOON!</div>
+      </ShouldRender>
+      
+      <ShouldRender if={!isLoading && loadedPosts.length > 0}>
+        <FlatList
+          list={loadedPosts}
+          listView={(post, i) => (
+            <NewsFeedTab
+              key={`tab-${i}`}
+              author={post.username}
+              profession={post.brand_name}
+              userSrc={post.profile_photo || `assets/img/users/${Math.ceil(Math.random() * 10)}.jpg`}
+              src={post.image_path || `assets/img/posts/1.jpg`}
+              caption={post.caption}
+              category={post.category}
+              categoryId={post.categoryId}
+              time={post.time}
+              likes={post.likes_count}
+              isChangingLikeStatus={fetchStatusOf(post.post_id)}
+              userLikesPost={post.liked_by_me}
+              comments={post.comments_count}
+              loadComments={() => loadComments(post.post_id)}
+              changeLikeStatus={() => changeLikeStatus(post.post_id, post.liked_by_me)}
+            />
+          )}
+        />
+      </ShouldRender>
     </section >
   )
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import Spinner from './Spinner';
 
-export default function FullPageSpinner() {
+export default function FullPageSpinner(props) {
   return (
     <div style={{
-      width: '100vw',
-      height: '100vh',
+      width: props.width || '100vw',
+      height: props.height || '100vh',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center'
@@ -18,16 +18,18 @@ export default function FullPageSpinner() {
   )
 }
 
-export function FullPageLoader() {
+export function FullPageLoader(props) {
   return (
-    <div style={{
-      width: '100vw',
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}>
-      <Spinner style={{fontSize: '400%', color: '#ccc', animationDuration: '.65s'}} />
+    <div
+      className={props.className}
+      style={{
+        width: props.width || '100vw',
+        height: props.height || '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+      <Spinner style={{ fontSize: '400%', color: '#ccc', animationDuration: '.65s' }} />
     </div>
   )
 }
