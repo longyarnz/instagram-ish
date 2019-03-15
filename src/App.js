@@ -12,13 +12,12 @@ export default function App() {
   const dependencies = {
     './pages/NewsFeed': [
       'userIsLoggedIn',
-      'showComment',
-      'hasPosts',
-      'hasComments',
       'isChangingLikeStatus',
       'likes',
       'isSendingComments',
-      'comments'
+      'comments',
+      'hasPosts',
+      'posts'
     ],
     './pages/Login': undefined,
     './components/CommentModal': 'DO NOT RERENDER',

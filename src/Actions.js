@@ -27,28 +27,29 @@ export async function FETCH_POSTS(dispatch, token, callback) {
   }
 }
 
-export async function CREATE_POST(dispatch, token, formData, callback, onError) {
-  console.log(formData);
+export async function CREATE_POST(dispatch, token, form, callback, onError) {
   try {
     let post = await fetch(`${API}/posts`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        // 'content-type': 'multipart/form-data',
-        'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`,
       },
-      body: formData
+      body: form
     });
     post = await post.json();
 
     post.msg === 'success' && dispatch({
       type: 'ADD NEW POST',
-      payload: {
-        post: post.data
-      }
+      payload: post.data
+    });
+
+    post.msg === 'success' && dispatch({
+      type: 'CACHE STATE'
     });
 
     post.msg === 'success' && callback && callback();
+
+    if (post.error) throw post.error;
   }
   catch (err) {
     console.log(err);
@@ -181,6 +182,10 @@ export async function LIKE_A_POST(dispatch, token, userId, postId, callback) {
         type: 'LIKE A POST',
         payload: postId
       });
+
+      dispatch({
+        type: 'CACHE STATE',
+      });
     }
 
     else if (like.msg === 'liked before') {
@@ -226,6 +231,11 @@ export async function UNLIKE_A_POST(dispatch, token, userId, postId, callback) {
     like.msg === 'success' && dispatch({
       type: 'UNLIKE A POST',
       payload: postId
+    });
+
+    
+    like.msg === 'success' && dispatch({
+      type: 'CACHE STATE',
     });
 
     if (like.msg !== 'success') throw like;

@@ -21,21 +21,7 @@ export const InitialState = {
   isChangingLikeStatus: [],
   isFetchingComments: false,
   token: null,
-  user: {
-    // id: 0,
-    // firstName: 'Olalekan',
-    // lastName: 'Ayodele',
-    // email: 'longyarnz@gmail.com',
-    // username: 'LekanMedia',
-    // accountType: 'Fashion Designer',
-    // phone: '08082935102',
-    // brand: 'LekanMedia Inc.',
-    // experience: 0,
-    // photo: null,
-    // about: `Lorem ipsum dolor sit amet consectetur adipisicing elit.
-    // \nConsequatur odio sit perferendis totam, et mollitia at tempora repellendus!
-    // \nVeniam tempore officia non recusandae, quae mollitia amet inventore molestias molestiae repudiandae!`
-  }
+  user: {}
 }
 
 export function Reducers(state, action) {
@@ -120,7 +106,7 @@ export function Reducers(state, action) {
       return { ...state, mutations, posts: [], hasPosts: false }
 
     case 'ADD NEW POST':
-      return { ...state, mutations, posts: [payload, ...state.posts] }
+      return { ...state, mutations, posts: [...payload, ...state.posts] }
 
     case 'FETCH COMMENTS':
       return { ...state, mutations, comments: { ...state.comments, ...payload }, hasComments: true }

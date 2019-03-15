@@ -20,6 +20,9 @@ export default function EditProfileImage(props) {
           src="assets/img/bg/white.png"
           onSelect={onSelect}
           preview={true}
+          iconContainer={{
+            backgroundColor: '#fff'
+          }}
         />
       </div>
     </div>

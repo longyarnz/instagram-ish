@@ -9,7 +9,7 @@ export default function NewsFeedTab({ src, ...props }) {
   const likeIcon = props.userLikesPost || 
     props.isChangingLikeStatus ? 'favorite' : 'favorite_border';
 
-  const color = props.isChangingLikeStatus ? '#ccc' : 'red';
+  const color = props.isChangingLikeStatus ? '#ccc' : '#f8ba0d';
 
   const changeLikeStatus = props.isChangingLikeStatus ? 
     null : props.changeLikeStatus;

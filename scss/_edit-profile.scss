@@ -23,17 +23,23 @@ section.edit-profile {
       padding: 15px 15px 0px;
       background-color: #f9f9f9;
       margin: 0px;
+      font-size: 90%;
     }
-
+    
     & > div.input-group {
       display: flex;
       flex-direction: column;
       padding: 15px;
 
-      input,
+      & > label {
+        font-size: 90%;
+      }
+      
+      & > input,
       textarea {
+        font-size: 85%;
         padding: 10px 0px;
-        margin: 10px 0px 30px;
+        margin: 0px 0px 30px;
         box-shadow: none;
         font-family: $font;
         font-weight: 300;

@@ -79,6 +79,12 @@ export default function CreatePostDialog(props) {
   button = posted === true ? <Icon name="check" /> : (
     posted === 'error' ? 'NETWORK ERROR' : button);
 
+  const backgroundColor = posted === true ? '#5cb85c' : (
+    posted === 'error' ? '#d9534f' : null
+  );
+
+  const style = { backgroundColor };
+
   const list = [
     {
       "id": 7,
@@ -162,8 +168,9 @@ export default function CreatePostDialog(props) {
           autoComplete="on"
           spellCheck="true"
           required={true}
+          maxLength={30}
         />
-        <button type="submit">
+        <button type="submit" style={style}>
           {button}
         </button>
       </form>

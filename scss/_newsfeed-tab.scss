@@ -78,6 +78,7 @@ div.newsfeed-tab {
       justify-content: space-around;
       width: 100%;
       padding: 10px;
+      cursor: pointer;
 
       div {
         flex: 1;
@@ -100,7 +101,7 @@ div.newsfeed-tab {
 
         div:first-of-type {
           i {
-            color: red;
+            color: $theme-color;
           }
         }
       }
