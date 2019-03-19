@@ -50,6 +50,7 @@ export default function CreatePostModal(props) {
 
   return (
     <Dialog slide="bottom"
+      className="create-post-dialog"
       header="CREATE POST"
       onClose={onClose}
       upperDialog={upperDialog}

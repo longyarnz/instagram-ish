@@ -8,11 +8,20 @@ import { FETCH_POSTS } from '../Actions';
 
 export default function NewsFeed(props) {
   const { state, dispatch, goTo } = props;
+
   useEffect(() => {
-    const { scrollTop } = state;
-    if (scrollTop === null) return;
-    document.scrollingElement.scrollTop = scrollTop;
-  });
+    const { scrollTop, view } = state;
+     
+    setTimeout(() => {
+      document.scrollingElement.scrollTop = scrollTop[view];
+      dispatch({
+        type: 'NULL SCROLL TOP',
+        payload: {
+          [view]: 0
+        }
+      })
+    }, 10);
+  }, []);
 
   useEffect(() => {
     if (!state.hasPosts && state.token !== null) {
@@ -21,24 +30,12 @@ export default function NewsFeed(props) {
     }
   }, [state.hasPosts, state.token]);
 
-  const injectScrollSetter = fn => () => {
-    console.log(document.scrollingElement.scrollTop);
-    dispatch({
-      type: 'SET SCROLL TOP',
-      payload: {
-        [state.view]: document.scrollingElement.scrollTop
-      }
-    });
-    fn();
-  }
-
   return (
     <>
       <NavBar
         dispatch={dispatch}
         state={state}
         goTo={goTo}
-        injectScrollSetter={injectScrollSetter}
       />
 
       <ShouldRender if={state.userIsLoggedIn}>
@@ -56,7 +53,6 @@ export default function NewsFeed(props) {
         dispatch={dispatch}
         userIsLoggedIn={state.userIsLoggedIn}
         profilePic={state.user.photo}
-        injectScrollSetter={injectScrollSetter}
       />
 
       <Footer />

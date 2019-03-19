@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Gallery from '../components/Gallery';
 import Banner from '../components/Banner';
 import MenuBar from '../components/MenuBar';
@@ -7,6 +7,21 @@ import Footer from '../components/Footer';
 
 export default function Profile(props) {
   const profileState = useState(0);
+
+  useEffect(() => {
+    const { scrollTop, view } = props.state;
+     
+    setTimeout(() => {
+      document.scrollingElement.scrollTop = scrollTop[view];
+      props.dispatch({
+        type: 'NULL SCROLL TOP',
+        payload: {
+          [view]: 0
+        }
+      })
+    }, 10);
+  }, []);
+
   const { dispatch, state, goTo } = props;
   const fullName = state.user.firstName + 
     ' ' + state.user.lastName;

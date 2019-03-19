@@ -128,12 +128,12 @@ export async function POST_A_COMMENT(dispatch, token, userId, postId, text, call
       dispatch({
         type: 'ADD NEW COMMENT',
         payload: {
-          postId, 
+          postId,
           comment: comment.data
         }
       });
     }
-    
+
     dispatch({
       type: 'NULL SENDING STATUS FOR COMMENTS'
     });
@@ -170,14 +170,12 @@ export async function LIKE_A_POST(dispatch, token, userId, postId, callback) {
     });
     like = await like.json();
 
-    callback && callback();
+    dispatch({
+      type: 'STOP CHANGING LIKE STATUS',
+      payload: postId
+    });
 
     if (like.msg === 'success') {
-      dispatch({
-        type: 'STOP CHANGING LIKE STATUS',
-        payload: postId
-      });
-
       dispatch({
         type: 'LIKE A POST',
         payload: postId
@@ -186,13 +184,8 @@ export async function LIKE_A_POST(dispatch, token, userId, postId, callback) {
       dispatch({
         type: 'CACHE STATE',
       });
-    }
 
-    else if (like.msg === 'liked before') {
-      dispatch({
-        type: 'STOP CHANGING LIKE STATUS',
-        payload: postId
-      });
+      callback && callback();
     }
 
     else throw like;
@@ -221,24 +214,25 @@ export async function UNLIKE_A_POST(dispatch, token, userId, postId, callback) {
     });
     like = await like.json();
 
-    callback && callback();
-
-    like && dispatch({
+    dispatch({
       type: 'STOP CHANGING LIKE STATUS',
       payload: postId
     });
 
-    like.msg === 'success' && dispatch({
-      type: 'UNLIKE A POST',
-      payload: postId
-    });
+    if (like.msg === 'success') {
+      dispatch({
+        type: 'UNLIKE A POST',
+        payload: postId
+      });
 
-    
-    like.msg === 'success' && dispatch({
-      type: 'CACHE STATE',
-    });
+      dispatch({
+        type: 'CACHE STATE',
+      });
 
-    if (like.msg !== 'success') throw like;
+      callback && callback();
+    }
+
+    else throw like;
   }
   catch (err) {
     console.log(err);

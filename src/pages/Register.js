@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Icon from '../components/Icon';
 import { REGISTER_USER } from '../Actions';
 import Spinner from '../components/Spinner';
@@ -34,6 +34,20 @@ export default function Register(props) {
 
   const password = useRef(null);
   const c_password = useRef(null);
+
+  useEffect(() => {
+    const { scrollTop, view } = props.state;
+     
+    setTimeout(() => {
+      document.scrollingElement.scrollTop = scrollTop[view];
+      props.dispatch({
+        type: 'NULL SCROLL TOP',
+        payload: {
+          [view]: 0
+        }
+      })
+    }, 10);
+  }, []);
 
   const onChange = e => {
     const check = c_password.current.value !== password.current.value ? 'Passwords do not match!' : '';

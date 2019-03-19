@@ -1,12 +1,10 @@
 import React from 'react';
-import AsyncImage from './AsyncImage';
+// import AsyncImage from './AsyncImage';
 import Divider from './Divider';
 import Icon from './Icon';
 import ShouldRender from './ShouldRender';
 
 export default function NewsFeedTab({ src, ...props }) {
-  src = src.search('///') ? src.replace('///', '/640/480/') : src;
-
   const likeIcon = props.userLikesPost ||
     props.isChangingLikeStatus ? 'favorite' : 'favorite_border';
 
@@ -24,7 +22,7 @@ export default function NewsFeedTab({ src, ...props }) {
   return (
     <div className="newsfeed-tab">
       <header>
-        <AsyncImage src={props.userSrc} alt="user" />
+        {/* <AsyncImage src={props.userSrc} alt="user" /> */}
 
         <div>
           <span>{props.author}</span>
@@ -36,7 +34,7 @@ export default function NewsFeedTab({ src, ...props }) {
         </span>
       </header>
 
-      <AsyncImage src={src} alt="user" />
+      {/* <AsyncImage src={src} alt="user" /> */}
 
       <span>
         {props.caption}

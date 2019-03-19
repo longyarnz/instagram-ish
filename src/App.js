@@ -3,29 +3,12 @@ import AsyncLoader from './AsyncLoader';
 import { Reducers, InitialState } from './Store';
 import ShouldRender from './components/ShouldRender';
 
-export const AppContext = React.createContext([]);
+export const AppContext = React.createContext({});
 
 export default function App() {
   const appState = useReducer(Reducers, InitialState);
   const [state, dispatch] = appState;
   window.onbeforeunload = () => `Don't leave yet`;
-  const dependencies = {
-    './pages/NewsFeed': [
-      'userIsLoggedIn',
-      'isChangingLikeStatus',
-      'likes',
-      'isSendingComments',
-      'comments',
-      'hasPosts',
-      'posts'
-    ],
-    './pages/Login': undefined,
-    './components/CommentModal': 'DO NOT RERENDER',
-    './components/CreatePostModal': [
-      'modalView'
-    ],
-    './pages/EditProfile': ['user']
-  }
 
   useEffect(() => {
     let cache = localStorage.staleState;
@@ -45,24 +28,39 @@ export default function App() {
     localStorage.removeItem('cachedImages');
   }, []);
 
-  useEffect(() => {
-    // console.log([document.scrollingElement.scrollTop]);
-  });
+  const reloadComponentWhenThisChanges = {
+    './pages/NewsFeed': [
+      'userIsLoggedIn',
+      'isSendingComments',
+      'comments',
+      'hasPosts'
+    ],
+    './pages/Login': 'DO NOT RERENDER',
+    './pages/Register': 'DO NOT RERENDER',
+    './pages/Profile': 'DO NOT RERENDER',
+    './components/CommentModal': 'DO NOT RERENDER',
+    './components/CreatePostModal': [
+      'modalView'
+    ],
+    './pages/EditProfile': ['user']
+  }
 
   return (
     <AppContext.Provider value={appState}>
       <AsyncLoader
         path={state.view}
         fallback={<div></div>}
-        dependencies={dependencies[state.view]}
+        dependencies={reloadComponentWhenThisChanges[state.view]}
       />
+
       <ShouldRender if={state.modalView}>
         <AsyncLoader
           path={state.modalView}
           fallback={<div></div>}
-          dependencies={dependencies[state.modalView]}
+          dependencies={reloadComponentWhenThisChanges[state.modalView]}
         />
       </ShouldRender>
+
       <ShouldRender
         if={
           state.userIsLoggedIn &&

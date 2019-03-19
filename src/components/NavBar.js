@@ -5,10 +5,12 @@ import ShouldRender from './ShouldRender';
 import Icon from './Icon';
 import ActionMenu from './ActionMenu';
 import UserMenu from './UserMenu';
+import { injectScrollSetter } from './Utils';
 
 export default function NavBar(props) {
   const [showMenu, setMenu] = useState(false);
   const [showUserMenu, setUserMenu] = useState(false);
+  const { dispatch, state, goTo } = props;
 
   const toggle = () => {
     setUserMenu(false);
@@ -21,8 +23,8 @@ export default function NavBar(props) {
   }
 
   const toggleModal = (modal) => {
-    props.dispatch({
-      type: !props.state.showAppMenu ? 'SET MODAL VIEW' : 'NULL MODAL VIEW',
+    dispatch({
+      type: !state.showAppMenu ? 'SET MODAL VIEW' : 'NULL MODAL VIEW',
       payload: `./components/${modal}`
     });
   }
@@ -30,25 +32,29 @@ export default function NavBar(props) {
   const toggleAppMenu = () => toggleModal('MenuModal');
 
   const toggleNotificationMenu = () => {
-    props.state.userIsLoggedIn ?
+    state.userIsLoggedIn ?
       toggleModal('NotificationModal')
-      : props.goTo('./pages/Login');
+      : goTo('./pages/Login');
   }
 
   const toggleSearch = () => {
-    props.state.userIsLoggedIn ?
+    state.userIsLoggedIn ?
       toggleModal('SearchModal')
-      : props.goTo('./pages/Login');
+      : goTo('./pages/Login');
   }
 
-  const showAllIcons = props.state.view === './pages/NewsFeed';
+  const showAllIcons = state.view === './pages/NewsFeed';
+  const scrollSetter = fn => injectScrollSetter(dispatch, state.view, fn);
 
   return (
     <nav>
       <div>
         <SandwichMenu
-          menuIsOpened={props.state.showAppMenu || props.state.showNotifications || props.menuIsOpened}
-          onClick={props.injectScrollSetter(props.goBack || toggleAppMenu)}
+          menuIsOpened={state.showAppMenu || state.showNotifications || props.menuIsOpened}
+          onClick={
+            props.goBack ||
+            (toggleAppMenu && scrollSetter(toggleAppMenu))
+          }
         />
         <span>DOMINERF</span>
       </div>
@@ -57,15 +63,16 @@ export default function NavBar(props) {
         <AsyncLoader path="./components/Avatar"
           localState={true}
           toggle={toggle}
-          toggleUserMenu={props.injectScrollSetter(toggleUserMenu)}
+          toggleUserMenu={toggleUserMenu}
           dependencies={[showMenu, showUserMenu]}
         />
+
         <ShouldRender if={showAllIcons}>
-          <div onClick={props.injectScrollSetter(toggleSearch)}>
+          <div onClick={scrollSetter(toggleSearch)}>
             <Icon name="search" />
           </div>
 
-          <div className="notifications-icon" onClick={props.injectScrollSetter(toggleNotificationMenu)}>
+          <div className="notifications-icon" onClick={scrollSetter(toggleNotificationMenu)}>
             <Icon name="notifications_none" />
             <span></span>
           </div>
@@ -73,14 +80,14 @@ export default function NavBar(props) {
       </div>
 
       <ShouldRender if={showMenu}>
-        <ActionMenu goTo={props.goTo} state={props.state} />
+        <ActionMenu goTo={goTo} state={state} />
       </ShouldRender>
 
       <ShouldRender if={showUserMenu}>
         <UserMenu
-          dispatch={props.dispatch}
-          state={props.state}
-          goTo={props.goTo}
+          dispatch={dispatch}
+          state={state}
+          goTo={goTo}
         />
       </ShouldRender>
     </nav>

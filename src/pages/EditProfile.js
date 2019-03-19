@@ -18,6 +18,20 @@ export default function EditProfile(props) {
   const isDesigner = state.upgradeAccount || state.user.accountType === 'Fashion Designer';
 
   useEffect(() => {
+    const { scrollTop, view } = props.state;
+     
+    setTimeout(() => {
+      document.scrollingElement.scrollTop = scrollTop[view];
+      props.dispatch({
+        type: 'NULL SCROLL TOP',
+        payload: {
+          [view]: 0
+        }
+      })
+    }, 10);
+  }, []);
+
+  useEffect(() => {
     for (let i = 0; i < inputs.current.children.length; i++) {
       const input = inputs.current.children[i];
       if (['INPUT', 'TEXTAREA'].some(i => i === input.tagName)) {

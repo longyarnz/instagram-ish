@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Icon from '../components/Icon';
 import { LOG_USER_IN } from '../Actions';
 import Spinner from '../components/Spinner';
@@ -13,6 +13,20 @@ export default function Login(props) {
   const [ isLoading, setIsLoading ] = useState(false);
   const [ caption, setCaption ] = useState('We Have Missed You!');
 
+  useEffect(() => {
+    const { scrollTop, view } = props.state;
+     
+    setTimeout(() => {
+      document.scrollingElement.scrollTop = scrollTop[view];
+      props.dispatch({
+        type: 'NULL SCROLL TOP',
+        payload: {
+          [view]: 0
+        }
+      })
+    }, 10);
+  }, []);
+
   const onSubmit = e => {
     setIsLoading(true);
 
@@ -21,7 +35,6 @@ export default function Login(props) {
     }
     
     const onError = (caption) => {
-      console.log(caption);
       setIsLoading(false);
       setCaption(caption);
     }

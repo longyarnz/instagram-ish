@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FlatList } from './Utils';
 import NewsFeedTab from './NewsFeedTab';
 import { FullPageLoader } from './FullPageSpinner';
@@ -6,7 +6,17 @@ import { LIKE_A_POST, UNLIKE_A_POST } from '../Actions';
 import ShouldRender from './ShouldRender';
 
 export default function NewsFeedSlide(props) {
+  const _this = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [localPosts, setLocalPosts] = useState(null);
+  const [isLiking, setIsLiking] = useState([]);
+
+  useEffect(() => {
+    _this.current = 'MOUNTED';
+    return () => {
+      _this.current = 'UNMOUNTED';
+    }
+  }, []);
 
   useEffect(() => {
     !localStorage.staleState && setIsLoading(false);
@@ -32,14 +42,9 @@ export default function NewsFeedSlide(props) {
     });
   }
 
-  const changeLikeStatus = (postId, userLikesStatus) => {
-    const likeAction = userLikesStatus ? UNLIKE_A_POST : LIKE_A_POST;
-    likeAction(props.dispatch, props.token, props.userId, postId);
-  }
-
   const origin = 'http://18.223.1.218';
-  const loadedPosts = props.posts;
-  const fetchStatusOf = postId => props.changingLikeStatus.some(id => id === postId);
+  const loadedPosts = localPosts || props.posts;
+  const fetchStatusOf = postId => isLiking.some(id => id === postId);
   const emptyDivMessage = props.emptyDivMessage || 'MORE POSTS COMING SOON!';
   const profilePic = post => {
     if (post.userId === props.userId) {
@@ -49,6 +54,33 @@ export default function NewsFeedSlide(props) {
       return post.profile_photo ?
         `${origin}/${post.profile_photo}` : `assets/img/user.png`;
     }
+  }
+
+  const changeLikeStatus = (postId, userLikesStatus) => {
+    const likeAction = userLikesStatus ? UNLIKE_A_POST : LIKE_A_POST;
+
+    setIsLiking([...isLiking, postId]);
+
+    const callback = () => {
+      if (_this.current === 'UNMOUNTED') return;
+
+      if (userLikesStatus) {
+        loadedPosts.forEach(post => {
+          post.liked_by_me = post.post_id === postId ?
+          false : post.liked_by_me;
+        });
+      }
+      else {
+        loadedPosts.forEach(post => {
+          post.liked_by_me = post.post_id === postId ?
+          true : post.liked_by_me;
+        });
+      }
+
+      setLocalPosts(loadedPosts);
+      setIsLiking(isLiking.filter(id => id !== postId));
+    }
+    likeAction(props.dispatch, props.token, props.userId, postId, callback);
   }
 
   return (

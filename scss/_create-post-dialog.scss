@@ -4,6 +4,10 @@ div.create-post-dialog {
   width: 100%;
   height: 100%;
 
+  div.dialog-lower-section{
+    overflow: hidden;
+  }
+
   & > form {
     height: calc(100% - 20px);
     display: flex;
@@ -42,5 +46,9 @@ div.create-post-dialog {
         background-color: #fff;
       }
     }
+  }
+
+  label.pick-a-file{
+    background: transparent;
   }
 }

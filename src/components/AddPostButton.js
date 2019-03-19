@@ -14,7 +14,7 @@ export default function AddPostButton(props) {
     });
 
     props.dispatch({
-      type: 'SET SCROLLTOP',
+      type: 'SET SCROLL TOP',
       payload: scrollTop
     });
   }

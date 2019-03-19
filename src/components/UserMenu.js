@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react';
 import Icon from './Icon';
+import { injectScrollSetter } from './Utils';
 
 export default function UserMenu(props) {
   const ul = useRef(null);
@@ -13,9 +14,15 @@ export default function UserMenu(props) {
   const icon = props.state.view === './pages/Profile' ? 
     ['arrow_back', 'HOME', './pages/NewsFeed'] : ['face', 'Profile', './pages/Profile'];
 
+  const openProfile = view => {
+    return injectScrollSetter(props.dispatch, view, () => {
+      props.goTo(icon[2]);
+    });
+  }
+
   return (
     <ul className="user-menu" ref={ul}>
-      <li onClick={() => props.goTo(icon[2])}>
+      <li onClick={openProfile(props.state.view)}>
         <Icon name={icon[0]} />
         <span>
           {icon[1]}

@@ -1,12 +1,13 @@
 export const InitialState = {
   stateIsLocked: false,
   mutations: [],
+  scrollIsLocked: false,
   scrollTop: {
-    './pages/NewsFeed': null,
-    './pages/EditProfile': null,
-    './pages/Profile': null,
-    './pages/Login': null,
-    './pages/Register': null,
+    './pages/NewsFeed': 0,
+    './pages/EditProfile': 0,
+    './pages/Profile': 0,
+    './pages/Login': 0,
+    './pages/Register': 0,
   },
   view: './pages/NewsFeed',
   modalView: null,
@@ -185,11 +186,12 @@ export function Reducers(state, action) {
     case 'NULL POST IMAGE':
       return { ...state, mutations, createPostImage: null }
 
-    case 'SET SCROLLTOP':
-      return { ...state, mutations, scrollTop: payload }
+    case 'SET SCROLL TOP':
+      const scrollTop = state.scrollIsLocked ? {} : payload;
+      return { ...state, mutations, scrollTop: {...state.scrollTop, ...scrollTop}, scrollIsLocked: true }
 
-    case 'NULL SCROLLTOP':
-      return { ...state, mutations, scrollTop: null }
+    case 'NULL SCROLL TOP':
+      return { ...state, mutations, scrollTop: {...state.scrollTop, ...action.payload}, scrollIsLocked: false }
 
     case 'SET MODAL VIEW':
       return { ...state, mutations, modalView: payload }
@@ -208,9 +210,6 @@ export function Reducers(state, action) {
 
     case 'NULL SENDING STATUS FOR COMMENTS':
       return { ...state, mutations, isSendingComment: false }
-
-    case 'SET SCROLL TOP':
-      return { ...state, mutations, scrollTop: {...state.scrollTop, ...payload} }
 
     case 'RESTORE STATE':
       return { ...state, mutations, ...payload }
