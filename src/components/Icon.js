@@ -22,5 +22,5 @@ export default function Icon(props) {
 }
 
 export function ColorIcon(props) {
-  return <Icon style={{color: props.color}} {...props} />
+  return <Icon {...props} style={{...props.style, color: props.color}} />
 }

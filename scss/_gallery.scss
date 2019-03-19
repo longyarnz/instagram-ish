@@ -6,6 +6,12 @@ div.gallery{
 
   section{
     margin-top: 0px;
+    padding-top: 0px;
+    min-height: 45vh;
+
+    & > div.empty{
+      min-height: inherit;
+    }
   }
 
   img.tiles {

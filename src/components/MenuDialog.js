@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ShouldRender from './ShouldRender';
 import Icon from './Icon';
+import { FlatList } from './Utils';
 
 export default function MenuDialog(props) {
   const [showNots, setNots] = useState(false);
@@ -29,14 +30,17 @@ export default function MenuDialog(props) {
         <h3 onClick={() => setCats(!showCats)}>
           Categories <Icon name={categories} />
         </h3>
-        <li>Blouses</li>
-        <li>Jackets</li>
-        <li>Gowns</li>
-        <li>Shirts</li>
-        <li>Ties</li>
-        <li>Suits</li>
-        <li>Coats</li>
-        <li>Sashes</li>
+        <FlatList
+          list={props.categories}
+          listView={(cat, i) => (
+            <li
+              key={`menu-${i}`}
+              value={cat.id}
+            >
+              {cat.name}
+            </li>
+          )}
+        />
       </ul>
 
       <ShouldRender if={props.userIsLoggedIn}>

@@ -2,8 +2,7 @@ div.menu-dialog{
   div.dialog-lower-section{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    overflow-y: scroll;
-
+    
     header{
       h3{
         font-weight: 900;
@@ -24,6 +23,7 @@ div.menu-dialog{
         justify-content: space-between;
         align-items: center;
         text-transform: uppercase;
+        cursor: pointer;
 
         span{
           margin: 0px auto 0.5px 3px;
@@ -40,11 +40,14 @@ div.menu-dialog{
 
       li{
         font-family: $font;
-        padding: 5px 0px 5px 10px;
+        padding: 10px 0px 10px 20px;
         font-weight: 300;
-        font-size: 85%;
+        font-size: 80%;
         color: #000;
-        text-transform: uppercase;
+
+        &:nth-child(even){
+          background-color: rgba($theme-color, .04);
+        }
       }
       
       &.expand_more{
@@ -64,8 +67,8 @@ div.menu-dialog{
         
         li{
           @extend .li-menu;
-          font-size: 85%;
-          text-transform: uppercase;
+          font-size: 80%;
+          text-transform: capitalize;
           
           i{
             color: #aaa;

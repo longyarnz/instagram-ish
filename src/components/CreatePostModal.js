@@ -43,6 +43,7 @@ export default function CreatePostModal(props) {
         dispatch={props.dispatch}
         userId={props.state.userId}
         token={props.state.token}
+        categories={props.state.categories}
       />
     ), [image]
   );

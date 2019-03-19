@@ -1,7 +1,13 @@
 export const InitialState = {
   stateIsLocked: false,
   mutations: [],
-  scrollTop: null,
+  scrollTop: {
+    './pages/NewsFeed': null,
+    './pages/EditProfile': null,
+    './pages/Profile': null,
+    './pages/Login': null,
+    './pages/Register': null,
+  },
   view: './pages/NewsFeed',
   modalView: null,
   userIsLoggedIn: false,
@@ -21,7 +27,22 @@ export const InitialState = {
   isChangingLikeStatus: [],
   isFetchingComments: false,
   token: null,
-  user: {}
+  user: {},
+  upgradeAccount: false,
+  categories: [
+    { "id": 1, "name": "Gown" },
+    { "id": 2, "name": "Blouse" },
+    { "id": 3, "name": "Men Suit" },
+    { "id": 4, "name": "Female Suit" },
+    { "id": 5, "name": "Skirt" },
+    { "id": 6, "name": "Trousers" },
+    { "id": 7, "name": "Agbada" },
+    { "id": 8, "name": "Buba" },
+    { "id": 9, "name": "Ankara" },
+    { "id": 10, "name": "Jeans" },
+    { "id": 11, "name": "Jump Suit" },
+    { "id": 12, "name": "Others" }
+  ]
 }
 
 export function Reducers(state, action) {
@@ -33,6 +54,7 @@ export function Reducers(state, action) {
   const mutations = [...state.mutations, type];
 
   switch (type) {
+    case 'EDIT USER PROFILE':
     case 'LOG USER IN':
       const { user, token } = payload;
       return {
@@ -42,17 +64,18 @@ export function Reducers(state, action) {
         userIsLoggedIn: true,
         user: {
           id: user.userId,
-          firstName: user.fullName.split(' ')[0],
-          lastName: user.fullName.split(' ')[1],
+          firstName: user.first_name || user.fullName.split(' ')[0],
+          lastName: user.last_name || user.fullName.split(' ')[1],
           email: user.email,
           sex: user.sex,
+          address: user.address,
           username: user.username,
           accountType: user.userType === 'user' ? 'Fashion Enthusiast' : 'Fashion Designer',
           phone: user.phone,
-          brand: user.brandName,
+          brand: user.brand_name || user.brandName,
           experience: user.experience || 0,
-          about: user.about || 0,
-          photo: user.photoPath
+          about: user.about || '',
+          photo: user.photo || user.photoPath
         }
       }
 
@@ -154,7 +177,7 @@ export function Reducers(state, action) {
       return { ...state, mutations, likes, posts }
 
     case 'UPGRADE CUSTOMER ACCOUNT':
-      return { ...state, mutations, user: { ...state.user, accountType: 'Fashion Designer' } }
+      return { ...state, mutations, upgradeAccount: true }
 
     case 'STORE POST IMAGE':
       return { ...state, mutations, createPostImage: payload }
@@ -185,6 +208,9 @@ export function Reducers(state, action) {
 
     case 'NULL SENDING STATUS FOR COMMENTS':
       return { ...state, mutations, isSendingComment: false }
+
+    case 'SET SCROLL TOP':
+      return { ...state, mutations, scrollTop: {...state.scrollTop, ...payload} }
 
     case 'RESTORE STATE':
       return { ...state, mutations, ...payload }

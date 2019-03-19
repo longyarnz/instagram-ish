@@ -37,8 +37,19 @@ export default function NewsFeedSlide(props) {
     likeAction(props.dispatch, props.token, props.userId, postId);
   }
 
+  const origin = 'http://18.223.1.218';
   const loadedPosts = props.posts;
   const fetchStatusOf = postId => props.changingLikeStatus.some(id => id === postId);
+  const emptyDivMessage = props.emptyDivMessage || 'MORE POSTS COMING SOON!';
+  const profilePic = post => {
+    if (post.userId === props.userId) {
+      return props.profilePic;
+    }
+    else {
+      return post.profile_photo ?
+        `${origin}/${post.profile_photo}` : `assets/img/user.png`;
+    }
+  }
 
   return (
     <section className="newsfeed-slide" style={style}>
@@ -47,9 +58,9 @@ export default function NewsFeedSlide(props) {
       </ShouldRender>
 
       <ShouldRender if={!isLoading && loadedPosts.length === 0}>
-        <div className="empty">MORE POSTS COMING SOON!</div>
+        <div className="empty">{emptyDivMessage}</div>
       </ShouldRender>
-      
+
       <ShouldRender if={!isLoading && loadedPosts.length > 0}>
         <FlatList
           list={loadedPosts}
@@ -58,8 +69,8 @@ export default function NewsFeedSlide(props) {
               key={`tab-${i}`}
               author={post.username}
               profession={post.brand_name}
-              userSrc={post.profile_photo || `assets/img/users/${Math.ceil(Math.random() * 10)}.jpg`}
-              src={post.image_path || `assets/img/posts/1.jpg`}
+              userSrc={profilePic(post)}
+              src={`${origin}/${post.image_path}`}
               caption={post.caption}
               category={post.category}
               categoryId={post.categoryId}
@@ -70,6 +81,7 @@ export default function NewsFeedSlide(props) {
               comments={post.comments_count}
               loadComments={() => loadComments(post.post_id)}
               changeLikeStatus={() => changeLikeStatus(post.post_id, post.liked_by_me)}
+              isViewingFromNewsFeed={props.isViewingFromNewsFeed}
             />
           )}
         />

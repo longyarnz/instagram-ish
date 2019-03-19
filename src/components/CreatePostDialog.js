@@ -85,57 +85,6 @@ export default function CreatePostDialog(props) {
 
   const style = { backgroundColor };
 
-  const list = [
-    {
-      "id": 7,
-      "name": "Agbada"
-    },
-    {
-      "id": 9,
-      "name": "Ankara"
-    },
-    {
-      "id": 2,
-      "name": "Blouse"
-    },
-    {
-      "id": 8,
-      "name": "Buba"
-    },
-    {
-      "id": 4,
-      "name": "Female Suit"
-    },
-    {
-      "id": 1,
-      "name": "Gown"
-    },
-    {
-      "id": 10,
-      "name": "Jeans"
-    },
-    {
-      "id": 11,
-      "name": "Jump Suit"
-    },
-    {
-      "id": 3,
-      "name": "Men Suit"
-    },
-    {
-      "id": 12,
-      "name": "Others"
-    },
-    {
-      "id": 5,
-      "name": "Skirt"
-    },
-    {
-      "id": 6,
-      "name": "Trousers"
-    }
-  ];
-
   const onChangeSelect = e => {
     const select = e.target;
     const check = select.value === undefined ? 'Select an account type' : '';
@@ -149,7 +98,7 @@ export default function CreatePostDialog(props) {
         <select name="category" required={true} onChange={onChangeSelect}>
           <option value={undefined}>Select a category</option>
           <FlatList
-            list={list}
+            list={props.categories}
             listView={(cat, i) => (
               <option
                 key={`option-${i}`}

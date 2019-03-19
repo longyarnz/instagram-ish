@@ -48,7 +48,7 @@ export default function NavBar(props) {
       <div>
         <SandwichMenu
           menuIsOpened={props.state.showAppMenu || props.state.showNotifications || props.menuIsOpened}
-          onClick={props.goBack || toggleAppMenu}
+          onClick={props.injectScrollSetter(props.goBack || toggleAppMenu)}
         />
         <span>DOMINERF</span>
       </div>
@@ -57,15 +57,15 @@ export default function NavBar(props) {
         <AsyncLoader path="./components/Avatar"
           localState={true}
           toggle={toggle}
-          toggleUserMenu={toggleUserMenu}
+          toggleUserMenu={props.injectScrollSetter(toggleUserMenu)}
           dependencies={[showMenu, showUserMenu]}
         />
         <ShouldRender if={showAllIcons}>
-          <div onClick={toggleSearch}>
+          <div onClick={props.injectScrollSetter(toggleSearch)}>
             <Icon name="search" />
           </div>
 
-          <div className="notifications-icon" onClick={toggleNotificationMenu}>
+          <div className="notifications-icon" onClick={props.injectScrollSetter(toggleNotificationMenu)}>
             <Icon name="notifications_none" />
             <span></span>
           </div>

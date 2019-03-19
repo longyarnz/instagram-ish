@@ -309,3 +309,36 @@ export async function LOG_USER_IN(dispatch, email, password, callback, onError) 
     return false;
   }
 }
+
+export async function EDIT_PROFILE(dispatch, token, formData, json, callback, onError) {
+  try {
+    let profile = await fetch(`${API}/user`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'multipart/form-data'
+      },
+      // body: formData
+      body: JSON.stringify(json.user)
+    });
+    profile = await profile.json();
+
+    // profile.msg === 'success' && dispatch({
+    //   type: 'ADD NEW POST',
+    //   payload: profile.data
+    // });
+
+    profile.msg === 'success' && dispatch({
+      type: 'CACHE STATE'
+    });
+
+    profile.msg === 'success' && callback && callback();
+
+    if (profile.error) throw profile.error;
+  }
+  catch (err) {
+    console.log(err);
+    onError && onError();
+  }
+}

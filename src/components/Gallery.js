@@ -1,12 +1,11 @@
 import React from 'react';
-import { ForLoop } from './Utils';
 import ProfileTab from './ProfileTab';
-import AsyncImage from './AsyncImage';
 import ShouldRender from './ShouldRender';
 import NewsFeedSlide from './NewsFeedSlide';
 
 export default function Gallery(props) {
-  const { tabs: [ tab ] } = props;
+  const { tabs: [tab] } = props;
+  const posts = props.state.posts.filter(i => i.liked_by_me);
 
   return (
     <div className="gallery">
@@ -14,19 +13,19 @@ export default function Gallery(props) {
         <ProfileTab {...props} />
       </ShouldRender>
 
-      <ShouldRender if={tab === 1}>
-        <ForLoop
-          times={9}
-          loopView={
-            i => (
-              <AsyncImage key={`tile=${i}`} className="tiles" src={`assets/img/users/${++i}.jpg`} />
-            )
-          }
-        />
-      </ShouldRender>
-
       <ShouldRender if={tab === 2}>
-        <NewsFeedSlide />
+        <NewsFeedSlide
+          isViewingFromNewsFeed={false}
+          hasPosts={true}
+          posts={posts}
+          emptyDivMessage="YOU HAVEN'T LIKED ANY POSTS"
+          changingLikeStatus={props.state.isChangingLikeStatus}
+          token={props.state.token}
+          userId={props.state.user.id}
+          likes={props.state.likes}
+          dispatch={props.dispatch}
+          userIsLoggedIn={props.state.userIsLoggedIn}
+        />
       </ShouldRender>
     </div>
   )

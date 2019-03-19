@@ -11,7 +11,7 @@ export default function MenuModal(props) {
 
   return (
     <Dialog
-      className={props.className}
+      className="menu-dialog"
       slide="bottom"
       header="MENU"
       onClose={onClose}
@@ -21,10 +21,11 @@ export default function MenuModal(props) {
           dispatch={props.dispatch}
           goTo={props.goTo}
           userIsLoggedIn={props.userIsLoggedIn}
+          categories={props.state.categories}
         />
       }
-      lowerDialogHeight="80%"
-      upperDialogHeight="20%"
+      lowerDialogHeight="100%"
+      upperDialogHeight="0%"
     />
   );
 }

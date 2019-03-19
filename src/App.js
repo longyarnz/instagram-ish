@@ -23,7 +23,8 @@ export default function App() {
     './components/CommentModal': 'DO NOT RERENDER',
     './components/CreatePostModal': [
       'modalView'
-    ]
+    ],
+    './pages/EditProfile': ['user']
   }
 
   useEffect(() => {

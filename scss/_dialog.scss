@@ -20,6 +20,7 @@ div.dialog {
     z-index: 999;
     transition: inherit;
     border: 1px solid #fff;
+    overflow-y: auto;
 
     header {
       width: 100%;

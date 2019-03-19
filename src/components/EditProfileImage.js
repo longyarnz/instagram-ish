@@ -8,7 +8,9 @@ export default function EditProfileImage(props) {
   return (
     <div className="edit-profile-image">
       <div>
-        <AsyncImage src="assets/img/users/14.jpg" alt="profile" />
+        <div className="img-border">
+          <AsyncImage src={props.prevImg} alt="profile" />
+        </div>
       </div>
       <div>
         <PickAFile
@@ -20,6 +22,7 @@ export default function EditProfileImage(props) {
           src="assets/img/bg/white.png"
           onSelect={onSelect}
           preview={true}
+          name={props.name}
           iconContainer={{
             backgroundColor: '#fff'
           }}

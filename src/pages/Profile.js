@@ -7,17 +7,24 @@ import Footer from '../components/Footer';
 
 export default function Profile(props) {
   const profileState = useState(0);
+  const { dispatch, state, goTo } = props;
+  const fullName = state.user.firstName + 
+    ' ' + state.user.lastName;
 
   return (
     <section className="profile">
       <NavBar
-        dispatch={props.dispatch}
-        state={props.state}
-        goTo={props.goTo}
+        dispatch={dispatch}
+        state={state}
+        goTo={goTo}
         menuIsOpened={true}
-        goBack={() => props.goTo('./pages/NewsFeed')}
+        goBack={() => goTo('./pages/NewsFeed')}
       />
-      <Banner goTo={props.goTo} src={props.state.user.photo} />
+      <Banner 
+        goTo={goTo} 
+        src={state.user.photo}
+        fullName={fullName}
+      />
       <MenuBar tabs={profileState} {...props} />
       <Gallery tabs={profileState} {...props} />
       <Footer />

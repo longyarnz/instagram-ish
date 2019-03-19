@@ -12,11 +12,15 @@ function LI(props) {
 }
 
 export default function ProfileTab(props) {
-  const { state, dispatch } = props;
+  const { state, dispatch, goTo } = props;
   const years = Number(state.user.experience) > 1 ? 'yrs' : 'yr';
   const experience = Number(state.user.experience) < 1 ? 'No Experience' : `
     ${state.user.experience} ${years} of Experience
   `;
+  const upgradeAccount = () => {
+    dispatch({ type: 'UPGRADE CUSTOMER ACCOUNT' });
+    goTo('./pages/EditProfile');
+  }
 
   return (
     <div className="profile-tab">
@@ -34,7 +38,7 @@ export default function ProfileTab(props) {
         <LI icon="store_mall_directory" text={state.user.about || 'No Description'} />
 
         <ShouldRender if={state.user.accountType === 'Fashion Enthusiast'}>
-          <li className="upgrade" onClick={() => dispatch({ type: 'UPGRADE CUSTOMER ACCOUNT' })}>
+          <li className="upgrade" onClick={upgradeAccount}>
             UPGRADE TO DESIGNER ACCOUNT
           </li>
         </ShouldRender>

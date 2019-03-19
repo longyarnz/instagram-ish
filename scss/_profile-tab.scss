@@ -1,5 +1,6 @@
 div.profile-tab {
   width: 100%;
+  min-height: calc(100vh * .5);
   
   h3.profile-tab {
     padding: 0px 15px;
@@ -43,15 +44,19 @@ div.profile-tab {
         font-weight: 700;
         border-radius: 5px;
         justify-content: center;
+        min-height: 44px;
+        width: 50%;
+        margin:auto;
+        cursor: pointer;
 
         &:hover,
         &:active {
-          background: darken($theme-color, 10);
+          // background: darken($theme-color, 10);
         }
       }
 
       &:last-of-type{
-        align-items: flex-start;
+        align-items: center;
 
         i{
           margin-top: 3.5px;
