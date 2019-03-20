@@ -1,29 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Gallery from '../components/Gallery';
 import Banner from '../components/Banner';
 import MenuBar from '../components/MenuBar';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import useScroll from '../components/useScroll';
 
 export default function Profile(props) {
   const profileState = useState(0);
-
-  useEffect(() => {
-    const { scrollTop, view } = props.state;
-     
-    setTimeout(() => {
-      document.scrollingElement.scrollTop = scrollTop[view];
-      props.dispatch({
-        type: 'NULL SCROLL TOP',
-        payload: {
-          [view]: 0
-        }
-      })
-    }, 10);
-  }, []);
+  useScroll(props);
 
   const { dispatch, state, goTo } = props;
-  const fullName = state.user.firstName + 
+  const fullName = state.user.firstName +
     ' ' + state.user.lastName;
 
   return (
@@ -35,8 +23,8 @@ export default function Profile(props) {
         menuIsOpened={true}
         goBack={() => goTo('./pages/NewsFeed')}
       />
-      <Banner 
-        goTo={goTo} 
+      <Banner
+        goTo={goTo}
         src={state.user.photo}
         fullName={fullName}
       />
@@ -46,3 +34,5 @@ export default function Profile(props) {
     </section>
   )
 }
+
+

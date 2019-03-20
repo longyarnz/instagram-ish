@@ -5,23 +5,12 @@ import Stories from '../components/Stories';
 import Footer from '../components/Footer';
 import ShouldRender from '../components/ShouldRender';
 import { FETCH_POSTS } from '../Actions';
+import useScroll from '../components/useScroll';
 
 export default function NewsFeed(props) {
   const { state, dispatch, goTo } = props;
 
-  useEffect(() => {
-    const { scrollTop, view } = state;
-     
-    setTimeout(() => {
-      document.scrollingElement.scrollTop = scrollTop[view];
-      dispatch({
-        type: 'NULL SCROLL TOP',
-        payload: {
-          [view]: 0
-        }
-      })
-    }, 10);
-  }, []);
+  useScroll(props);
 
   useEffect(() => {
     if (!state.hasPosts && state.token !== null) {
@@ -51,6 +40,7 @@ export default function NewsFeed(props) {
         hasPosts={state.hasPosts}
         posts={state.posts}
         dispatch={dispatch}
+        view={state.view}
         userIsLoggedIn={state.userIsLoggedIn}
         profilePic={state.user.photo}
       />

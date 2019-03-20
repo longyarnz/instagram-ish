@@ -17,13 +17,22 @@ export function ForLoop(props) {
 }
 
 export function injectScrollSetter(dispatch, view, fn) {
-  return function () {
+  return function (props) {
     dispatch({
       type: 'SET SCROLL TOP',
       payload: {
         [view]: document.scrollingElement.scrollTop
       }
     });
-    fn();
+    fn(props);
   }
+}
+
+export function animateScroll(top){
+  let x = 10;
+  const y = setInterval(() => {
+    if(x >= top) clearInterval(y);
+    document.scrollingElement.scrollTop = x;
+    x += 10;
+  }, 3);
 }

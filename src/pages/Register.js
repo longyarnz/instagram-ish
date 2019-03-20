@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Icon from '../components/Icon';
 import { REGISTER_USER } from '../Actions';
 import Spinner from '../components/Spinner';
 import ShouldRender from '../components/ShouldRender';
+import useScroll from '../components/useScroll';
 
 async function submitRegisterForm(e, dispatch, callback, onError) {
   const [first, last, username, email, password, c_password, accountType, brand] = e.target;
@@ -26,7 +27,7 @@ export default function Register(props) {
     brand_name: [],
     email: []
   }
-  const [ caption ] = useState('Nice to Meet Ya!');
+  const [caption] = useState('Nice to Meet Ya!');
   const [isLoading, setIsLoading] = useState(false);
   const [account, setAccount] = useState(undefined);
   const [match, setMatch] = useState(false);
@@ -35,19 +36,7 @@ export default function Register(props) {
   const password = useRef(null);
   const c_password = useRef(null);
 
-  useEffect(() => {
-    const { scrollTop, view } = props.state;
-     
-    setTimeout(() => {
-      document.scrollingElement.scrollTop = scrollTop[view];
-      props.dispatch({
-        type: 'NULL SCROLL TOP',
-        payload: {
-          [view]: 0
-        }
-      })
-    }, 10);
-  }, []);
+  useScroll(props);
 
   const onChange = e => {
     const check = c_password.current.value !== password.current.value ? 'Passwords do not match!' : '';
@@ -84,7 +73,7 @@ export default function Register(props) {
     const onError = (err) => {
       console.log(err);
       setIsLoading(false);
-      setError({...initialErrorState, ...err.error});
+      setError({ ...initialErrorState, ...err.error });
     }
 
     const callback = () => {

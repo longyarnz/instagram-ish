@@ -4,6 +4,7 @@ import NewsFeedTab from './NewsFeedTab';
 import { FullPageLoader } from './FullPageSpinner';
 import { LIKE_A_POST, UNLIKE_A_POST } from '../Actions';
 import ShouldRender from './ShouldRender';
+import { injectScrollSetter } from '../components/Utils';
 
 export default function NewsFeedSlide(props) {
   const _this = useRef(null);
@@ -30,17 +31,31 @@ export default function NewsFeedSlide(props) {
     paddingTop: 0
   } : {};
 
-  const loadComments = (postId) => {
-    props.dispatch({
-      type: 'SET MODAL VIEW',
-      payload: './components/CommentModal'
-    });
+  // const loadComments = (postId) => {
+  //   props.dispatch({
+  //     type: 'SET MODAL VIEW',
+  //     payload: './components/CommentModal'
+  //   });
 
-    props.dispatch({
-      type: 'SHOW COMMENTS',
-      payload: postId
-    });
-  }
+  //   props.dispatch({
+  //     type: 'SHOW COMMENTS',
+  //     payload: postId
+  //   });
+  // }
+
+  const loadComments = injectScrollSetter(
+    props.dispatch, props.view, (postId) => {
+      props.dispatch({
+        type: 'SET MODAL VIEW',
+        payload: './components/CommentModal'
+      });
+
+      props.dispatch({
+        type: 'SHOW COMMENTS',
+        payload: postId
+      });
+    }
+  );
 
   const origin = 'http://18.223.1.218';
   const loadedPosts = localPosts || props.posts;
@@ -67,13 +82,13 @@ export default function NewsFeedSlide(props) {
       if (userLikesStatus) {
         loadedPosts.forEach(post => {
           post.liked_by_me = post.post_id === postId ?
-          false : post.liked_by_me;
+            false : post.liked_by_me;
         });
       }
       else {
         loadedPosts.forEach(post => {
           post.liked_by_me = post.post_id === postId ?
-          true : post.liked_by_me;
+            true : post.liked_by_me;
         });
       }
 
