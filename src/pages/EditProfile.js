@@ -5,6 +5,7 @@ import EditProfileImage from '../components/EditProfileImage';
 import ShouldRender from '../components/ShouldRender';
 import { EDIT_PROFILE } from '../Actions';
 import Spinner from '../components/Spinner';
+import useScroll from '../components/useScroll';
 
 export default function EditProfile(props) {
   const form = useRef(null);
@@ -17,19 +18,7 @@ export default function EditProfile(props) {
   const { goTo, state, dispatch } = props;
   const isDesigner = state.upgradeAccount || state.user.accountType === 'Fashion Designer';
 
-  useEffect(() => {
-    const { scrollTop, view } = props.state;
-     
-    setTimeout(() => {
-      document.scrollingElement.scrollTop = scrollTop[view];
-      props.dispatch({
-        type: 'NULL SCROLL TOP',
-        payload: {
-          [view]: 0
-        }
-      })
-    }, 10);
-  }, []);
+  useScroll(props);
 
   useEffect(() => {
     for (let i = 0; i < inputs.current.children.length; i++) {
