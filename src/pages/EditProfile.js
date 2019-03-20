@@ -16,7 +16,7 @@ export default function EditProfile(props) {
   const [error, setError] = useState(null);
   const [src, setSrc] = useState(null);
   const { goTo, state, dispatch } = props;
-  const isDesigner = state.upgradeAccount || state.user.accountType === 'Fashion Designer';
+  const userIsADesigner = state.upgradeAccount || state.user.accountType === 'Fashion Designer';
 
   useScroll(props);
 
@@ -27,7 +27,7 @@ export default function EditProfile(props) {
         input.autocomplete = "on";
         input.spellcheck = "true";
         input.id = ++i / 2;
-        // input.required = true;
+        input.required = true;
       }
       else {
         input.htmlFor = (i + 2) / 2;
@@ -76,26 +76,31 @@ export default function EditProfile(props) {
     ];
 
     inputs.forEach(i => {
-      if (!isDesigner && ['brand_name', 'experience'].includes(i)) {
+      if (!userIsADesigner && ['brand_name', 'experience'].includes(i)) {
         return;
       }
 
-      console.log(i);
       newProfile.user[i] = i === 'photo_path' ? src : elements[i].value;
     });
 
     newProfile.user.photo = src;
-    newProfile.user.userType = isDesigner ? 'designer' : 'user';
+    newProfile.user.email = state.user.email;
+    newProfile.user.userType = userIsADesigner ? 'designer' : 'user';
     newProfile.token = state.token;
 
     const callback = () => {
+      setIsPosting(false);
       if (_this.current === 'UNMOUNTED') return;
-
+      
       dispatch({
         type: 'EDIT USER PROFILE',
         payload: newProfile
       });
-      setIsPosting(false);
+      
+      dispatch({
+        type: 'CACHE STATE',
+      });
+      
       goTo('./pages/Profile');
     }
 
@@ -110,8 +115,9 @@ export default function EditProfile(props) {
     }
 
     const profile = new FormData(form);
-    const userType = isDesigner ? 2 : 1;
+    const userType = userIsADesigner ? 2 : 1;
     profile.append('user_type_id', userType);
+    profile.append('email', state.user.email);
     newProfile.user.user_type_id = userType;
 
     EDIT_PROFILE(dispatch, state.token, profile, newProfile, callback, onError);
@@ -195,7 +201,7 @@ export default function EditProfile(props) {
             <option value="female">Female</option>
           </select>
 
-          <ShouldRender if={isDesigner}>
+          <ShouldRender if={userIsADesigner}>
             <label>Brand</label>
             <input placeholder="Brand Name" name="brand_name" type="text" defaultValue={state.user.brand} />
 

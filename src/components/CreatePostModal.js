@@ -16,6 +16,10 @@ export default function CreatePostModal(props) {
     props.dispatch({
       type: 'NULL MODAL VIEW'
     });
+
+    props.dispatch({
+      type: 'RELOAD NEWSFEED'
+    });
   };
 
   const upperDialog = useMemo(

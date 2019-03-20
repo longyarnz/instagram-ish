@@ -31,18 +31,6 @@ export default function NewsFeedSlide(props) {
     paddingTop: 0
   } : {};
 
-  // const loadComments = (postId) => {
-  //   props.dispatch({
-  //     type: 'SET MODAL VIEW',
-  //     payload: './components/CommentModal'
-  //   });
-
-  //   props.dispatch({
-  //     type: 'SHOW COMMENTS',
-  //     payload: postId
-  //   });
-  // }
-
   const loadComments = injectScrollSetter(
     props.dispatch, props.view, (postId) => {
       props.dispatch({
@@ -61,13 +49,14 @@ export default function NewsFeedSlide(props) {
   const loadedPosts = localPosts || props.posts;
   const fetchStatusOf = postId => isLiking.some(id => id === postId);
   const emptyDivMessage = props.emptyDivMessage || 'MORE POSTS COMING SOON!';
+
   const profilePic = post => {
     if (post.userId === props.userId) {
-      return props.profilePic;
+      return props.profilePic || 'assets/img/user.png';
     }
     else {
       return post.profile_photo ?
-        `${origin}/${post.profile_photo}` : `assets/img/user.png`;
+        `${origin}/${post.profile_photo}` : 'assets/img/user.png';
     }
   }
 

@@ -9,7 +9,6 @@ import useScroll from '../components/useScroll';
 
 export default function NewsFeed(props) {
   const { state, dispatch, goTo } = props;
-
   useScroll(props);
 
   useEffect(() => {

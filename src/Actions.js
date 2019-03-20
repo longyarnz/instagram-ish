@@ -18,6 +18,10 @@ export async function FETCH_POSTS(dispatch, token, callback) {
       payload: posts.data
     });
 
+    posts.msg === 'success' && dispatch({
+      type: 'RELOAD NEWSFEED',
+    });
+
     if (posts.msg !== 'success') throw posts;
 
     return true;

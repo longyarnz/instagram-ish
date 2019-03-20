@@ -8,7 +8,7 @@ export const AppContext = React.createContext({});
 export default function App() {
   const appState = useReducer(Reducers, InitialState);
   const [state, dispatch] = appState;
-  // window.onbeforeunload = () => `Don't leave yet`;
+  window.onbeforeunload = () => `Don't leave yet`;
 
   useEffect(() => {
     let cache = localStorage.staleState;
@@ -31,9 +31,8 @@ export default function App() {
   const reloadComponentWhenThisChanges = {
     './pages/NewsFeed': [
       'userIsLoggedIn',
-      'isSendingComments',
-      'comments',
-      'hasPosts'
+      'hasPosts',
+      'newsfeedCounter'
     ],
     './pages/Login': 'DO NOT RERENDER',
     './pages/Register': 'DO NOT RERENDER',

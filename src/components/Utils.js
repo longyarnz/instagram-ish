@@ -29,10 +29,12 @@ export function injectScrollSetter(dispatch, view, fn) {
 }
 
 export function animateScroll(top){
-  let x = 10;
+  let scrollPosition = 10;
+  const scrollSpeed = 40;
+  
   const y = setInterval(() => {
-    if(x >= top) clearInterval(y);
-    document.scrollingElement.scrollTop = x;
-    x += 10;
-  }, 3);
+    if(scrollPosition >= top) clearInterval(y);
+    document.scrollingElement.scrollTop = scrollPosition;
+    scrollPosition += scrollSpeed;
+  }, 0);
 }

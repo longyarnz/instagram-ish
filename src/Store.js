@@ -20,6 +20,7 @@ export const InitialState = {
   createPostImage: null,
   hasPosts: false,
   hasComments: false,
+  newsfeedCounter: 0,
   posts: [],
   postId: null,
   comments: {},
@@ -213,6 +214,9 @@ export function Reducers(state, action) {
 
     case 'RESTORE STATE':
       return { ...state, mutations, ...payload }
+
+    case 'RELOAD NEWSFEED':
+      return { ...state, mutations, newsfeedCounter: (state.newsfeedCounter + 1) }
 
     case 'CACHE STATE':
       localStorage.staleState = JSON.stringify({

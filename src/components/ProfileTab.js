@@ -31,6 +31,7 @@ export default function ProfileTab(props) {
         <LI icon="contact_phone" text={state.user.phone || 'No Phone Number'} />
 
         <ShouldRender if={state.user.accountType === 'Fashion Designer'}>
+          <LI icon="near_me" text={state.user.address || 'No Address'} />
           <LI icon="insert_emoticon" text={state.user.brand || 'No Brand'} />
           <LI icon="event" text={experience} />
         </ShouldRender>

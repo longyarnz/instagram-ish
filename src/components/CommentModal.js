@@ -7,6 +7,10 @@ export default function CommentModal(props) {
     props.dispatch({
       type: 'NULL MODAL VIEW'
     });
+
+    props.dispatch({
+      type: 'RELOAD NEWSFEED'
+    });
   };
 
   return (

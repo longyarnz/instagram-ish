@@ -1,23 +1,20 @@
 import React, { useRef, useEffect } from 'react';
 import AddStoryButton from './AddStoryButton';
+import { injectScrollSetter } from './Utils';
 
 export default function AddPostButton(props) {
   const div = useRef(null);
-  const { modalView } = props.state;
+  const { dispatch, state } = props;
+  const { modalView } = state;
 
-  const onClick = () => {
-    const { scrollTop } = document.scrollingElement;
-
-    props.dispatch({
-      type: 'SET MODAL VIEW',
-      payload: `./components/CreatePostModal`
-    });
-
-    props.dispatch({
-      type: 'SET SCROLL TOP',
-      payload: scrollTop
-    });
-  }
+  const onClick = injectScrollSetter(
+    dispatch, state.view, () => {
+      props.dispatch({
+        type: 'SET MODAL VIEW',
+        payload: `./components/CreatePostModal`
+      });
+    }
+  );
 
   useEffect(() => {
     if (!props.hasPosts) return;
@@ -25,11 +22,11 @@ export default function AddPostButton(props) {
       const opacity = '0';
       setTimeout(() => div.current.style.opacity = opacity, 50);
     }
-    
+
     const position = '35px';
     setTimeout(() => div.current.style.bottom = position, 50);
   }, []);
-  
+
   let style = null;
   if (modalView) {
     const bottom = '35px';
