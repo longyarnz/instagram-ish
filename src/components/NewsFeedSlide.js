@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FlatList } from './Utils';
+import { FlatList, calcTime } from './Utils';
 import NewsFeedTab from './NewsFeedTab';
 import { FullPageLoader } from './FullPageSpinner';
 import { LIKE_A_POST, UNLIKE_A_POST } from '../Actions';
@@ -8,9 +8,20 @@ import { injectScrollSetter } from '../components/Utils';
 
 export default function NewsFeedSlide(props) {
   const _this = useRef(null);
+  const [counter, setCounter] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [localPosts, setLocalPosts] = useState(null);
   const [isLiking, setIsLiking] = useState([]);
+  
+  useEffect(() => {
+    const x = setTimeout(() => {
+      if(_this.current === 'MOUNTED') setCounter(counter + 1);
+    }, 60000);
+    
+    return () => {
+      clearTimeout(x);
+    }
+  }, [counter])
 
   useEffect(() => {
     _this.current = 'MOUNTED';
@@ -110,7 +121,7 @@ export default function NewsFeedSlide(props) {
               caption={post.caption}
               category={post.category}
               categoryId={post.categoryId}
-              time={post.time}
+              time={calcTime(post.unix_time)}
               likes={post.likes_count}
               isChangingLikeStatus={fetchStatusOf(post.post_id)}
               userLikesPost={post.liked_by_me}

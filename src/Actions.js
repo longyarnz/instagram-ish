@@ -308,35 +308,84 @@ export async function LOG_USER_IN(dispatch, email, password, callback, onError) 
   }
 }
 
-export async function EDIT_PROFILE(dispatch, token, formData, json, callback, onError) {
+export async function EDIT_PROFILE(dispatch, token, formData, callback, onError) {
   try {
     let profile = await fetch(`${API}/user`, {
-      method: 'PUT',
+      method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'multipart/form-data'
       },
-      // body: formData
-      body: JSON.stringify(json.user)
+      body: formData
     });
     profile = await profile.json();
 
-    // profile.msg === 'success' && dispatch({
-    //   type: 'ADD NEW POST',
-    //   payload: profile.data
-    // });
+    if(profile.msg === 'success'){
+      const user = await GET_USER(token);
 
-    profile.msg === 'success' && dispatch({
-      type: 'CACHE STATE'
-    });
+      dispatch({
+        type: 'EDIT USER PROFILE',
+        payload: { user, token }
+      });
 
-    profile.msg === 'success' && callback && callback();
+      dispatch({
+        type: 'CACHE STATE'
+      });
+
+      callback && callback();
+    }
 
     if (profile.error) throw profile.error;
   }
   catch (err) {
     console.log(err);
     onError && onError();
+  }
+}
+
+export async function SEARCH(dispatch, token, text, callback) {
+  try {
+    let search = await fetch(`${API}/search/${text}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      method: 'GET'
+    });
+    search = await search.json();
+
+    if (search.msg === 'success'){
+      dispatch({
+        type: 'STORE SEARCH RESULTS',
+        payload: {
+          text,
+          result: search.data
+        }
+      })
+
+      callback && callback(search.data);
+    }
+
+    else throw search;
+  }
+  catch (err) {
+    console.log(err);
+  }
+}
+
+export async function GET_USER(token) {
+  try {
+    let user = await fetch(`${API}/user`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      method: 'GET'
+    });
+    user = await user.json();
+
+    if (user.msg !== 'success') throw user;
+
+    return user.data;
+  }
+  catch (err) {
+    console.log(err);
   }
 }

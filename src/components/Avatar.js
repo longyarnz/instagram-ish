@@ -4,6 +4,9 @@ import AsyncImage from './AsyncImage';
 import ShouldRender from './ShouldRender';
 
 export default function Avatar(props) {
+  const origin = window.location.origin === 'http://localhost:3000' ?
+    'http://18.223.1.218' : '';
+
   return (
     <>
       <ShouldRender if={!props.state.userIsLoggedIn}>
@@ -15,8 +18,9 @@ export default function Avatar(props) {
       <ShouldRender if={props.state.userIsLoggedIn}>
         <AsyncImage 
           className="avatar" 
-          src={props.state.user.photo || 'assets/img/user.png'} 
-          alt="user"onClick={props.toggleUserMenu} 
+          src={`${origin}/${props.state.user.photo}` || 'assets/img/user.png'} 
+          alt="user"
+          onClick={props.toggleUserMenu} 
         />
       </ShouldRender>
     </>

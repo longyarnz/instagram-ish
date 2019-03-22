@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FlatList } from './Utils';
+import { FlatList, calcTime } from './Utils';
 import Divider from './Divider';
 import Icon from './Icon';
 import Spinner from './Spinner';
@@ -29,7 +29,7 @@ function Comments(props) {
                 <span>{result.user[0].username}:</span>
                 <span>{result.comment}</span>
               </div>
-              <footer>{result.time}</footer>
+              <footer>{calcTime(result.unix_time)}</footer>
               <Divider color="#f4f4f4" width="100%" />
             </div>
           )}

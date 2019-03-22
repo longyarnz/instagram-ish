@@ -8,7 +8,7 @@ export const AppContext = React.createContext({});
 export default function App() {
   const appState = useReducer(Reducers, InitialState);
   const [state, dispatch] = appState;
-  window.onbeforeunload = () => `Don't leave yet`;
+  // window.onbeforeunload = () => `Don't leave yet`;
 
   useEffect(() => {
     let cache = localStorage.staleState;
@@ -64,7 +64,7 @@ export default function App() {
         if={
           state.userIsLoggedIn &&
           state.user.accountType === 'Fashion Designer' &&
-          state.view === './pages/NewsFeed' 
+          state.view === './pages/NewsFeed'
         }
       >
         <AsyncLoader

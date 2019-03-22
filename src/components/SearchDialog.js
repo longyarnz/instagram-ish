@@ -63,7 +63,7 @@ export default function SearchDialog(props) {
   return (
     <div className="search">
       <form onSubmit={onSubmit}>
-        <input type="search" name="search" />
+        <input type="search" name="search" placeholder="Search for users" />
         <button type="submit">
           <Icon name="arrow_forward" />
         </button>

@@ -23,7 +23,7 @@ export default function EditProfile(props) {
   useEffect(() => {
     for (let i = 0; i < inputs.current.children.length; i++) {
       const input = inputs.current.children[i];
-      if (['INPUT', 'TEXTAREA'].some(i => i === input.tagName)) {
+      if (['INPUT'].some(i => i === input.tagName)) {
         input.autocomplete = "on";
         input.spellcheck = "true";
         input.id = ++i / 2;
@@ -70,13 +70,13 @@ export default function EditProfile(props) {
     setError(null);
 
     const newProfile = { user: {} }, inputs = [
-      'address', 'brand_name', 'description', 'sex',
-      'experience', 'first_name', 'last_name', 'phone',
+      'address', 'brand_name', 'sex',
+      'first_name', 'last_name', 'phone',
       'username', 'photo_path'
     ];
 
     inputs.forEach(i => {
-      if (!userIsADesigner && ['brand_name', 'experience'].includes(i)) {
+      if (!userIsADesigner && ['brand_name'].includes(i)) {
         return;
       }
 
@@ -89,18 +89,6 @@ export default function EditProfile(props) {
     newProfile.token = state.token;
 
     const callback = () => {
-      setIsPosting(false);
-      if (_this.current === 'UNMOUNTED') return;
-      
-      dispatch({
-        type: 'EDIT USER PROFILE',
-        payload: newProfile
-      });
-      
-      dispatch({
-        type: 'CACHE STATE',
-      });
-      
       goTo('./pages/Profile');
     }
 
@@ -120,7 +108,13 @@ export default function EditProfile(props) {
     profile.append('email', state.user.email);
     newProfile.user.user_type_id = userType;
 
-    EDIT_PROFILE(dispatch, state.token, profile, newProfile, callback, onError);
+    const photo = profile.get('photo_path');
+    if(photo.size !== 0) {
+      profile.append('image', photo);
+      profile.delete('photo_path');
+    }
+
+    EDIT_PROFILE(dispatch, state.token, profile, callback, onError);
   }
 
   const goBack = () => goTo('./pages/Profile');
@@ -154,6 +148,8 @@ export default function EditProfile(props) {
 
   const navbarTitle = !error ? 'EDIT PROFILE' : error;
   const errorStyle = error ? { color: '#d9534f' } : null;
+  const origin = window.location.origin === 'http://localhost:3000' ?
+    'http://18.223.1.218' : '';
 
   return (
     <section className="edit-profile">
@@ -169,7 +165,7 @@ export default function EditProfile(props) {
         <label htmlFor="0">Change Profile Image</label>
         <EditProfileImage
           name="photo_path"
-          prevImg={state.user.photo || 'assets/img/user.png'}
+          prevImg={`${origin}/${state.user.photo}` || 'assets/img/user.png'}
           onSelect={onSelectImage}
         />
 
@@ -204,14 +200,7 @@ export default function EditProfile(props) {
           <ShouldRender if={userIsADesigner}>
             <label>Brand</label>
             <input placeholder="Brand Name" name="brand_name" type="text" defaultValue={state.user.brand} />
-
-            <label>Years of Experience</label>
-            <input placeholder="Experience" name="experience" type="number" defaultValue={state.user.experience} />
           </ShouldRender>
-
-          <label>About</label>
-          <textarea placeholder="Description" name="description" rows={8} defaultValue={state.user.about}>
-          </textarea>
         </div>
         <button ref={button} type="submit"></button>
       </form>

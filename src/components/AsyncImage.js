@@ -31,7 +31,11 @@ export default function AsyncImage({ src, ...props }) {
   return (
     <>
       <ShouldRender if={view && imageHasNotBeenLoaded}>
-        <Spinner style={{ fontSize: '300%', color: 'transparent' }} container={{position: 'absolute', zIndex: '99999' }} />
+        <Spinner 
+          style={{ fontSize: '300%', color: 'transparent' }} 
+          container={{position: 'absolute', zIndex: '99999' }} 
+          onClick={props.onClick}
+        />
         <div style={{ width: 50, height: 50, position: 'absolute' }}></div>
       </ShouldRender>
       <img src={src} onLoad={removeSpinner} alt={props.alt} style={style} {...props} />
