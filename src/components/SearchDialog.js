@@ -26,6 +26,14 @@ const results = [
 ];
 
 function SearchResults(props) {
+  const [showUsers, setUsers] = useState(false);
+  const [showCats, setCats] = useState(false);
+  const [showPosts, setPosts] = useState(false);
+
+  const users = showUsers ? 'expand_less' : 'expand_more';
+  const categories = showCats ? 'expand_less' : 'expand_more';
+  const posts = showPosts ? 'expand_less' : 'expand_more';
+
   return (
     <div className="search-results">
       <h3>Search Results</h3>
@@ -36,20 +44,81 @@ function SearchResults(props) {
         </div>
       </ShouldRender>
 
-      <FlatList
-        list={results}
-        listView={(result, i) => (
-          <div key={`search-${i}`}>
-            <div>
-              <AsyncImage src={result.userSrc} alt="user" />
-              <span>{result.text}</span>
-            </div>
-            <Divider color="#f4f4f4" width="100%" />
-          </div>
-        )}
-      />
+      <ShouldRender if={!props.isLoading && props.fetchedSearch}>
+        <SearchTab
+          totalResult={5}
+          title="Users"
+          icon={users}
+          onClick={() => setUsers(!showUsers)}
+          list={results}
+          view={(result, i) => (
+            <li key={`user-${i}`}>
+              <div>
+                <AsyncImage src={result.userSrc} alt="user" />
+                <span>{result.text}</span>
+              </div>
+              <Divider color="#f4f4f4" width="100%" />
+            </li>
+          )}
+        />
+
+        <SearchTab
+          totalResult={5}
+          title="Categories"
+          icon={categories}
+          onClick={() => setCats(!showCats)}
+          list={results}
+          view={(result, i) => (
+            <li key={`user-${i}`}>
+              <div>
+                <AsyncImage src={result.userSrc} alt="user" />
+                <span>{result.text}</span>
+              </div>
+              <Divider color="#f4f4f4" width="100%" />
+            </li>
+          )}
+        />
+
+        <SearchTab
+          totalResult={0}
+          title="Posts"
+          icon={posts}
+          onClick={() => setPosts(!showPosts)}
+          list={results}
+          view={(result, i) => (
+            <li key={`user-${i}`}>
+              <div>
+                <AsyncImage src={result.userSrc} alt="user" />
+                <span>{result.text}</span>
+              </div>
+              <Divider color="#f4f4f4" width="100%" />
+            </li>
+          )}
+        />
+      </ShouldRender>
     </div>
   )
+}
+
+function SearchTab(props) {
+  return (
+    <ul className={props.icon}>
+      <h3 onClick={props.onClick}>
+        <span>
+          <small>{props.totalResult}</small>
+          {props.title}
+        </span>
+
+        <ShouldRender if={props.totalResult > 0}>
+          <Icon name={props.icon} />
+        </ShouldRender>
+      </h3>
+      <FlatList
+        list={props.list}
+        listView={props.view}
+      />
+    </ul>
+  );
 }
 
 export default function SearchDialog(props) {
@@ -58,17 +127,19 @@ export default function SearchDialog(props) {
   const onSubmit = e => {
     e.preventDefault();
     setIsLoading(true);
-    console.log(e.target[0]);
   }
+
+  let button = isLoading ?
+    <Spinner style={{ animationDuration: '.55s' }} /> : <Icon name="arrow_forward" />;
+
   return (
     <div className="search">
       <form onSubmit={onSubmit}>
-        <input type="search" name="search" placeholder="Search for users" />
-        <button type="submit">
-          <Icon name="arrow_forward" />
-        </button>
+        <input type="search" name="search" placeholder="Search for Users and Posts" />
+        <button type="submit">{button}</button>
       </form>
-      <SearchResults isLoading={isLoading} />
+
+      <SearchResults isLoading={isLoading} fetchedSearch={true} />
     </div>
   )
 }

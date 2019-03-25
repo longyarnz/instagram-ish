@@ -50,30 +50,36 @@ export function calcTime(unix){
   const years = months > 12 ? Math.floor(months / 12) : 0;
 
   if(years > 0){
-    return `${years} years ago`;
+    const s = years > 1 ? 's' : '';
+    return `${years} year${s} ago`;
   }
 
   else if(months > 0){
-    return `${months} months ago`;
+    const s = months > 1 ? 's' : '';
+    return `${months} month${s} ago`;
   }
 
   else if(weeks > 0){
-    return `${weeks} weeks ago`;
+    const s = weeks > 1 ? 's' : '';
+    return `${weeks} week${s} ago`;
   }
 
   else if(days > 0){
-    return `${days} days ago`;
+    const s = days > 1 ? 's' : '';
+    return `${days} day${s} ago`;
   }
 
   else if(hours > 0){
-    return `${hours} hours ago`;
+    const s = hours > 1 ? 's' : '';
+    return `${hours} hour${s} ago`;
   }
 
   else if(minutes > 0){
-    return `${minutes} minutes ago`;
+    const s = minutes > 1 ? 's' : '';
+    return `${minutes} minute${s} ago`;
   }
 
-  else if(seconds > 15){
+  else if(seconds > 30){
     return `${seconds} seconds ago`;
   }
 

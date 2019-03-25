@@ -30,7 +30,7 @@ export default function Dialog(props) {
   useEffect(() => {
     document.documentElement.style.overflow = 'hidden';
     const y = setTimeout(
-      () => div.current.style.backgroundColor = 'rgba(0, 0, 0, .6)'
+      () => div.current.style.backgroundColor = 'rgba(0, 0, 0, 0)'
     , 250);
 
     return () => {

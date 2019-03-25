@@ -42,18 +42,22 @@ export async function CREATE_POST(dispatch, token, form, callback, onError) {
     });
     post = await post.json();
 
-    post.msg === 'success' && dispatch({
-      type: 'ADD NEW POST',
-      payload: post.data
-    });
+    if (post.msg === 'success') {
+      post.data[0].unix_time = Math.floor(Date.now() / 1000);
 
-    post.msg === 'success' && dispatch({
-      type: 'CACHE STATE'
-    });
+      dispatch({
+        type: 'ADD NEW POST',
+        payload: post.data
+      });
 
-    post.msg === 'success' && callback && callback();
+      dispatch({
+        type: 'CACHE STATE'
+      });
 
-    if (post.error) throw post.error;
+      callback && callback();
+    }
+
+    else throw post.error;
   }
   catch (err) {
     console.log(err);
@@ -319,7 +323,7 @@ export async function EDIT_PROFILE(dispatch, token, formData, callback, onError)
     });
     profile = await profile.json();
 
-    if(profile.msg === 'success'){
+    if (profile.msg === 'success') {
       const user = await GET_USER(token);
 
       dispatch({
@@ -352,7 +356,7 @@ export async function SEARCH(dispatch, token, text, callback) {
     });
     search = await search.json();
 
-    if (search.msg === 'success'){
+    if (search.msg === 'success') {
       dispatch({
         type: 'STORE SEARCH RESULTS',
         payload: {

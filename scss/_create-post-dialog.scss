@@ -3,6 +3,7 @@ $dialog-height: 50%;
 div.create-post-dialog {
   width: 100%;
   height: 100%;
+  background: rgba(#000, .6) !important;
 
   div.dialog-lower-section{
     overflow: hidden;
@@ -13,6 +14,7 @@ div.create-post-dialog {
     display: flex;
     flex-direction: column;
     padding: 0px 0px 50px;
+    background: #fff;
     justify-content: space-around;
 
     button {
