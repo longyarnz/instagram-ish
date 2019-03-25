@@ -38,6 +38,7 @@ export default function App() {
     './pages/Register': 'DO NOT RERENDER',
     './pages/Profile': 'DO NOT RERENDER',
     './components/CommentModal': 'DO NOT RERENDER',
+    './components/SearchModal': 'DO NOT RERENDER',
     './components/CreatePostModal': [
       'modalView'
     ],

@@ -20,10 +20,12 @@ export const InitialState = {
   createPostImage: null,
   hasPosts: false,
   hasComments: false,
+  hasSearch: false,
   newsfeedCounter: 0,
   posts: [],
   postId: null,
   comments: {},
+  search: {},
   likes: [],
   isSendingComment: false,
   isChangingLikeStatus: [],
@@ -147,6 +149,9 @@ export function Reducers(state, action) {
       posts = [...state.posts];
       posts.forEach(post => post.post_id === payload.postId && ++post.comments_count);
       return { ...state, mutations, comments: { ...state.comments, ...comments }, hasComments: true, posts }
+
+    case 'STORE SEARCH RESULT':
+      return { ...state, mutations, search: { ...state.search, ...payload }, hasSearch: true }
 
     case 'START CHANGING LIKE STATUS':
       return { ...state, mutations, isChangingLikeStatus: [...state.isChangingLikeStatus, payload] }

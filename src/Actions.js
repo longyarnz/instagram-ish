@@ -346,32 +346,31 @@ export async function EDIT_PROFILE(dispatch, token, formData, callback, onError)
   }
 }
 
-export async function SEARCH(dispatch, token, text, callback) {
+export async function SEARCH(dispatch, token, text, callback, onError) {
   try {
     let search = await fetch(`${API}/search/${text}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
-      },
-      method: 'GET'
+      }
     });
     search = await search.json();
 
     if (search.msg === 'success') {
       dispatch({
-        type: 'STORE SEARCH RESULTS',
+        type: 'STORE SEARCH RESULT',
         payload: {
-          text,
-          result: search.data
+          [text]: search.data[0]
         }
       })
 
-      callback && callback(search.data);
+      callback && callback(search.data[0]);
     }
 
     else throw search;
   }
   catch (err) {
     console.log(err);
+    onError && onError();
   }
 }
 

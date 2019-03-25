@@ -1,3 +1,11 @@
+.small {
+  background-color: $theme-color;
+  padding: 2.5px 5px;
+  margin-right: 5px;
+  color: #fff;
+  border-radius: 3px;
+}
+
 div.search-dialog {
   & > div.dialog-lower-section {
     border-top-left-radius: 0;
@@ -47,26 +55,23 @@ div.search-dialog {
       }
 
       div.search-results {
-        h3 {
+        & > h3 {
           font-size: 120%;
           font-family: $font;
           font-weight: 400;
           margin: 20px 0px 10px;
           text-transform: uppercase;
+
+          & > small {
+            @extend .small;
+            margin-left: 10px;
+          }
         }
-        
-        div .spinner {
-          width: 100%;
-          height: 65vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        
+
         ul {
           padding: 0px;
           margin: 0px;
-          
+
           h3 {
             font-family: $font;
             font-weight: 400;
@@ -80,12 +85,8 @@ div.search-dialog {
             cursor: pointer;
 
             span {
-              small{
-                background-color: $theme-color;
-                padding: 2.5px 5px;
-                margin-right: 5px;
-                color: #fff;
-                border-radius: 3px;
+              small {
+                @extend .small;
               }
             }
 
@@ -97,42 +98,14 @@ div.search-dialog {
 
           li {
             font-family: $font;
-            padding: 10px 10px 0px;
+            padding: 20px 10px 8px;
             font-weight: 300;
             font-size: 85%;
             color: #000;
+            height: 10px;
             display: flex;
             flex-direction: column;
-            height: 10px;
-            min-height: 80px;
-            transition: all .25s ease;
-
-            &:nth-child(even) {
-              background-color: rgba($theme-color, 0.04);
-            }
-
-            div {
-              display: inline-flex;
-              justify-content: flex-start;
-              align-items: center;
-              margin: 10px 0px;
-              transition: opacity .25s ease;
-
-              img {
-                width: 42px;
-                height: 42px;
-                border-radius: 50%;
-                border: 2px solid $theme-color;
-              }
-
-              span {
-                font-size: 85%;
-                font-family: $font;
-                font-weight: 300;
-                margin-left: 15px;
-                color: #000;
-              }
-            }
+            transition: all 0.25s ease;
           }
 
           &.expand_more {

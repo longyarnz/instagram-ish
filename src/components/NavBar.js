@@ -72,10 +72,12 @@ export default function NavBar(props) {
             <Icon name="search" />
           </div>
 
-          <div className="notifications-icon" onClick={scrollSetter(toggleNotificationMenu)}>
-            <Icon name="notifications_none" />
-            <span></span>
-          </div>
+          <ShouldRender if={false}>
+            <div className="notifications-icon" onClick={scrollSetter(toggleNotificationMenu)}>
+              <Icon name="notifications_none" />
+              <span></span>
+            </div>
+          </ShouldRender>
         </ShouldRender>
       </div>
 

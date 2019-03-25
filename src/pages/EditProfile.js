@@ -148,8 +148,7 @@ export default function EditProfile(props) {
 
   const navbarTitle = !error ? 'EDIT PROFILE' : error;
   const errorStyle = error ? { color: '#d9534f' } : null;
-  const origin = window.location.origin === 'http://localhost:3000' ?
-    'http://18.223.1.218' : '';
+  const origin = 'http://18.223.1.218' ;
 
   return (
     <section className="edit-profile">

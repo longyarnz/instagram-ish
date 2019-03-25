@@ -14,7 +14,7 @@ export default function MenuDialog(props) {
 
   return (
     <>
-      <ShouldRender if={true}>
+      <ShouldRender if={false}>
         <ul className={`no-decoration ${notifications}`}>
           <h3 onClick={() => setNots(!showNots)}>
             Notifications

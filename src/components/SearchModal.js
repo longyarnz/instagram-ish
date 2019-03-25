@@ -18,8 +18,10 @@ export default function SearchModal(props) {
       upperDialog={null}
       lowerDialog={
         <SearchDialog
-          dispatch={props.dispatch}
           goTo={props.goTo}
+          state={props.state}
+          dispatch={props.dispatch}
+          token={props.state.token}
         />
       }
       lowerDialogHeight="100%"

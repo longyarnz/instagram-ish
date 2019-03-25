@@ -39,6 +39,18 @@ export function animateScroll(top){
   }, 0);
 }
 
+export function getProfilePictureUrl(props, origin) {
+  return post => {
+    if (post.userId === props.userId) {
+      return props.profilePic || 'assets/img/user.png';
+    }
+    else {
+      return post.profile_photo ?
+        `${origin}/${post.profile_photo}` : 'assets/img/user.png';
+    }
+  };
+}
+
 export function calcTime(unix){
   const timeDifference = Date.now() - (unix * 1000);
   const seconds = Math.floor(timeDifference / 1000);

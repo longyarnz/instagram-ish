@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FlatList, calcTime } from './Utils';
+import { FlatList, calcTime, getProfilePictureUrl } from './Utils';
 import NewsFeedTab from './NewsFeedTab';
 import { FullPageLoader } from './FullPageSpinner';
 import { LIKE_A_POST, UNLIKE_A_POST } from '../Actions';
@@ -61,15 +61,7 @@ export default function NewsFeedSlide(props) {
   const fetchStatusOf = postId => isLiking.some(id => id === postId);
   const emptyDivMessage = props.emptyDivMessage || 'MORE POSTS COMING SOON!';
 
-  const profilePic = post => {
-    if (post.userId === props.userId) {
-      return props.profilePic || 'assets/img/user.png';
-    }
-    else {
-      return post.profile_photo ?
-        `${origin}/${post.profile_photo}` : 'assets/img/user.png';
-    }
-  }
+  const profilePic = getProfilePictureUrl(props, origin);
 
   const changeLikeStatus = (postId, userLikesStatus) => {
     const likeAction = userLikesStatus ? UNLIKE_A_POST : LIKE_A_POST;

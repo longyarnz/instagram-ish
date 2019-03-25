@@ -1,0 +1,65 @@
+li.search-user {
+  min-height: 140px;
+
+  & > div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0px;
+    overflow: hidden;
+    position: relative;
+    transition: opacity 0.25s ease;
+
+    & > img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid $theme-color;
+    }
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin: 0px;
+
+      span {
+        padding: 0px 0px 10px;
+        font-size: 85%;
+        font-family: $font;
+        font-weight: 300;
+        margin-left: 15px;
+        color: #000;
+
+        &:first-of-type {
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+li.search-post {
+  min-height: 400px;
+  align-items: center;
+
+  & > * {
+    transition: opacity 0.25s ease;
+  }
+
+  span{
+    margin-bottom: 15px;
+  }
+
+  img {
+    height: auto;
+    width: 100%;
+
+    @media screen and (min-width: 676px) {
+      height: 200px;
+      width: auto;
+      margin-bottom: 15px;
+    }
+  }
+}

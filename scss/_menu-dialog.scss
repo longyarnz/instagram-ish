@@ -1,19 +1,19 @@
-div.menu-dialog{
-  div.dialog-lower-section{
+div.menu-dialog {
+  div.dialog-lower-section {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    
-    header{
-      h3{
+
+    header {
+      h3 {
         font-weight: 900;
       }
     }
-    
-    ul{
+
+    ul {
       padding: 0px;
       margin: 0px;
-      
-      h3{
+
+      h3 {
         font-family: $font;
         font-size: 80%;
         color: #888;
@@ -25,52 +25,62 @@ div.menu-dialog{
         text-transform: uppercase;
         cursor: pointer;
 
-        span{
+        span {
           margin: 0px auto 0.5px 3px;
           padding: 3px;
           background: red;
           color: #fff;
           border-radius: 10px;
         }
-        
-        i{
+
+        i {
           font-size: 200%;
+          color: $theme-color;
         }
       }
 
-      li{
+      li {
         font-family: $font;
         padding: 10px 0px 10px 20px;
         font-weight: 300;
         font-size: 80%;
         color: #000;
+        min-height: 40px;
+        transition: all 0.25s ease;
 
-        &:nth-child(even){
-          background-color: rgba($theme-color, .04);
-        }
-      }
-      
-      &.expand_more{
-        li{
-          display: none;
+        &:nth-child(even) {
+          background-color: rgba($theme-color, 0.04);
         }
       }
 
-      &.no-decoration{
-        li{
+      &.expand_more {
+        li {
+          height: 0px;
+          min-height: 0px;
+          overflow: hidden;
+          padding: 0px 10px;
+
+          & > * {
+            opacity: 0;
+          }
+        }
+      }
+
+      &.no-decoration {
+        li {
           text-transform: none;
         }
       }
-      
-      &.profile-menu{
+
+      &.profile-menu {
         padding-top: 10px;
-        
-        li{
+
+        li {
           @extend .li-menu;
           font-size: 80%;
           text-transform: capitalize;
-          
-          i{
+
+          i {
             color: #aaa;
             font-size: 130%;
           }
