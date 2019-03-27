@@ -16,7 +16,7 @@ export default function MenuDialog(props) {
     props.dispatch({
       type: 'FILTER POSTS',
       payload: {
-        id, by: 'category',
+        id, by: 'categories',
       }
     })
 
