@@ -31,6 +31,8 @@ export default function ProfileTab(props) {
           <LI icon="insert_emoticon" text={state.user.brand || 'No Brand'} />
         </ShouldRender>
 
+        <LI icon="store_mall_directory" text={state.user.description || 'No Description'} />
+
         <ShouldRender if={state.user.accountType === 'Fashion Enthusiast'}>
           <li className="upgrade" onClick={upgradeAccount}>
             UPGRADE TO DESIGNER ACCOUNT

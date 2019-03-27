@@ -23,7 +23,7 @@ export default function EditProfile(props) {
   useEffect(() => {
     for (let i = 0; i < inputs.current.children.length; i++) {
       const input = inputs.current.children[i];
-      if (['INPUT'].some(i => i === input.tagName)) {
+      if (['INPUT', 'TEXTAREA'].some(i => i === input.tagName)) {
         input.autocomplete = "on";
         input.spellcheck = "true";
         input.id = ++i / 2;
@@ -70,13 +70,13 @@ export default function EditProfile(props) {
     setError(null);
 
     const newProfile = { user: {} }, inputs = [
-      'address', 'brand_name', 'sex',
+      'address', 'brand_name', 'description', 'sex',
       'first_name', 'last_name', 'phone',
       'username', 'photo_path'
     ];
 
     inputs.forEach(i => {
-      if (!userIsADesigner && ['brand_name'].includes(i)) {
+      if (!userIsADesigner && ['brand_name', 'description'].includes(i)) {
         return;
       }
 
@@ -109,7 +109,7 @@ export default function EditProfile(props) {
     newProfile.user.user_type_id = userType;
 
     const photo = profile.get('photo_path');
-    if(photo.size !== 0) {
+    if (photo.size !== 0) {
       profile.append('image', photo);
       profile.delete('photo_path');
     }
@@ -148,7 +148,7 @@ export default function EditProfile(props) {
 
   const navbarTitle = !error ? 'EDIT PROFILE' : error;
   const errorStyle = error ? { color: '#d9534f' } : null;
-  const origin = 'http://18.223.1.218' ;
+  const origin = 'http://18.223.1.218';
 
   return (
     <section className="edit-profile">
@@ -199,6 +199,10 @@ export default function EditProfile(props) {
           <ShouldRender if={userIsADesigner}>
             <label>Brand</label>
             <input placeholder="Brand Name" name="brand_name" type="text" defaultValue={state.user.brand} />
+
+            <label>About</label>
+            <textarea placeholder="Description" name="description" rows={8} defaultValue={state.user.description}>
+            </textarea>
           </ShouldRender>
         </div>
         <button ref={button} type="submit"></button>

@@ -77,8 +77,7 @@ export function Reducers(state, action) {
           accountType: user.userType === 'user' ? 'Fashion Enthusiast' : 'Fashion Designer',
           phone: user.phone,
           brand: user.brand_name || user.brandName,
-          experience: user.experience || 0,
-          about: user.about || '',
+          description: user.description || '',
           photo: user.photo || user.photoPath
         }
       }
