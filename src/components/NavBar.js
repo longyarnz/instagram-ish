@@ -58,7 +58,7 @@ export default function NavBar(props) {
           }
         />
         <span>
-          <AsyncImage src="/assets/img/nav.png" alt="Dominerf" />
+          <AsyncImage src="assets/img/nav.png" alt="Dominerf" />
         </span>
       </div>
 
