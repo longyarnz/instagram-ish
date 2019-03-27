@@ -1,4 +1,29 @@
-section.profile{
+section.profile {
   min-height: 100vh;
   background-color: #fff;
+
+  &.view-profile {
+    min-height: calc(100vh - 60px);
+    position: relative;
+    z-index: 9999;
+
+    & > nav {
+      & > div:last-of-type {
+        display: none;
+      }
+    }
+
+    div.banner > span {
+      padding-bottom: 0px;
+    }
+
+    @media screen and (min-width: 676px) {
+      width: calc(100vw * 0.5 + 10px);
+      margin: auto;
+      
+      & > nav {
+        width: calc(100vw * 0.5 + 10px);
+      }
+    }
+  }
 }

@@ -5,12 +5,25 @@ import { FlatList } from './Utils';
 
 export default function MenuDialog(props) {
   const [showNots, setNots] = useState(false);
-  const [showCats, setCats] = useState(false);
+  const [showCats, setCats] = useState(true);
   const [showSets, setSets] = useState(false);
 
   const notifications = showNots ? 'expand_less' : 'expand_more';
   const categories = showCats ? 'expand_less' : 'expand_more';
   const settings = showSets ? 'expand_less' : 'expand_more';
+
+  const selectCategory = id => {
+    props.dispatch({
+      type: 'FILTER POSTS',
+      payload: {
+        id, by: 'category',
+      }
+    })
+
+    props.dispatch({
+      type: 'NULL MODAL VIEW'
+    });    
+  }
 
   return (
     <>
@@ -36,6 +49,7 @@ export default function MenuDialog(props) {
             <li
               key={`menu-${i}`}
               value={cat.id}
+              onClick={() => selectCategory(cat.id)}
             >
               {cat.name}
             </li>

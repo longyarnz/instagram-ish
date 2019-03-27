@@ -11,8 +11,7 @@ export default function Profile(props) {
   useScroll(props);
 
   const { dispatch, state, goTo } = props;
-  const fullName = state.user.firstName +
-    ' ' + state.user.lastName;
+  const fullName = `${state.user.firstName} ${state.user.lastName}`;
 
   return (
     <section className="profile">
@@ -27,12 +26,11 @@ export default function Profile(props) {
         goTo={goTo}
         src={state.user.photo}
         fullName={fullName}
+        userIsSuperUser={true}
       />
       <MenuBar tabs={profileState} {...props} />
-      <Gallery tabs={profileState} {...props} />
+      <Gallery tabs={profileState} userId={state.user.id} {...props} />
       <Footer />
     </section>
   )
 }
-
-

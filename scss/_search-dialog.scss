@@ -51,6 +51,15 @@ div.search-dialog {
           padding: 0px;
           font-family: $font;
           border: 0;
+
+          i {
+            color: $accent-color;
+          }
+        }
+
+        &:focus,
+        &:hover {
+          outline: none;
         }
       }
 
@@ -85,6 +94,8 @@ div.search-dialog {
             cursor: pointer;
 
             span {
+              transition: all 0.35s ease;
+
               small {
                 @extend .small;
               }
@@ -92,6 +103,11 @@ div.search-dialog {
 
             i {
               font-size: 200%;
+              color: $theme-color;
+            }
+
+            &:focus,
+            &:hover {
               color: $theme-color;
             }
           }
@@ -103,8 +119,8 @@ div.search-dialog {
             font-size: 85%;
             color: #000;
             height: 10px;
-            display: flex;
             flex-direction: column;
+            cursor: pointer;
             transition: all 0.25s ease;
           }
 

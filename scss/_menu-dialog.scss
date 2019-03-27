@@ -46,10 +46,16 @@ div.menu-dialog {
         font-size: 80%;
         color: #000;
         min-height: 40px;
+        cursor: pointer;
         transition: all 0.25s ease;
 
         &:nth-child(even) {
           background-color: rgba($theme-color, 0.04);
+        }
+        
+        &:focus, &:hover{
+          color: $theme-color;
+          font-weight: 400;
         }
       }
 
@@ -58,7 +64,7 @@ div.menu-dialog {
           height: 0px;
           min-height: 0px;
           overflow: hidden;
-          padding: 0px 10px;
+          padding: 0px 0px 0px 20px;
 
           & > * {
             opacity: 0;
@@ -73,7 +79,7 @@ div.menu-dialog {
       }
 
       &.profile-menu {
-        padding-top: 10px;
+        margin-top: 10px;
 
         li {
           @extend .li-menu;

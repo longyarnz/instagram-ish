@@ -1,10 +1,11 @@
 import React from 'react';
 import AsyncImage from './AsyncImage';
 import Icon from './Icon';
+import ShouldRender from './ShouldRender';
 
-export default function Banner({ src, goTo, fullName }) {
+export default function Banner(props) {
   const origin = 'http://18.223.1.218';
-  src = !src ? 'assets/img/user.png' : origin + '/' + src;
+  const src = !props.src ? 'assets/img/user.png' : origin + '/' + props.src;
 
   return (
     <div className="banner">
@@ -13,11 +14,14 @@ export default function Banner({ src, goTo, fullName }) {
           <AsyncImage src={src} alt="profile" />
         </div>
       </div>
-      <span>{fullName}</span>
-      <button onClick={() => goTo('./pages/EditProfile')}>
-        <Icon name="edit" />
-        <span>Edit Profile</span>
-      </button>
+      <span>{props.fullName}</span>
+      
+      <ShouldRender if={props.userIsSuperUser}>
+        <button onClick={() => props.goTo('./pages/EditProfile')}>
+          <Icon name="edit" />
+          <span>Edit Profile</span>
+        </button>
+      </ShouldRender>
     </div>
   )
 }

@@ -93,7 +93,7 @@ export default function CreatePostDialog(props) {
   }
 
   return (
-    <div className="create-post-dialog">
+    <div className="create-post-tab">
       <form onSubmit={onSubmit}>
         <select name="category" required={true} onChange={onChangeSelect}>
           <option value={undefined}>Select a category</option>

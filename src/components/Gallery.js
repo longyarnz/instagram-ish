@@ -4,8 +4,9 @@ import ShouldRender from './ShouldRender';
 import NewsFeedSlide from './NewsFeedSlide';
 
 export default function Gallery(props) {
-  const { tabs: [tab] } = props;
-  const posts = props.state.posts.filter(i => i.liked_by_me);
+  const { tabs: [tab], state, userId } = props;
+  const posts = state.posts.filter(i => i.user_id === userId);
+  const emptyDivMessage = props.emptyDivMessage || `YOU HAVEN'T CREATED ANY POSTS YET`;
 
   return (
     <div className="gallery">
@@ -18,13 +19,13 @@ export default function Gallery(props) {
           isViewingFromNewsFeed={false}
           hasPosts={true}
           posts={posts}
-          emptyDivMessage="YOU HAVEN'T LIKED ANY POSTS"
-          changingLikeStatus={props.state.isChangingLikeStatus}
-          token={props.state.token}
-          userId={props.state.user.id}
-          likes={props.state.likes}
+          emptyDivMessage={emptyDivMessage}
+          changingLikeStatus={state.isChangingLikeStatus}
+          token={state.token}
+          userId={state.user.id}
+          likes={state.likes}
           dispatch={props.dispatch}
-          userIsLoggedIn={props.state.userIsLoggedIn}
+          userIsLoggedIn={state.userIsLoggedIn}
         />
       </ShouldRender>
     </div>

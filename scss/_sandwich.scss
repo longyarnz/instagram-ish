@@ -37,7 +37,7 @@ svg.sandwich {
   -webkit-tap-highlight-color: transparent;
   
   rect {
-    fill: #000;
+    fill: $accent-color;
     
     &:first-of-type {
       animation: svg-Y .3s ease-out both;

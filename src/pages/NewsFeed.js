@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import NavBar from '../components/NavBar';
 import NewsFeedSlide from '../components/NewsFeedSlide';
 import Stories from '../components/Stories';
+import NewsFeedHeader from '../components/NewsFeedHeader';
 import Footer from '../components/Footer';
 import ShouldRender from '../components/ShouldRender';
 import { FETCH_POSTS } from '../Actions';
@@ -18,6 +19,29 @@ export default function NewsFeed(props) {
     }
   }, [state.hasPosts, state.token]);
 
+  let name = '';
+  const getFilteredPosts = () => {
+    const { filter, posts } = state;
+    const x = text => text.toLowerCase();
+    
+    if (filter.by === 'categories') {
+      name = state.categories[parseInt(filter.id)].name;
+      return posts.filter(post => {
+        return x(name) === 'show all'
+          ? post
+          : x(post.category) === x(name);
+      });
+    }
+
+    else if (filter.by === 'posts') {
+      const filteredPost = state.posts[parseInt(filter.id)];
+      name = 'Cancel Search';
+      return [ filteredPost ];
+    }
+  }
+
+  const posts = state.filter.id === null ? state.posts : getFilteredPosts();
+
   return (
     <>
       <NavBar
@@ -26,8 +50,12 @@ export default function NewsFeed(props) {
         goTo={goTo}
       />
 
-      <ShouldRender if={state.userIsLoggedIn}>
+      <ShouldRender if={false && state.userIsLoggedIn}>
         <Stories />
+      </ShouldRender>
+
+      <ShouldRender if={state.filter.id !== null}>
+        <NewsFeedHeader name={name} dispatch={dispatch} />
       </ShouldRender>
 
       <NewsFeedSlide
@@ -37,11 +65,12 @@ export default function NewsFeed(props) {
         userId={state.user.id}
         likes={state.likes}
         hasPosts={state.hasPosts}
-        posts={state.posts}
+        posts={posts}
         dispatch={dispatch}
         view={state.view}
         userIsLoggedIn={state.userIsLoggedIn}
         profilePic={state.user.photo}
+        postIsFiltered={Boolean(state.filter.id)}
       />
 
       <Footer />

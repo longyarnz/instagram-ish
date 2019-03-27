@@ -6,6 +6,7 @@ import Icon from './Icon';
 import ActionMenu from './ActionMenu';
 import UserMenu from './UserMenu';
 import { injectScrollSetter } from './Utils';
+import AsyncImage from './AsyncImage';
 
 export default function NavBar(props) {
   const [showMenu, setMenu] = useState(false);
@@ -56,7 +57,9 @@ export default function NavBar(props) {
             (toggleAppMenu && scrollSetter(toggleAppMenu))
           }
         />
-        <span>DOMINERF</span>
+        <span>
+          <AsyncImage src="/assets/img/nav.png" alt="Dominerf" />
+        </span>
       </div>
 
       <div>

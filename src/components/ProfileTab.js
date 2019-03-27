@@ -12,7 +12,8 @@ function LI(props) {
 }
 
 export default function ProfileTab(props) {
-  const { state, dispatch, goTo } = props;
+  const { state: {user}, dispatch, goTo } = props;
+
   const upgradeAccount = () => {
     dispatch({ type: 'UPGRADE CUSTOMER ACCOUNT' });
     goTo('./pages/EditProfile');
@@ -20,20 +21,20 @@ export default function ProfileTab(props) {
 
   return (
     <div className="profile-tab">
-      <h3 className="profile-tab">{state.user.accountType} Account</h3>
+      <h3 className="profile-tab">{user.accountType} Account</h3>
       <ul className="profile-tab">
-        <LI icon="face" text={state.user.username} />
-        <LI icon="mail_outline" text={state.user.email} />
-        <LI icon="contact_phone" text={state.user.phone || 'No Phone Number'} />
+        <LI icon="face" text={user.username} />
+        <LI icon="mail_outline" text={user.email} />
+        <LI icon="contact_phone" text={user.phone || 'No Phone Number'} />
 
-        <ShouldRender if={state.user.accountType === 'Fashion Designer'}>
-          <LI icon="near_me" text={state.user.address || 'No Address'} />
-          <LI icon="insert_emoticon" text={state.user.brand || 'No Brand'} />
+        <ShouldRender if={user.accountType === 'Fashion Designer'}>
+          <LI icon="near_me" text={user.address || 'No Address'} />
+          <LI icon="insert_emoticon" text={user.brand || 'No Brand'} />
         </ShouldRender>
 
-        <LI icon="store_mall_directory" text={state.user.description || 'No Description'} />
+        <LI icon="store_mall_directory" text={user.description || 'No Description'} />
 
-        <ShouldRender if={state.user.accountType === 'Fashion Enthusiast'}>
+        <ShouldRender if={props.userIsSuperUser && user.accountType === 'Fashion Enthusiast'}>
           <li className="upgrade" onClick={upgradeAccount}>
             UPGRADE TO DESIGNER ACCOUNT
           </li>

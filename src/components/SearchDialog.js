@@ -6,9 +6,14 @@ import SearchResults from './SearchResults';
 
 export default function SearchDialog(props) {
   const _this = useRef(null);
+  const [text, setText] = useState('');
   const [results, setResults] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [placeholder, setPlaceholder] = useState('Search for Users and Posts');
+
+  useEffect(() => {
+    document.getElementsByTagName('input')[0].focus();
+  }, []);
 
   useEffect(() => {
     _this.current = 'MOUNTED';
@@ -22,12 +27,12 @@ export default function SearchDialog(props) {
     e.persist();
     if (isLoading) return;
 
-    setIsLoading(true);
     const text = e.target[0].value;
+    setText(text);
+    setIsLoading(true);
 
     const callback = results => {
       if (_this.current === 'UNMOUNTED') return;
-      e.target[0].value = '';
       setIsLoading(false);
       setResults(results);
     }
@@ -42,7 +47,7 @@ export default function SearchDialog(props) {
       }, 5000);
     }
 
-    if(props.state.search[text]){
+    if (props.state.search[text]) {
       callback(props.state.search[text]);
     }
 
@@ -54,12 +59,24 @@ export default function SearchDialog(props) {
 
   return (
     <div className="search">
-      <form onSubmit={onSubmit}>
-        <input type="search" name="search" placeholder={placeholder} />
+      <form onSubmit={onSubmit} autoFocus={true}>
+        <input
+          type="search"
+          name="search"
+          placeholder={placeholder}
+          defaultValue={props.state.searchText}
+        />
         <button type="submit">{button}</button>
       </form>
 
-      <SearchResults isLoading={isLoading} results={results} />
+      <SearchResults
+        state={props.state}
+        isLoading={isLoading}
+        results={results}
+        dispatch={props.dispatch}
+        goTo={props.goTo}
+        text={text}
+      />
     </div>
   )
 }

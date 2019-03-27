@@ -23,6 +23,11 @@ export const InitialState = {
   hasSearch: false,
   newsfeedCounter: 0,
   posts: [],
+  filter: {
+    by: null,
+    id: null
+  },
+  searchText: null,
   postId: null,
   comments: {},
   search: {},
@@ -34,6 +39,7 @@ export const InitialState = {
   user: {},
   upgradeAccount: false,
   categories: [
+    { "id": 0, "name": "Show All" },
     { "id": 1, "name": "Gown" },
     { "id": 2, "name": "Blouse" },
     { "id": 3, "name": "Men Suit" },
@@ -60,7 +66,7 @@ export function Reducers(state, action) {
   switch (type) {
     case 'EDIT USER PROFILE':
     case 'LOG USER IN':
-      const { user, token } = payload;
+      let { user, token } = payload;
       return {
         ...state,
         mutations,
@@ -85,6 +91,30 @@ export function Reducers(state, action) {
     case 'LOG USER OUT':
       localStorage.removeItem('staleState');
       return InitialState;
+
+    case 'VIEW A DIFFERENT USER PROFILE':
+      user = payload;
+      return {
+        ...state,
+        mutations,
+        viewUser: {
+          id: user.userId,
+          firstName: user.first_name || user.fullName.split(' ')[0],
+          lastName: user.last_name || user.fullName.split(' ')[1],
+          email: user.email,
+          sex: user.sex,
+          address: user.address,
+          username: user.username,
+          accountType: user.userType === 'user' ? 'Fashion Enthusiast' : 'Fashion Designer',
+          phone: user.phone,
+          brand: user.brand_name || user.brandName,
+          description: user.description || '',
+          photo: user.photo || user.photoPath
+        }
+      }
+
+    case 'NULL A DIFFERENT USER PROFILE':
+      return { ...state, mutations, viewUser: {} }
 
     case 'LOCK STATE':
       return { ...state, mutations, stateIsLocked: true }
@@ -185,6 +215,12 @@ export function Reducers(state, action) {
     case 'UPGRADE CUSTOMER ACCOUNT':
       return { ...state, mutations, upgradeAccount: true }
 
+    case 'FILTER POSTS':
+      return { ...state, mutations, filter: payload }
+
+    case 'REMOVE FILTER':
+      return { ...state, mutations, filter: InitialState.filter }
+
     case 'STORE POST IMAGE':
       return { ...state, mutations, createPostImage: payload }
 
@@ -193,16 +229,22 @@ export function Reducers(state, action) {
 
     case 'SET SCROLL TOP':
       const scrollTop = state.scrollIsLocked ? {} : payload;
-      return { ...state, mutations, scrollTop: {...state.scrollTop, ...scrollTop}, scrollIsLocked: true }
+      return { ...state, mutations, scrollTop: { ...state.scrollTop, ...scrollTop }, scrollIsLocked: true }
 
     case 'NULL SCROLL TOP':
-      return { ...state, mutations, scrollTop: {...state.scrollTop, ...action.payload}, scrollIsLocked: false }
+      return { ...state, mutations, scrollTop: { ...state.scrollTop, ...action.payload }, scrollIsLocked: false }
 
     case 'SET MODAL VIEW':
       return { ...state, mutations, modalView: payload }
 
     case 'NULL MODAL VIEW':
       return { ...state, mutations, modalView: null }
+
+    case 'SET SEARCH TEXT':
+      return { ...state, mutations, searchText: payload }
+
+    case 'NULL SEARCH TEXT':
+      return { ...state, mutations, searchText: null }
 
     case 'SET FETCHING STATUS FOR COMMENTS':
       return { ...state, mutations, isFetchingComments: true }
@@ -216,11 +258,11 @@ export function Reducers(state, action) {
     case 'NULL SENDING STATUS FOR COMMENTS':
       return { ...state, mutations, isSendingComment: false }
 
-    case 'RESTORE STATE':
-      return { ...state, mutations, ...payload }
-
     case 'RELOAD NEWSFEED':
       return { ...state, mutations, newsfeedCounter: (state.newsfeedCounter + 1) }
+
+    case 'RESTORE STATE':
+      return { ...state, mutations, ...payload }
 
     case 'CACHE STATE':
       localStorage.staleState = JSON.stringify({

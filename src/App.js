@@ -32,11 +32,13 @@ export default function App() {
     './pages/NewsFeed': [
       'userIsLoggedIn',
       'hasPosts',
-      'newsfeedCounter'
+      'newsfeedCounter',
+      'filter'
     ],
     './pages/Login': 'DO NOT RERENDER',
     './pages/Register': 'DO NOT RERENDER',
     './pages/Profile': 'DO NOT RERENDER',
+    './pages/ViewProfile': 'DO NOT RERENDER',
     './components/CommentModal': 'DO NOT RERENDER',
     './components/SearchModal': 'DO NOT RERENDER',
     './components/CreatePostModal': [
@@ -56,8 +58,15 @@ export default function App() {
       <ShouldRender if={state.modalView}>
         <AsyncLoader
           path={state.modalView}
-          fallback={<div></div>}
           dependencies={reloadComponentWhenThisChanges[state.modalView]}
+          fallback={(
+            <div style={{
+              width: '100vw',
+              height: '100vh',
+              position: 'fixed',
+              backgroundColor: '#fff'
+            }}></div>
+          )}
         />
       </ShouldRender>
 

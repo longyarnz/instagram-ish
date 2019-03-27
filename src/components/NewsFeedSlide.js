@@ -12,12 +12,12 @@ export default function NewsFeedSlide(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [localPosts, setLocalPosts] = useState(null);
   const [isLiking, setIsLiking] = useState([]);
-  
+
   useEffect(() => {
     const x = setTimeout(() => {
-      if(_this.current === 'MOUNTED') setCounter(counter + 1);
+      if (_this.current === 'MOUNTED') setCounter(counter + 1);
     }, 60000);
-    
+
     return () => {
       clearTimeout(x);
     }
@@ -38,9 +38,11 @@ export default function NewsFeedSlide(props) {
     props.hasPosts && setIsLoading(false);
   });
 
-  const style = props.userIsLoggedIn ? {
-    paddingTop: 0
-  } : {};
+  const style = !props.isViewingFromNewsFeed
+    || (false && props.userIsLoggedIn)
+    || props.postIsFiltered ? {
+      paddingTop: 0
+    } : { paddingTop: 60 };
 
   const loadComments = injectScrollSetter(
     props.dispatch, props.view, (postId) => {

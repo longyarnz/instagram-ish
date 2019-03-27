@@ -13,7 +13,6 @@ nav {
 
   & > div {
     min-width: 80px;
-    // min-width: 144px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,14 +21,24 @@ nav {
       min-width: 120px;
 
       & > span {
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
         font-family: $font;
         font-weight: 900;
-        margin-left: 15px;
+
+        img{
+          width: 100px;
+        }
       }
 
       & > div.svg {
         width: 26px;
         height: 26px;
+      }
+
+      & > i {
+        color: $accent-color;
       }
     }
 
@@ -38,6 +47,7 @@ nav {
 
       & > div > div > i {
         font-size: 26px;
+        color: $accent-color;
       }
     }
 

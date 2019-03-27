@@ -25,16 +25,30 @@ export function SearchTab(props) {
 
 export function UserSearchTab(props) {
   const origin = 'http://18.223.1.218';
+  const src = props.user.photoPath ? `${origin}/${props.user.photoPath}` 
+    : '/assets/img/user.png';
+
+  const showUserProfile = () => {
+    props.dispatch({
+      type: 'VIEW A DIFFERENT USER PROFILE',
+      payload: props.user
+    });
+
+    props.dispatch({
+      type: 'SET SEARCH TEXT',
+      payload: props.text
+    });
+
+    props.goTo('./pages/ViewProfile');
+  }
 
   return (
-    <li className="search-user" key={`user-${props.i}`}>
+    <li className="search-user" key={`user-${props.i}`} onClick={showUserProfile}>
       <div>
-        <AsyncImage src={`${origin}/${props.user.photoPath}`} alt="user" />
+        <AsyncImage src={src} alt="user" />
         <div>
           <span>{props.user.fullName}</span>
           <span>{props.user.username}</span>
-          <span>{props.user.email}</span>
-          <span>{props.user.phone}</span>
         </div>
       </div>
       <Divider className="line" color="#f4f4f4" width="100%" />
@@ -42,14 +56,65 @@ export function UserSearchTab(props) {
   );
 }
 
-export function PostSearchTab({ post }) {
-  const origin = 'http://18.223.1.218';
+export function CategorySearchTab(props) {
+  const selectCategory = () => {
+    props.dispatch({
+      type: 'FILTER POSTS',
+      payload: {
+        by: 'categories',
+        id: props.id
+      }
+    });
+
+    props.dispatch({
+      type: 'SET SEARCH TEXT',
+      payload: props.text
+    });
+
+    props.dispatch({
+      type: 'NULL MODAL VIEW'
+    });
+  }
 
   return (
-    <li className="search-post">
+    <li className="search-cat" onClick={selectCategory}>
       <span>
-        {post.caption}
+        {props.name}
       </span>
+    </li>
+  );
+}
+
+export function PostSearchTab(props) {
+  const { posts, dispatch, post } = props;
+  const origin = 'http://18.223.1.218';
+
+  const selectPost = () => {
+    const id = posts.findIndex(i => i.post_id === post.post_id);
+
+    dispatch({
+      type: 'SET SEARCH TEXT',
+      payload: props.text
+    });
+
+    dispatch({
+      type: 'FILTER POSTS',
+      payload: {
+        id, by: 'posts',
+      }
+    })
+
+    dispatch({
+      type: 'NULL MODAL VIEW'
+    });
+  }
+
+  return (
+    <li className="search-post" onClick={selectPost}>
+      <div>
+        {post.caption}
+        <i className="material-icons">chevron_right</i>
+      </div>
       <AsyncImage src={`${origin}/${post.image_path}`} alt="post" />
       <Divider className="line" color="#f4f4f4" width="100%" />
     </li>
