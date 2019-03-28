@@ -54,6 +54,7 @@ div.search-dialog {
 
           i {
             color: $accent-color;
+            font-size: 20px;
           }
         }
 
@@ -118,7 +119,7 @@ div.search-dialog {
             font-weight: 300;
             font-size: 85%;
             color: #000;
-            height: 10px;
+            height: auto;
             flex-direction: column;
             cursor: pointer;
             transition: all 0.25s ease;

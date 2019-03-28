@@ -14,11 +14,6 @@ export default function SearchResults(props) {
   posts = searchText ? search[searchText].posts : posts;
   users = searchText ? search[searchText].users : users;
   categories = searchText ? search[searchText].categories : categories;
-
-  categories = categories.length > 0
-    ? [{ id: 0, name: 'Show All' }].concat(categories)
-    : categories;
-
   const total = users.length + posts.length + categories.length;
 
   return (
