@@ -30,8 +30,7 @@ export function injectScrollSetter(dispatch, view, fn) {
 
 export function animateScroll(top){
   let scrollPosition = 0;
-  let scrollSpeed = top > 600 ? 100 : 50;
-  scrollSpeed = top > 1500 ? 300 : scrollSpeed;
+  const scrollSpeed = 50;
   
   const y = setInterval(() => {
     if(scrollPosition >= top) clearInterval(y);
