@@ -6,13 +6,20 @@ import { FlatList } from './Utils';
 export default function MenuDialog(props) {
   const [showNots, setNots] = useState(false);
   const [showCats, setCats] = useState(true);
-  const [showSets, setSets] = useState(false);
+  const [showSets, setSets] = useState(true);
 
   const notifications = showNots ? 'expand_less' : 'expand_more';
   const categories = showCats ? 'expand_less' : 'expand_more';
   const settings = showSets ? 'expand_less' : 'expand_more';
 
   const selectCategory = id => {
+    props.dispatch({
+      type: 'SET SCROLL TOP',
+      payload: {
+        './pages/NewsFeed': 0
+      }
+    });
+
     props.dispatch({
       type: 'FILTER POSTS',
       payload: {
@@ -65,7 +72,7 @@ export default function MenuDialog(props) {
           <li onClick={() => {
             props.goTo('./pages/Profile');
             props.dispatch('HIDE APP MENU');
-          }}>Settings</li>
+          }}>Edit Profile</li>
           <li onClick={() => {
             props.dispatch({ type: 'LOG USER OUT' });
             props.goTo('./pages/NewsFeed');

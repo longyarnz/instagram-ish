@@ -53,8 +53,7 @@ export default function NavBar(props) {
         <SandwichMenu
           menuIsOpened={state.showAppMenu || state.showNotifications || props.menuIsOpened}
           onClick={
-            props.goBack ||
-            (toggleAppMenu && scrollSetter(toggleAppMenu))
+            props.goBack || toggleAppMenu
           }
         />
         <span>

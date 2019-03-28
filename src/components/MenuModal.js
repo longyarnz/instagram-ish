@@ -20,7 +20,7 @@ export default function MenuModal(props) {
         <MenuDialog
           dispatch={props.dispatch}
           goTo={props.goTo}
-          userIsLoggedIn={props.userIsLoggedIn}
+          userIsLoggedIn={props.state.userIsLoggedIn}
           categories={props.state.categories}
         />
       }

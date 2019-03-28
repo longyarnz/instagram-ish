@@ -7,6 +7,26 @@ import ShouldRender from './ShouldRender';
 import { FETCH_COMMENTS, POST_A_COMMENT } from '../Actions';
 
 function Comments(props) {
+  const _this = useRef(null);
+  const [counter, setCounter] = useState(0);
+
+  useEffect(() => {
+    _this.current = 'MOUNTED';
+    return () => {
+      _this.current = 'UNMOUNTED';
+    }
+  }, []);
+
+  useEffect(() => {
+    const x = setTimeout(() => {
+      if (_this.current === 'MOUNTED') setCounter(counter + 1);
+    }, 60000);
+
+    return () => {
+      clearTimeout(x);
+    }
+  }, [counter]);
+
   let totalComments = props.comments.length;
   totalComments = `${totalComments || 'No'} comment${totalComments !== 1 ? 's' : ''}`;
 
@@ -130,7 +150,7 @@ export default function CommentDialog(props) {
         <button type="submit">
           {
             !isSending ? <Icon name="chat_bubble_outline" /> : (
-              <Spinner style={{ color: '#ccc', animationDuration: '.5s' }} />
+              <Spinner style={{ color: '#1c3451', animationDuration: '.5s' }} />
             )
           }
         </button>

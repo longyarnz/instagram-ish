@@ -27,7 +27,6 @@ div.comment-dialog {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        // border-bottom: 2px solid $theme-color;
         position: sticky;
         top: 44px;
         background: #fff;
@@ -57,8 +56,9 @@ div.comment-dialog {
           font-family: $font;
           border: 0;
           
-          & i {
+          & > i {
             font-size: 110%;
+            color: $accent-color;
           }
         }
       }
@@ -96,13 +96,11 @@ div.comment-dialog {
               min-width: 42px;
               height: 42px;
               border-radius: 50%;
-              // flex: 1;
               margin-right: auto;
               border: 2px solid $theme-color;
             }
 
             span {
-              // flex: 1;
               font-size: 80%;
               font-family: $font;
               font-weight: 300;
@@ -112,7 +110,7 @@ div.comment-dialog {
               &:first-of-type {
                 font-weight: 700;
                 margin-left: 0px;
-                color: $theme-color;
+                color: $accent-color;
               }
             }
           }
