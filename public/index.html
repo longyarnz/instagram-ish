@@ -61,7 +61,11 @@
       font-family: "Material Icons";
       font-style: normal;
       font-weight: 400;
-      src: url("%PUBLIC_URL%/assets/fonts/icons.woff2") format("woff2"), url("%PUBLIC_URL%/assets/fonts/icons.woff") format("woff")
+      src: url("%PUBLIC_URL%/assets/fonts/icons.woff2") format("woff2"), 
+        url("%PUBLIC_URL%/assets/fonts/icons.woff") format("woff"),
+        url("%PUBLIC_URL%/assets/fonts/icons.ttf") format("truetype"),
+        url("%PUBLIC_URL%/assets/fonts/icons.eot"),
+        url("%PUBLIC_URL%/assets/fonts/icons.svg")
     }
 
     .material-icons {
@@ -76,9 +80,12 @@
       white-space: nowrap;
       word-wrap: normal;
       direction: ltr;
-      -webkit-font-smoothing: antialiased;
       cursor: pointer;
       overflow: hidden;
+      font-feature-settings: "liga";
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     section#fallback {
