@@ -25,21 +25,31 @@ export function SearchTab(props) {
 
 export function UserSearchTab(props) {
   const origin = 'http://18.223.1.218';
-  const src = props.user.photoPath ? `${origin}/${props.user.photoPath}` 
+  const src = props.user.photoPath ? `${origin}/${props.user.photoPath}`
     : '/assets/img/user.png';
 
   const showUserProfile = () => {
-    props.dispatch({
-      type: 'VIEW A DIFFERENT USER PROFILE',
-      payload: props.user
-    });
+    if (props.id === props.user.userId) {
+      props.goTo('./pages/Profile');
+
+      // props.dispatch({
+      //   type: 'NULL MODAL VIEW',
+      // });
+    }
+
+    else {
+      props.dispatch({
+        type: 'VIEW A DIFFERENT USER PROFILE',
+        payload: props.user
+      });
+
+      props.goTo('./pages/ViewProfile');
+    }
 
     props.dispatch({
       type: 'SET SEARCH TEXT',
       payload: props.text
     });
-
-    props.goTo('./pages/ViewProfile');
   }
 
   return (

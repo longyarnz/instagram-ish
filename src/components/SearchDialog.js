@@ -25,9 +25,9 @@ export default function SearchDialog(props) {
   const onSubmit = e => {
     e.preventDefault();
     e.persist();
-    if (isLoading) return;
-
     const text = e.target[0].value;
+    if (isLoading || !text || text === '') return;
+
     setText(text);
     setIsLoading(true);
 
@@ -65,6 +65,7 @@ export default function SearchDialog(props) {
           name="search"
           placeholder={placeholder}
           defaultValue={props.state.searchText}
+          required={true}
         />
         <button type="submit">{button}</button>
       </form>

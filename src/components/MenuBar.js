@@ -19,7 +19,7 @@ export default function MenuBar({ tabs }) {
         <ColorIcon name="local_play" color={hue[1]} onClick={() => setTab(1)} />
       </ShouldRender>
       
-      <ColorIcon name="favorite_outline" color={hue[2]} onClick={() => setTab(2)} />
+      <ColorIcon name="apps" color={hue[2]} onClick={() => setTab(2)} />
     </div>
   )
 }

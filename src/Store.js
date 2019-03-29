@@ -94,24 +94,21 @@ export function Reducers(state, action) {
 
     case 'VIEW A DIFFERENT USER PROFILE':
       user = payload;
-      return {
-        ...state,
-        mutations,
-        viewUser: {
-          id: user.userId,
-          firstName: user.first_name || user.fullName.split(' ')[0],
-          lastName: user.last_name || user.fullName.split(' ')[1],
-          email: user.email,
-          sex: user.sex,
-          address: user.address,
-          username: user.username,
-          accountType: user.userType === 'user' ? 'Fashion Enthusiast' : 'Fashion Designer',
-          phone: user.phone,
-          brand: user.brand_name || user.brandName,
-          description: user.description || '',
-          photo: user.photo || user.photoPath
-        }
-      }
+      const viewUser = user ? {
+        id: user.userId,
+        firstName: user.first_name || user.fullName.split(' ')[0],
+        lastName: user.last_name || user.fullName.split(' ')[1],
+        email: user.email,
+        sex: user.sex,
+        address: user.address,
+        username: user.username,
+        accountType: user.userType === 'user' ? 'Fashion Enthusiast' : 'Fashion Designer',
+        phone: user.phone,
+        brand: user.brand_name || user.brandName,
+        description: user.description || '',
+        photo: user.photo || user.photoPath
+      } : {}
+      return { ...state, mutations, viewUser }
 
     case 'NULL A DIFFERENT USER PROFILE':
       return { ...state, mutations, viewUser: {} }
@@ -163,6 +160,10 @@ export function Reducers(state, action) {
 
     case 'ADD NEW POST':
       return { ...state, mutations, posts: [...payload, ...state.posts] }
+
+    case 'DELETE POST':
+      posts = state.posts.filter(post => post.post_id !== payload);
+      return { ...state, mutations, posts }
 
     case 'FETCH COMMENTS':
       return { ...state, mutations, comments: { ...state.comments, ...payload }, hasComments: true }
@@ -269,8 +270,8 @@ export function Reducers(state, action) {
         token: state.token ? state.token : null,
         userIsLoggedIn: state.userIsLoggedIn ? state.userIsLoggedIn : false,
         user: state.user ? state.user : {},
-        hasPosts: state.hasPosts ? state.hasPosts : false,
-        posts: state.posts.length > 0 ? state.posts : []
+        hasPosts: process.env.NODE_ENV === 'development' && state.hasPosts,
+        posts: process.env.NODE_ENV === 'development' && state.posts.length > 0 ? state.posts : []
       });
       return { ...state, mutations };
 

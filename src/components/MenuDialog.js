@@ -70,9 +70,9 @@ export default function MenuDialog(props) {
             Profile <Icon name={settings} />
           </h3>
           <li onClick={() => {
+            props.dispatch({type : 'NULL MODAL VIEW'});
             props.goTo('./pages/Profile');
-            props.dispatch('HIDE APP MENU');
-          }}>Edit Profile</li>
+          }}>View Profile</li>
           <li onClick={() => {
             props.dispatch({ type: 'LOG USER OUT' });
             props.goTo('./pages/NewsFeed');

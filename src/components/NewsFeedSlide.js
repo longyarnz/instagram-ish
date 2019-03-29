@@ -108,8 +108,10 @@ export default function NewsFeedSlide(props) {
           listView={(post, i) => (
             <NewsFeedTab
               key={`tab-${i}`}
+              id={post.post_id}
               author={post.username}
-              profession={post.brand_name}
+              authorId={post.userId}
+              brand={post.brand_name}
               userSrc={profilePic(post)}
               src={`${origin}/${post.image_path}`}
               caption={post.caption}
@@ -123,6 +125,11 @@ export default function NewsFeedSlide(props) {
               loadComments={() => loadComments(post.post_id)}
               changeLikeStatus={() => changeLikeStatus(post.post_id, post.liked_by_me)}
               isViewingFromNewsFeed={props.isViewingFromNewsFeed}
+              isViewingFromOwnProfile={props.isViewingFromOwnProfile}
+              viewerId={props.userId}
+              token={props.token}
+              dispatch={props.dispatch}
+              goTo={props.goTo}
             />
           )}
         />

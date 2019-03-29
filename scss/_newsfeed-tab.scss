@@ -38,9 +38,11 @@ div.newsfeed-tab {
       flex-direction: column;
 
       span {
+        cursor: pointer;
+        
         &:first-of-type {
           width: 100%;
-          color: #000;
+          color: $accent-color;
           margin-bottom: 3px;
           font-weight: 700;
         }
@@ -96,6 +98,21 @@ div.newsfeed-tab {
         font-size: 85%;
       }
 
+      &.delete {
+        display: block;
+        text-align: center;
+
+        & > span {
+          background: #d9534f;
+          margin: auto;
+          padding: 5px 12px;
+          text-align: center;
+          font-weight: 700;
+          color: #fff;
+          border-radius: 3px;
+        }
+      }
+
       &:first-of-type {
         border-right: 1px solid #f4f4f4;
 
@@ -108,8 +125,22 @@ div.newsfeed-tab {
     }
   }
 
-  & > img {
-    width: 100%;
+  & > div.img-container {
+    max-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    
+    img {
+      width: 100%;
+      
+    }
+    
+    @media screen and (min-width: 676px) {
+      max-height: calc(100vh - 80px);
+    }
   }
 
   & > span {

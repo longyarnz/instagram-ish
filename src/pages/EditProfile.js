@@ -123,7 +123,7 @@ export default function EditProfile(props) {
 
   const SaveIcon = () => (
     isPosting ?
-      <Spinner style={{ animationDuration: '.55s' }} /> :
+      <Spinner style={{ animationDuration: '.35s' }} /> :
       <ColorIcon
         name="check"
         color="#fff"

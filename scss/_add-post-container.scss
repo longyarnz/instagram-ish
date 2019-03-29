@@ -5,18 +5,35 @@ div.add-post-container {
   width: 70px;
   height: 70px;
   z-index: 99;
-  transition: bottom 0.25s ease, opacity .5s ease;
-  
+  transition: bottom 0.25s ease, opacity 0.5s ease;
+
   & > div.add-story-button {
     & > div {
       background-color: $theme-color;
       border: 1px solid #f8ba0d;
-      box-shadow: 0px 12px 8px -4px rgba(0, 0, 0, .2);
+      transition: all .25s ease;
+      box-shadow: 0px 12px 8px -4px rgba(0, 0, 0, 0.2);
     }
-
-    i{
+    
+    i {
       color: #fff;
       font-size: 250%;
+      transition: all .25s ease;
+    }
+  }
+  
+  &:focus,
+  &:hover {
+    & > div.add-story-button {
+      & > div {
+        background-color: darken($theme-color, 5%);
+        transform: scale(.95, .95);
+        box-shadow: 0px 12px 8px -8px rgba(0, 0, 0, 0.6);
+      }
+      
+      i{
+        transform: scale(.95, .95);
+      }
     }
   }
 

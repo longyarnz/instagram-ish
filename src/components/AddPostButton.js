@@ -1,20 +1,16 @@
 import React, { useRef, useEffect } from 'react';
 import AddStoryButton from './AddStoryButton';
-import { injectScrollSetter } from './Utils';
 
 export default function AddPostButton(props) {
   const div = useRef(null);
-  const { dispatch, state } = props;
-  const { modalView } = state;
+  const { modalView } = props.state;
 
-  const onClick = injectScrollSetter(
-    dispatch, state.view, () => {
-      props.dispatch({
-        type: 'SET MODAL VIEW',
-        payload: `./components/CreatePostModal`
-      });
-    }
-  );
+  const onClick = () => {
+    props.dispatch({
+      type: 'SET MODAL VIEW',
+      payload: `./components/CreatePostModal`
+    });
+  }
 
   useEffect(() => {
     if (!props.hasPosts) return;

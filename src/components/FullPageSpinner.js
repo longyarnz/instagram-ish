@@ -29,7 +29,7 @@ export function FullPageLoader(props) {
         justifyContent: 'center',
         alignItems: 'center'
       }}>
-      <Spinner style={{ fontSize: '400%', color: '#ccc', animationDuration: '.65s' }} />
+      <Spinner style={{ fontSize: '400%', color: '#ccc', animationDuration: '.45s' }} />
     </div>
   )
 }

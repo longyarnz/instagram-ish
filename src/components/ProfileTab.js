@@ -21,18 +21,18 @@ export default function ProfileTab(props) {
 
   return (
     <div className="profile-tab">
-      <h3 className="profile-tab">{user.accountType} Account</h3>
+      <h3 className="profile-tab">{user.accountType}</h3>
       <ul className="profile-tab">
         <LI icon="face" text={user.username} />
         <LI icon="mail_outline" text={user.email} />
-        <LI icon="contact_phone" text={user.phone || 'No Phone Number'} />
+        <LI icon="contact_phone" text={user.phone || 'Nil'} />
 
         <ShouldRender if={user.accountType === 'Fashion Designer'}>
-          <LI icon="near_me" text={user.address || 'No Address'} />
-          <LI icon="insert_emoticon" text={user.brand || 'No Brand'} />
+          <LI icon="near_me" text={user.address || 'Nil'} />
+          <LI icon="insert_emoticon" text={user.brand || 'Nil'} />
         </ShouldRender>
 
-        <LI icon="store_mall_directory" text={user.description || 'No Description'} />
+        <LI icon="store_mall_directory" text={user.description || 'Nil'} />
 
         <ShouldRender if={props.userIsSuperUser && user.accountType === 'Fashion Enthusiast'}>
           <li className="upgrade" onClick={upgradeAccount}>

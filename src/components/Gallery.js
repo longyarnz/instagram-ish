@@ -4,8 +4,8 @@ import ShouldRender from './ShouldRender';
 import NewsFeedSlide from './NewsFeedSlide';
 
 export default function Gallery(props) {
-  const { tabs: [tab], state, userId } = props;
-  const posts = state.posts.filter(i => i.user_id === userId);
+  const { tabs: [tab], state } = props;
+  const posts = state.posts.filter(i => i.user_id === props.state.userId);
   const emptyDivMessage = props.emptyDivMessage || `YOU HAVEN'T CREATED ANY POSTS YET`;
 
   return (
@@ -17,6 +17,7 @@ export default function Gallery(props) {
       <ShouldRender if={tab === 2}>
         <NewsFeedSlide
           isViewingFromNewsFeed={false}
+          isViewingFromOwnProfile={props.isViewingFromOwnProfile}
           hasPosts={true}
           posts={posts}
           emptyDivMessage={emptyDivMessage}

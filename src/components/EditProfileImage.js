@@ -9,7 +9,7 @@ export default function EditProfileImage(props) {
     <div className="edit-profile-image">
       <div>
         <div className="img-border">
-          <AsyncImage src={props.prevImg} alt="profile" />
+          <AsyncImage src={props.prevImg || 'assets/img/user.png'} alt="profile" />
         </div>
       </div>
       <div>

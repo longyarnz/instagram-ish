@@ -67,6 +67,7 @@ export default function NewsFeed(props) {
         hasPosts={state.hasPosts}
         posts={posts}
         dispatch={dispatch}
+        goTo={goTo}
         view={state.view}
         userIsLoggedIn={state.userIsLoggedIn}
         profilePic={state.user.photo}

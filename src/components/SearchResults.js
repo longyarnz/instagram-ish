@@ -50,6 +50,7 @@ export default function SearchResults(props) {
           list={users}
           view={(user, i) => (
             <UserSearchTab
+              id={props.state.user.id}
               key={`user-${i}`}
               user={user}
               goTo={props.goTo}

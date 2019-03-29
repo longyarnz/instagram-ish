@@ -29,7 +29,13 @@ export default function Profile(props) {
         userIsSuperUser={true}
       />
       <MenuBar tabs={profileState} {...props} />
-      <Gallery tabs={profileState} userId={state.user.id} {...props} />
+      <Gallery
+        userIsSuperUser={true}
+        tabs={profileState}
+        userId={state.user.id}
+        isViewingFromOwnProfile={props.state.userIsLoggedIn}
+        {...props}
+      />
       <Footer />
     </section>
   )

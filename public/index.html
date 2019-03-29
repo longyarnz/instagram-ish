@@ -8,23 +8,10 @@
   <meta name="theme-color" content="#1c3451" />
   <meta name="msapplication-navbutton-color" content="#1c3451" />
   <meta name="apple-mobile-web-app-status-bar-style" content="#1c3451" />
-  <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900"
     onload="this.rel = 'stylesheet'" />
-  <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
 
   <style>
     * {
@@ -61,11 +48,12 @@
       font-family: "Material Icons";
       font-style: normal;
       font-weight: 400;
-      src: url("%PUBLIC_URL%/assets/fonts/icons.woff2") format("woff2"), 
+      src: 
+        url("%PUBLIC_URL%/assets/fonts/icons.woff2") format("woff2"), 
         url("%PUBLIC_URL%/assets/fonts/icons.woff") format("woff"),
         url("%PUBLIC_URL%/assets/fonts/icons.ttf") format("truetype"),
-        url("%PUBLIC_URL%/assets/fonts/icons.eot"),
-        url("%PUBLIC_URL%/assets/fonts/icons.svg")
+        url("%PUBLIC_URL%/assets/fonts/icons.eot") format('embedded-opentype'),
+        url("%PUBLIC_URL%/assets/fonts/icons.svg") format('svg')
     }
 
     .material-icons {
@@ -107,7 +95,7 @@
 
     @media screen and (min-width: 676px) {
       main#root{
-        width: calc(100vw * 0.5);
+        width: 50vw;
         margin: auto;
       }
     }
@@ -124,16 +112,6 @@
     <img src="%PUBLIC_URL%/assets/img/favicon.png" alt="Dominerf Logo" />
   </section>
   <main id="root"></main>
-  <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
 </body>
 
 </html>

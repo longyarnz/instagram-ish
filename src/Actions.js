@@ -65,6 +65,35 @@ export async function CREATE_POST(dispatch, token, form, callback, onError) {
   }
 }
 
+export async function DELETE_POST(dispatch, token, postId, callback, onError) {
+  try {
+    let post = await fetch(`${API}/posts`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ postId })
+    });
+    post = await post.json();
+
+    if (post.msg === 'success') {
+      dispatch({
+        type: 'DELETE POST',
+        payload: postId
+      });
+
+      callback && callback();
+    }
+
+    else throw post.error;
+  }
+  catch (err) {
+    console.log(err);
+    onError && onError();
+  }
+}
+
 export async function FETCH_COMMENTS(dispatch, token, postId, callback, onError) {
   dispatch({
     type: 'SET FETCHING STATUS FOR COMMENTS'

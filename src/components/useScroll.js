@@ -5,6 +5,8 @@ export default function useScroll(props) {
   const { scrollTop, view } = props.state;
   
   useEffect(() => {
+    // if(scrollTop[view] === 0) return;
+
     const y = setTimeout(() => {
       animateScroll(scrollTop[view]);
       props.dispatch({
