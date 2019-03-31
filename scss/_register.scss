@@ -104,12 +104,12 @@
       font-weight: 700;
       border-radius: 5px;
       cursor: pointer;
-
+      
       &.disabled {
         cursor: not-allowed;
       }
     }
-
+    
     span.btn {
       background-color: transparent;
       color: #000;
@@ -117,8 +117,9 @@
       font-size: 12px !important;
       margin: 20px 0px 10px;
       display: block;
-
-      button {
+      cursor: pointer;
+      
+      & > button {
         margin-left: 5px;
         background: transparent;
         border: 0;
@@ -127,6 +128,7 @@
         font-weight: 700;
         text-emphasis-style: dot;
         text-emphasis-position: under left;
+        cursor: pointer;
       }
     }
   }

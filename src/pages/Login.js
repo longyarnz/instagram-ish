@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Icon from '../components/Icon';
 import { LOG_USER_IN } from '../Actions';
 import Spinner from '../components/Spinner';
-import useScroll from '../components/useScroll';
 
 async function submitLoginForm(e, dispatch, callback, onError) {
   e.preventDefault();
@@ -13,7 +12,6 @@ async function submitLoginForm(e, dispatch, callback, onError) {
 export default function Login(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [caption, setCaption] = useState('We Have Missed You!');
-  useScroll(props);
 
   const onSubmit = e => {
     setIsLoading(true);
@@ -35,6 +33,8 @@ export default function Login(props) {
     color: caption !== 'We Have Missed You!' ? '#d43f3a' : null
   }
 
+  const goToRegister = () => props.goTo('./pages/Register');
+
   const button = isLoading ? <Spinner style={{ animationDuration: '.55s' }} /> : 'LOG IN';
 
   return (
@@ -49,12 +49,12 @@ export default function Login(props) {
         <input type="password" name="password" placeholder="Password" />
         <button type="submit">{button}</button>
 
-        <span className="btn btn-dark " role="button" onClick={() => props.goTo('./pages/Register')}>
+        <span className="btn" onClick={goToRegister}>
           Don't have an account?
           <button>REGISTER</button>
         </span>
 
-        <span className="btn btn-dark " role="button" onClick={() => props.goTo('./pages/Register')}>
+        <span className="btn" onClick={goToRegister}>
           <button>FORGOT YOUR PASSWORD?</button>
         </span>
       </form>

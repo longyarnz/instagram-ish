@@ -403,9 +403,11 @@ export async function SEARCH(dispatch, token, text, callback, onError) {
   }
 }
 
-export async function GET_USER(token) {
+export async function GET_USER(token, id, callback, onError) {
+  const url = id ? `${API}/user/${id}` : `${API}/user`;
+
   try {
-    let user = await fetch(`${API}/user`, {
+    let user = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -414,10 +416,14 @@ export async function GET_USER(token) {
     user = await user.json();
 
     if (user.msg !== 'success') throw user;
-
-    return user.data;
+    
+    else {
+      callback && callback(user.data);
+      return user.data;
+    }
   }
   catch (err) {
     console.log(err);
+    onError && onError();
   }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Gallery from '../components/Gallery';
 import Banner from '../components/Banner';
 import MenuBar from '../components/MenuBar';
@@ -9,8 +9,19 @@ import { FullPageLoader } from '../components/FullPageSpinner';
 import { GET_USER } from '../Actions';
 
 export default function ViewProfile(props) {
+  const _this = useRef(null);
   const profileState = useState(0);
-  const [dataIsFetched, setDataIsFetched] = useState(false);
+  const [viewUser, setViewUser] = useState({});
+  const [error, setError] = useState(false);
+  // const [dataIsFetched, setDataIsFetched] = useState(false);
+  const { dispatch, state, goTo, token } = props;
+
+  useEffect(() => {
+    _this.current = 'MOUNTED';
+    return () => {
+      _this.current = 'UNMOUNTED';
+    }
+  }, []);
 
   useEffect(() => {
     document.getElementsByTagName('html')[0].style.overflowY = 'auto';
@@ -21,13 +32,24 @@ export default function ViewProfile(props) {
   }, []);
 
   useEffect(() => {
+    console.log(state.viewUser);
     if(!props.state.viewUser.email) {
-      GET_USER(props.dispatch, props.token);
+      const callback = user => {
+        if(_this.current === 'UNMOUNTED') return;
+        setViewUser(user);
+      }
+      
+      const onError = () => {
+        if(_this.current === 'UNMOUNTED') return;
+        setError(true);
+      }
+
+      GET_USER(token, state.viewUser.id, callback, onError);
     }
   }, []);
 
-  const { dispatch, state, goTo } = props;
-  const fullName = `${state.viewUser.firstName} ${state.viewUser.lastName}`;
+  const user = { ...state.viewUser, ...viewUser }; 
+  const fullName = `${user.firstName} ${user.lastName}`;
 
   return (
     <section className="profile view-profile">
@@ -39,14 +61,18 @@ export default function ViewProfile(props) {
         goBack={() => goTo('./pages/NewsFeed')}
       />
 
-      <ShouldRender if={!props.state.viewUser.email}>
-        <FullPageLoader width={'50vw'} className="loader" />
+      <ShouldRender if={!error && !user.email}>
+        <FullPageLoader className="loader" />
       </ShouldRender>
 
-      <ShouldRender if={props.state.viewUser.email}>
+      <ShouldRender if={error}>
+        <div className="empty">Failed to fetch user</div>
+      </ShouldRender>
+
+      <ShouldRender if={user.email}>
         <Banner
           goTo={goTo}
-          src={state.viewUser.photo}
+          src={user.photo}
           fullName={fullName}
           userIsSuperUser={false}
         />
@@ -55,15 +81,15 @@ export default function ViewProfile(props) {
           tabs={profileState}
           userIsSuperUser={false}
           isViewingFromOwnProfile={false}
-          emptyDivMessage={`${state.viewUser.username} has 0 post`}
+          emptyDivMessage={`${user.username} has 0 post`}
           state={{
-            user: state.viewUser,
+            user,
             posts: state.posts,
             token: null,
             isChangingLikeStatus: null,
             likes: [],
             userIsLoggedIn: false,
-            userId: state.viewUser.id
+            userId: user.id
           }}
         />
         <Footer />

@@ -29,7 +29,7 @@ export default function MenuDialog(props) {
 
     props.dispatch({
       type: 'NULL MODAL VIEW'
-    });    
+    });
   }
 
   return (
@@ -46,31 +46,31 @@ export default function MenuDialog(props) {
         </ul>
       </ShouldRender>
 
-      <ul className={categories}>
-        <h3 onClick={() => setCats(!showCats)}>
-          Categories <Icon name={categories} />
-        </h3>
-        <FlatList
-          list={props.categories}
-          listView={(cat, i) => (
-            <li
-              key={`menu-${i}`}
-              value={cat.id}
-              onClick={() => selectCategory(cat.id)}
-            >
-              {cat.name}
-            </li>
-          )}
-        />
-      </ul>
-
       <ShouldRender if={props.userIsLoggedIn}>
+        <ul className={categories}>
+          <h3 onClick={() => setCats(!showCats)}>
+            Categories <Icon name={categories} />
+          </h3>
+          <FlatList
+            list={props.categories}
+            listView={(cat, i) => (
+              <li
+                key={`menu-${i}`}
+                value={cat.id}
+                onClick={() => selectCategory(cat.id)}
+              >
+                {cat.name}
+              </li>
+            )}
+          />
+        </ul>
+
         <ul className={settings}>
           <h3 onClick={() => setSets(!showSets)}>
             Profile <Icon name={settings} />
           </h3>
           <li onClick={() => {
-            props.dispatch({type : 'NULL MODAL VIEW'});
+            props.dispatch({ type: 'NULL MODAL VIEW' });
             props.goTo('./pages/Profile');
           }}>View Profile</li>
           <li onClick={() => {

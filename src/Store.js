@@ -96,8 +96,8 @@ export function Reducers(state, action) {
       user = payload;
       const viewUser = user ? {
         id: user.userId,
-        firstName: user.first_name || user.fullName.split(' ')[0],
-        lastName: user.last_name || user.fullName.split(' ')[1],
+        firstName: user.fullName ? user.fullName.split(' ')[0] : user.first_name,
+        lastName: user.fullName ? user.fullName.split(' ')[1] : user.last_name,
         email: user.email,
         sex: user.sex,
         address: user.address,

@@ -110,7 +110,7 @@ export default function NewsFeedSlide(props) {
               key={`tab-${i}`}
               id={post.post_id}
               author={post.username}
-              authorId={post.userId}
+              authorId={post.user_id}
               brand={post.brand_name}
               userSrc={profilePic(post)}
               src={`${origin}/${post.image_path}`}

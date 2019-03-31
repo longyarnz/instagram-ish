@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import AsyncImage from './AsyncImage';
+// import AsyncImage from './AsyncImage';
 import Divider from './Divider';
 import Icon from './Icon';
 import ShouldRender from './ShouldRender';
@@ -60,25 +60,16 @@ export default function NewsFeedTab({ src, ...props }) {
   const showUserProfile = () => {
     if (props.viewerId === props.authorId) {
       props.goTo('./pages/Profile');
-
-      // props.dispatch({
-      //   type: 'NULL MODAL VIEW',
-      // });
     }
 
     else {
       props.dispatch({
         type: 'VIEW A DIFFERENT USER PROFILE',
-        payload: null
+        payload: {userId: props.authorId}
       });
 
       props.goTo('./pages/ViewProfile');
     }
-
-    // const html = document.documentElement;
-    // const section = document.querySelector('section#fallback');
-    // html.style.overflow = 'hidden';
-    // section.style.zIndex = 999999999;
   }
 
   const deleteText = error ? 'Unable To Delete Post' : 'Delete Post';
@@ -99,7 +90,7 @@ export default function NewsFeedTab({ src, ...props }) {
       </header>
 
       <div className="img-container">
-        <AsyncImage src="assets/img/users/4.jpg" alt="user" />
+        {/* <AsyncImage src={src} alt="user" /> */}
       </div>
 
       <span>

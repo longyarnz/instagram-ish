@@ -17,6 +17,17 @@ section.profile {
       padding-bottom: 0px;
     }
 
+    div.empty {
+      min-height: calc(100vh - #{$navbar-height} - 38px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #ccc;
+      font-size: 90%;
+      margin-top: 60px;
+    }
+
     @media screen and (min-width: 676px) {
       width: calc(100vw * 0.5 + 10px);
       margin: auto;
@@ -26,11 +37,10 @@ section.profile {
       }
     }
 
-    &.loader {
-      height: calc(100vh * 0.75) !important;
+    & > div.loader {
+      width: 100% !important;
       
       @media screen and (min-width: 676px) {
-        width: calc(100vw * 0.5) !important;
         margin: auto;
       }
     }

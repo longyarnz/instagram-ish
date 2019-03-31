@@ -3,8 +3,6 @@ import Icon from '../components/Icon';
 import { REGISTER_USER } from '../Actions';
 import Spinner from '../components/Spinner';
 import ShouldRender from '../components/ShouldRender';
-import useScroll from '../components/useScroll';
-
 async function submitRegisterForm(e, dispatch, callback, onError) {
   const [first, last, username, email, password, c_password, accountType, brand] = e.target;
 
@@ -35,8 +33,6 @@ export default function Register(props) {
 
   const password = useRef(null);
   const c_password = useRef(null);
-
-  useScroll(props);
 
   const onChange = e => {
     const check = c_password.current.value !== password.current.value ? 'Passwords do not match!' : '';
@@ -85,6 +81,8 @@ export default function Register(props) {
   }
 
   const button = isLoading ? <Spinner style={{ animationDuration: '.55s' }} /> : 'SIGN UP';
+
+  const goToLogin = () => props.goTo('./pages/Login');
 
   return (
     <section className="register">
@@ -165,11 +163,11 @@ export default function Register(props) {
           />
         </ShouldRender>
 
-        <button disabled={isLoading} className="btn-block" type="submit">
+        <button disabled={isLoading} type="submit">
           {button}
         </button>
 
-        <span className="btn btn-dark" role="button" onClick={() => props.goTo('./pages/Login')}>
+        <span className="btn" onClick={goToLogin}>
           Already have an account?
           <button>LOG IN</button>
         </span>

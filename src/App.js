@@ -35,10 +35,8 @@ export default function App() {
       'newsfeedCounter',
       'filter'
     ],
-    './pages/Login': 'DO NOT RERENDER',
-    './pages/Register': 'DO NOT RERENDER',
     './pages/Profile': 'DO NOT RERENDER',
-    './pages/ViewProfile': ['viewUser'],
+    './pages/ViewProfile': 'DO NOT RERENDER',
     './components/CommentModal': 'DO NOT RERENDER',
     './components/SearchModal': 'DO NOT RERENDER',
     './components/CreatePostModal': [
