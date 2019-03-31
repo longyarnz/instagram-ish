@@ -44,7 +44,7 @@ div.dialog {
 
   @media screen and (min-width: 676px) {
     & > div {
-      width: calc(100vw * 3 / 6) !important;
+      width: calc(50vw + 20px) !important;
       margin: auto;
       left: 25%;
     }

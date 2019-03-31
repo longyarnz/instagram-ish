@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-// import AsyncImage from './AsyncImage';
+import AsyncImage from './AsyncImage';
 import Divider from './Divider';
 import Icon from './Icon';
 import ShouldRender from './ShouldRender';
@@ -77,7 +77,7 @@ export default function NewsFeedTab({ src, ...props }) {
   return !deleteStatus ? (
     <div className="newsfeed-tab">
       <header onClick={showUserProfile}>
-        {/* <AsyncImage src={props.userSrc} alt="user" /> */}
+        <AsyncImage src={props.userSrc} alt="user" />
 
         <div>
           <span>{props.brand}</span>
@@ -90,7 +90,7 @@ export default function NewsFeedTab({ src, ...props }) {
       </header>
 
       <div className="img-container">
-        {/* <AsyncImage src={src} alt="user" /> */}
+        <AsyncImage src={src} alt="user" />
       </div>
 
       <span>

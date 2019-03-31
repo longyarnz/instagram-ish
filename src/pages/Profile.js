@@ -28,7 +28,9 @@ export default function Profile(props) {
         fullName={fullName}
         userIsSuperUser={true}
       />
-      <MenuBar tabs={profileState} {...props} />
+
+      <MenuBar accountType={state.user.accountType} tabs={profileState} {...props} />
+
       <Gallery
         userIsSuperUser={true}
         tabs={profileState}

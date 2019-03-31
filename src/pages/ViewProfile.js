@@ -13,8 +13,7 @@ export default function ViewProfile(props) {
   const profileState = useState(0);
   const [viewUser, setViewUser] = useState({});
   const [error, setError] = useState(false);
-  // const [dataIsFetched, setDataIsFetched] = useState(false);
-  const { dispatch, state, goTo, token } = props;
+  const { dispatch, state, goTo } = props;
 
   useEffect(() => {
     _this.current = 'MOUNTED';
@@ -32,7 +31,6 @@ export default function ViewProfile(props) {
   }, []);
 
   useEffect(() => {
-    console.log(state.viewUser);
     if(!props.state.viewUser.email) {
       const callback = user => {
         if(_this.current === 'UNMOUNTED') return;
@@ -44,12 +42,12 @@ export default function ViewProfile(props) {
         setError(true);
       }
 
-      GET_USER(token, state.viewUser.id, callback, onError);
+      GET_USER(state.token, state.viewUser.id, callback, onError);
     }
   }, []);
 
   const user = { ...state.viewUser, ...viewUser }; 
-  const fullName = `${user.firstName} ${user.lastName}`;
+  const fullName = user.fullName || `${user.firstName} ${user.lastName}`;
 
   return (
     <section className="profile view-profile">
@@ -72,11 +70,13 @@ export default function ViewProfile(props) {
       <ShouldRender if={user.email}>
         <Banner
           goTo={goTo}
-          src={user.photo}
+          src={user.photoPath || user.photo}
           fullName={fullName}
           userIsSuperUser={false}
         />
-        <MenuBar tabs={profileState} />
+
+        <MenuBar accountType={user.accountType} tabs={profileState} />
+        
         <Gallery
           tabs={profileState}
           userIsSuperUser={false}

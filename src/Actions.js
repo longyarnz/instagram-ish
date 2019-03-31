@@ -409,7 +409,7 @@ export async function GET_USER(token, id, callback, onError) {
   try {
     let user = await fetch(url, {
       headers: {
-        'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`
       },
       method: 'GET'
     });

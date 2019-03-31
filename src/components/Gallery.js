@@ -14,7 +14,7 @@ export default function Gallery(props) {
         <ProfileTab {...props} />
       </ShouldRender>
 
-      <ShouldRender if={tab === 2}>
+      <ShouldRender if={tab === 1}>
         <NewsFeedSlide
           isViewingFromNewsFeed={false}
           isViewingFromOwnProfile={props.isViewingFromOwnProfile}
