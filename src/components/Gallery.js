@@ -5,7 +5,7 @@ import NewsFeedSlide from './NewsFeedSlide';
 
 export default function Gallery(props) {
   const { tabs: [tab], state } = props;
-  const posts = state.posts.filter(i => i.user_id === props.state.userId);
+  const posts = state.posts.filter(i => i.user_id === props.state.user.id);
   const emptyDivMessage = props.emptyDivMessage || `YOU HAVEN'T CREATED ANY POSTS YET`;
 
   return (

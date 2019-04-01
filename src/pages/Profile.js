@@ -34,7 +34,6 @@ export default function Profile(props) {
       <Gallery
         userIsSuperUser={true}
         tabs={profileState}
-        userId={state.user.id}
         isViewingFromOwnProfile={props.state.userIsLoggedIn}
         {...props}
       />
