@@ -111,12 +111,6 @@ export default function CreatePostDialog(props) {
   button = posted === true ? <Icon name="check" /> : (
     posted === 'error' ? 'NETWORK ERROR' : button);
 
-  const backgroundColor = posted === true ? '#5cb85c' : (
-    posted === 'error' ? '#d9534f' : null
-  );
-
-  const style = { backgroundColor };
-
   const onChangeSelect = e => {
     const select = e.target;
     const condition = [undefined, 'Select a category', null].includes(select.value);
@@ -135,8 +129,14 @@ export default function CreatePostDialog(props) {
     condition && setReadyToPost(false);
   }
 
+  const backgroundColor = posted === true ? '#5cb85c' : (
+    posted === 'error' ? '#d9534f' : (
+      !readyToPost ? '#ccc' : '#f8ba0d'
+    )
+  );
+
   const buttonStyle = !readyToPost ? {
-    backgroundColor: '#ccc', color: '#f9f9f9'
+    backgroundColor, color: '#f9f9f9'
   } : null;
 
   return (
@@ -171,7 +171,7 @@ export default function CreatePostDialog(props) {
         
         <button 
           type="submit" 
-          style={{ ...buttonStyle, ...style }} 
+          style={buttonStyle} 
           disabled={!readyToPost}
         >
           { button }
