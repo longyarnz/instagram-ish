@@ -6,9 +6,11 @@ import { FlatList } from './Utils';
 
 export default function CreatePostDialog(props) {
   const _this = useRef(null);
-  const [isPosting, setIsPosting] = useState(false);
+  const [counter, setCounter] = useState(0);
   const [posted, setPosted] = useState(false);
   const [select, setSelect] = useState(undefined);
+  const [isPosting, setIsPosting] = useState(false);
+  const [readyToPost, setReadyToPost] = useState(false);
 
   useEffect(() => {
     _this.current = 'MOUNTED';
@@ -25,13 +27,40 @@ export default function CreatePostDialog(props) {
     }
   });
 
+  useEffect(() => {
+    const form = document.getElementsByTagName('form')[0];
+    const [category, caption] = form;
+    const dependencies = [category.value, caption.value, props.image];
+
+    if (dependencies.some(i => i === null || i === '' || i === 'Select a category')) {
+      setIsPosting(false);
+      setReadyToPost(false);
+
+      if (category.value === undefined) {
+        category.setCustomValidity('Select a category type');
+      }
+
+      else if (props.image === null) {
+        category.setCustomValidity('Click the camera icon and select an image');
+      }
+
+      else {
+        category.setCustomValidity('');
+      }
+    }
+
+    else {
+      setReadyToPost(true);
+    }
+  });
+
   const onSubmit = e => {
     e.preventDefault();
 
-    if (isPosting) return;
+    if (isPosting || !readyToPost) return;
 
     else if (select === undefined) {
-      e.target[6].setCustomValidity('Select an account type');
+      e.target[0].setCustomValidity('Select a category type');
       return;
     }
 
@@ -75,7 +104,10 @@ export default function CreatePostDialog(props) {
     CREATE_POST(props.dispatch, props.token, form, callback, onError);
   }
 
-  let button = isPosting ? <Spinner style={{ animationDuration: '.55s' }} /> : 'CREATE POST';
+  let button = isPosting ? (
+    <Spinner style={{ animationDuration: '.55s' }} />
+  ) : 'CREATE POST';
+
   button = posted === true ? <Icon name="check" /> : (
     posted === 'error' ? 'NETWORK ERROR' : button);
 
@@ -87,10 +119,25 @@ export default function CreatePostDialog(props) {
 
   const onChangeSelect = e => {
     const select = e.target;
-    const check = select.value === undefined ? 'Select an account type' : '';
+    const condition = [undefined, 'Select a category', null].includes(select.value);
+
+    const check = condition ? 'Select a category type' : '';
+    condition && setReadyToPost(false);
+
     select.setCustomValidity(check);
     setSelect(select.value);
   }
+
+  const onChangeText = e => {
+    const text = e.target;
+    const condition = text.value === '';
+    setCounter(counter + 1);
+    condition && setReadyToPost(false);
+  }
+
+  const buttonStyle = !readyToPost ? {
+    backgroundColor: '#ccc', color: '#f9f9f9'
+  } : null;
 
   return (
     <div className="create-post-tab">
@@ -98,7 +145,7 @@ export default function CreatePostDialog(props) {
         <select name="category" required={true} onChange={onChangeSelect}>
           <option value={undefined}>Select a category</option>
           <FlatList
-            list={props.categories}
+            list={props.categories.filter(i => i.name !== 'Show All')}
             listView={(cat, i) => (
               <option
                 key={`option-${i}`}
@@ -109,6 +156,7 @@ export default function CreatePostDialog(props) {
             )}
           />
         </select>
+
         <textarea
           type="text"
           name="caption"
@@ -118,10 +166,15 @@ export default function CreatePostDialog(props) {
           spellCheck="true"
           required={true}
           rows={4}
-          maxLength={190}
+          onChange={onChangeText}
         />
-        <button type="submit" style={style}>
-          {button}
+        
+        <button 
+          type="submit" 
+          style={{ ...buttonStyle, ...style }} 
+          disabled={!readyToPost}
+        >
+          { button }
         </button>
       </form>
     </div>

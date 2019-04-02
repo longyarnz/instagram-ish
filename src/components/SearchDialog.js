@@ -50,8 +50,9 @@ export default function SearchDialog(props) {
     else SEARCH(props.dispatch, props.token, text, callback, onError);
   }
 
-  let button = isLoading ?
-    <Spinner style={{ animationDuration: '.35s' }} /> : <Icon name="arrow_forward" />;
+  let button = isLoading
+    ? <Spinner style={{ animationDuration: '.35s' }} />
+    : <Icon name="arrow_forward" />;
 
   return (
     <div className="search">

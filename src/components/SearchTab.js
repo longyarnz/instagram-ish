@@ -25,16 +25,13 @@ export function SearchTab(props) {
 
 export function UserSearchTab(props) {
   const origin = 'http://18.223.1.218';
+  console.log(props.user);
   const src = props.user.photoPath ? `${origin}/${props.user.photoPath}`
     : '/assets/img/user.png';
 
   const showUserProfile = () => {
     if (props.id === props.user.userId) {
       props.goTo('./pages/Profile');
-
-      // props.dispatch({
-      //   type: 'NULL MODAL VIEW',
-      // });
     }
 
     else {
