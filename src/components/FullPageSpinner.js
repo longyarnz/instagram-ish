@@ -23,7 +23,7 @@ export function FullPageLoader(props) {
     <div
       className={props.className}
       style={{
-        width: props.width || '50vw',
+        width: props.width || '100vw',
         height: props.height || '100vh',
         display: 'flex',
         justifyContent: 'center',

@@ -57,7 +57,7 @@ export default function App() {
       <ShouldRender if={state.modalView}>
         <AsyncLoader
           path={state.modalView}
-          fallback={<FullPageLoader height="75vh" />}
+          fallback={<FullPageLoader width="50vw" height="75vh" />}
           dependencies={reloadComponentWhenThisChanges[state.modalView]}
         />
       </ShouldRender>
