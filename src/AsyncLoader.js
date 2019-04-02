@@ -18,9 +18,11 @@ export default function AsyncLoader({ path, ...props }) {
 
   dependencies = props.localState ? () => props.dependencies : dependencies[type];
 
+  dependencies = JSON.stringify(dependencies());
+
   return useMemo(() => (
     <Suspense fallback={props.fallback ? props.fallback : <Spinner />}>
       <Payload state={state} dispatch={dispatch} goTo={goTo} {...props} />
     </Suspense>
-  ), [JSON.stringify(dependencies())]);
+  ), [dependencies]);
 }

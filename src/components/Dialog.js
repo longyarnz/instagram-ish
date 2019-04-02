@@ -67,7 +67,7 @@ export default function Dialog(props) {
       return;
     }
 
-    const x = setTimeout(() => inner.current.style.bottom = '0px', 50);
+    const x = setTimeout(() => inner.current.style.bottom = '0px', 0);
 
     return () => {
       inner.current.style.bottom = '-50%';

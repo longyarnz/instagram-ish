@@ -147,19 +147,25 @@ export default function CommentDialog(props) {
     <div className="comment">
       <form onSubmit={onSubmit}>
         <input type="text" name="comment" placeholder={placeholder} />
+
         <button type="submit">
-          {
-            !isSending ? <Icon name="chat_bubble_outline" /> : (
-              <Spinner style={{ color: '#1c3451', animationDuration: '.5s' }} />
-            )
-          }
+          <ShouldRender if={isSending}>
+            <Spinner style={{ color: '#1c3451', animationDuration: '.5s' }} />
+          </ShouldRender>
+
+          <ShouldRender if={!isSending}>
+            <Icon name="chat_bubble_outline" />
+          </ShouldRender>
         </button>
       </form>
+
       <Divider className="border" color="#f8ba0d" width="calc(100% - 28px)" height="3px" />
+
       <Comments
         isLoading={isLoading}
         comments={loadedComments}
       />
+
       <ShouldRender if={false}>
         <LoadMore />
       </ShouldRender>

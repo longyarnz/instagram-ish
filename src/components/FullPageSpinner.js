@@ -31,9 +31,16 @@ export function FullPageLoader(props) {
         position: 'fixed',
         background: '#fff',
         zIndex: '999',
-        top: '60px'
+        ...props.style
       }}>
-      <Spinner style={{ fontSize: '400%', color: '#ccc', animationDuration: '.35s' }} />
+      <Spinner
+        style={{ 
+          fontSize: '400%',
+          color: '#ccc',
+          animationDuration: '.45s',
+          ...props.iconStyle
+        }}
+      />
     </div>
   )
 }

@@ -12,10 +12,6 @@ export default function SearchDialog(props) {
   const [placeholder, setPlaceholder] = useState('Search for Users and Posts');
 
   useEffect(() => {
-    document.getElementsByTagName('input')[0].focus();
-  }, []);
-
-  useEffect(() => {
     _this.current = 'MOUNTED';
     return () => {
       _this.current = 'UNMOUNTED';
@@ -59,7 +55,7 @@ export default function SearchDialog(props) {
 
   return (
     <div className="search">
-      <form onSubmit={onSubmit} autoFocus={true}>
+      <form onSubmit={onSubmit}>
         <input
           type="search"
           name="search"

@@ -57,7 +57,20 @@ export default function App() {
       <ShouldRender if={state.modalView}>
         <AsyncLoader
           path={state.modalView}
-          fallback={<FullPageLoader width="50vw" height="75vh" />}
+          fallback={
+            <FullPageLoader
+              className="full-page-loader"
+              width="50vw" 
+              height="100vh" 
+              style={{
+                top: 60,
+                background: 'rgba(0, 0, 0, .5)'
+              }}
+              iconStyle={{
+                color: '#fff'
+              }}
+            />
+          }
           dependencies={reloadComponentWhenThisChanges[state.modalView]}
         />
       </ShouldRender>
