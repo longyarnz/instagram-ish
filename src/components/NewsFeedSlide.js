@@ -61,7 +61,6 @@ export default function NewsFeedSlide(props) {
   const origin = 'http://18.223.1.218';
   const loadedPosts = localPosts || props.posts;
   const fetchStatusOf = postId => isLiking.some(id => id === postId);
-  const emptyDivMessage = props.emptyDivMessage || 'MORE POSTS COMING SOON!';
 
   const profilePic = getProfilePictureUrl(props, origin);
 
@@ -99,7 +98,7 @@ export default function NewsFeedSlide(props) {
       </ShouldRender>
 
       <ShouldRender if={!isLoading && loadedPosts.length === 0}>
-        <div className="empty">{emptyDivMessage}</div>
+        <div className="empty">{props.emptyDivMessage}</div>
       </ShouldRender>
 
       <ShouldRender if={!isLoading && loadedPosts.length > 0}>

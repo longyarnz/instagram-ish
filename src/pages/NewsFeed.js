@@ -70,6 +70,7 @@ export default function NewsFeed(props) {
         userIsLoggedIn={state.userIsLoggedIn}
         profilePic={state.user.photo}
         postIsFiltered={Boolean(state.filter.id)}
+        emptyDivMessage="Landing Page Here!"
       />
 
       <Footer />
