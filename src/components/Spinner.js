@@ -6,7 +6,10 @@ export default function Spinner(props) {
     <Icon
       name="donut_large"
       className="fa-spin"
-      style={props.style}
+      style={{
+        animationDuration: '.45s',
+        ...props.style
+      }}
       {...props}
     />
   )

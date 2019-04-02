@@ -23,13 +23,17 @@ export function FullPageLoader(props) {
     <div
       className={props.className}
       style={{
-        width: props.width || '100vw',
+        width: props.width || '50vw',
         height: props.height || '100vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'fixed',
+        background: '#fff',
+        zIndex: '999',
+        top: '60px'
       }}>
-      <Spinner style={{ fontSize: '400%', color: '#ccc', animationDuration: '.45s' }} />
+      <Spinner style={{ fontSize: '400%', color: '#ccc', animationDuration: '.35s' }} />
     </div>
   )
 }

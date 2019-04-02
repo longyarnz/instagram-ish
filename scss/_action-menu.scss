@@ -1,7 +1,6 @@
 ul.action-menu{
   @extend .ul-menu;
   background: lighten(#f9f9f9, 1%);
-  min-height: 96px;
   top: 60px;
 
   li{

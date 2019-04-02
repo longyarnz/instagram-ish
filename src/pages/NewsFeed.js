@@ -6,11 +6,9 @@ import NewsFeedHeader from '../components/NewsFeedHeader';
 import Footer from '../components/Footer';
 import ShouldRender from '../components/ShouldRender';
 import { FETCH_POSTS } from '../Actions';
-import useScroll from '../components/useScroll';
 
 export default function NewsFeed(props) {
   const { state, dispatch, goTo } = props;
-  useScroll(props);
 
   useEffect(() => {
     if (!state.hasPosts && state.token !== null) {

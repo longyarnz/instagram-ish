@@ -2,6 +2,7 @@ import React, { useReducer, useEffect } from 'react';
 import AsyncLoader from './AsyncLoader';
 import { Reducers, InitialState } from './Store';
 import ShouldRender from './components/ShouldRender';
+import FullPageSpinner, { FullPageLoader } from './components/FullPageSpinner';
 
 export const AppContext = React.createContext({});
 
@@ -49,22 +50,15 @@ export default function App() {
     <AppContext.Provider value={appState}>
       <AsyncLoader
         path={state.view}
-        fallback={<div></div>}
+        fallback={<FullPageSpinner width="100%" />}
         dependencies={reloadComponentWhenThisChanges[state.view]}
       />
 
       <ShouldRender if={state.modalView}>
         <AsyncLoader
           path={state.modalView}
+          fallback={<FullPageLoader height="75vh" />}
           dependencies={reloadComponentWhenThisChanges[state.modalView]}
-          fallback={(
-            <div style={{
-              width: '100vw',
-              height: '100vh',
-              position: 'fixed',
-              backgroundColor: '#fff'
-            }}></div>
-          )}
         />
       </ShouldRender>
 
@@ -81,6 +75,7 @@ export default function App() {
           lastAction={[...state.mutations].pop()}
           dispatch={dispatch}
           dependencies={['createPostImage', 'hasPosts', 'view', 'modalView']}
+          fallback={(<div></div>)}
         />
       </ShouldRender>
     </AppContext.Provider>

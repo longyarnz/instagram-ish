@@ -109,7 +109,7 @@ export default function CreatePostDialog(props) {
             )}
           />
         </select>
-        <input
+        <textarea
           type="text"
           name="caption"
           placeholder="Caption your post..."
@@ -117,7 +117,8 @@ export default function CreatePostDialog(props) {
           autoComplete="on"
           spellCheck="true"
           required={true}
-          maxLength={30}
+          rows={4}
+          maxLength={190}
         />
         <button type="submit" style={style}>
           {button}

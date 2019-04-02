@@ -28,7 +28,7 @@ div.comment-dialog {
         justify-content: space-between;
         align-items: center;
         position: sticky;
-        top: 44px;
+        top: 40px;
         background: #fff;
         
         input {
@@ -56,7 +56,7 @@ div.comment-dialog {
           font-family: $font;
           border: 0;
           
-          & > i {
+          & > div > i {
             font-size: 110%;
             color: $accent-color;
           }
@@ -65,7 +65,7 @@ div.comment-dialog {
 
       div.border{
         position: sticky;
-        top: 91px;
+        top: 87px;
       }
       
       div.search-results {

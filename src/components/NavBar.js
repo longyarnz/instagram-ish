@@ -69,7 +69,7 @@ export default function NavBar(props) {
           dependencies={[showMenu, showUserMenu]}
         />
 
-        <ShouldRender if={showAllIcons}>
+        <ShouldRender if={showAllIcons && state.userIsLoggedIn}>
           <div onClick={scrollSetter(toggleSearch)}>
             <Icon name="search" />
           </div>
