@@ -9,6 +9,7 @@
 # production
 /build
 /pages
+/public/assets/img/users/
 
 # misc
 .DS_Store
